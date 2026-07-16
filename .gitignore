@@ -1,0 +1,25 @@
+# Lake / Lean build artifacts
+.lake/
+build/
+*.olean
+*.olean.trace
+*.ilean
+*.hash
+
+# Lake manifest (meist behalten)
+# lake-manifest.json
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temp files
+*.tmp
+*.log
+*.bak
