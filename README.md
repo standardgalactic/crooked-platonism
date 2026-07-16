@@ -1,4 +1,4 @@
-# LEAN FAILS BECAUSE IT IS ZFC, BITCH
+# LEAN FAILS BECAUSE IT IS ZFC! And this crooked Platonism.
 
 This repository does not document a failed coding project.  
 It documents the inevitable collapse of a system that was built on false ontological foundations.
