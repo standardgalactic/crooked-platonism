@@ -1,0 +1,5 @@
+name = "CrookedPlatonism"
+defaultTargets = ["CrookedPlatonism"]
+
+[[lean_lib]]
+name = "CrookedPlatonism"

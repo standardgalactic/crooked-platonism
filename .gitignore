@@ -1,0 +1,15 @@
+# Lean / Lake
+.lake/
+build/
+lake-manifest.json.bak
+
+# LaTeX build artifacts
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.bbl
+*.blg
