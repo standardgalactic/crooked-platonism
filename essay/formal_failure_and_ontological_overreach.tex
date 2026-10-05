@@ -1,0 +1,414 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1.15in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs,array,enumitem}
+\usepackage{listings}
+\usepackage[expansion=false]{microtype}
+\usepackage[hidelinks]{hyperref}
+\linespread{1.08}
+\setlength{\parskip}{0.5em}
+\setlength{\parindent}{0pt}
+
+\lstset{basicstyle=\ttfamily\small, frame=single, framesep=4pt,
+  aboveskip=8pt, belowskip=8pt, columns=fullflexible, keepspaces=true,
+  breaklines=true, xleftmargin=4pt, xrightmargin=4pt}
+
+\title{Formal Failure and Ontological Overreach\\[0.4em]\large Lean, Choice, and the Limits of Foundational Criticism}
+\author{Flyxion\\Independent Researcher}
+\date{October 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent A set of documents distributed with a repository for a framework called TONE argues that the Lean theorem prover cannot cleanly formalize TONE because ``Lean is ZFC,'' that ZFC is ontologically false because it admits the empty set and the Axiom of Choice, and that Lean's silence about the third time derivative (jerk) confirms the verdict. This essay examines each step. Lean's logic is a dependent type theory and not ZFC. The empty type and the empty set are not ``nothing.'' The Axiom of Choice is independent of ZF, and in Lean it is an explicit, auditable axiom. Lean has no built-in physics, so its silence about jerk is not a bias. A rival foundation with a specified syntax and inference system, TONE included, can in principle be represented in Lean as a deep embedding. A failed formalization, correctly classified, is evidence about the formalization. A pair of companion issues extends the claim to continuous physics. Their premises are satisfiable and so yield no contradiction, and the step from their self-inversion axiom to $j=\pm1$ requires excluding zero jerk, which includes inertial and uniformly accelerated motion. A further section separates the scope of a claim from its warrant and asks what a compiled proof licenses, and another catalogues the elementary logical patterns at work in the arguments. The closing section identifies three genuine commitments of Lean that could constrain a process-first ontology, none of which is among the three the documents name.
+\end{abstract}
+
+\section{Scope and the argument as stated}
+
+Five short texts circulate with the repository: \emph{The Ontological Assumptions of Lean}, \emph{The Death of ZFC}, \emph{Why Lean Fails}, \emph{What If Lean Was Different?}, and the repository summary. They refer to a Lean source file, \texttt{src/TONE\_Physics\_Core.lean}. That file could not be retrieved while this essay was prepared, and the only line of Lean quoted in the material is
+\begin{lstlisting}
+def empty_exists : Type := Empty
+\end{lstlisting}
+The essay therefore addresses what the documents claim about Lean, ZFC, and failure, and treats the unseen code only through a classification of failure types (Section~\ref{sec:fail}) that anyone can apply to it. Two issues filed against a public library repository on 4 October 2026, since deleted, are treated separately in Section~\ref{sec:issues}.
+
+The documents advance one argument, which can be reconstructed in four steps.
+\begin{enumerate}[label=(P\arabic*), leftmargin=3em]
+\item Lean is, in the relevant sense, ZFC.
+\item ZFC is committed to the empty set and to the Axiom of Choice, and both commitments are false.
+\item TONE rejects both and ranks jerk as the highest admissible form of change. Formalizing TONE in Lean produces breakdowns exactly at these points.
+\item[(C)] The breakdowns are symptoms of ontological corruption in ZFC, which is therefore finished.
+\end{enumerate}
+Each step has a gap. (P1) is false as stated. (P2) equivocates between a mathematical object and an ontological claim, and offers no criterion by which an axiom is ``false.'' The move from (P3) to (C) is an inference to the best explanation that never considers rival explanations, and it is built so that every possible failure counts as confirmation. The sections below take these in turn.
+
+\section{Lean is not ZFC}
+
+Lean's kernel implements a dependent type theory: a hierarchy of universes, an impredicative sort of propositions \texttt{Prop}, inductive types, quotient types, and definitional proof irrelevance \cite{demoura2021,carneiro2019}. Terms and types are primitive. The kernel contains no membership predicate and no axiom of extensionality for sets. In the main mathematical library, a ``set'' of elements of a type \texttt{$\alpha$} is a predicate, defined as a function from \texttt{$\alpha$} to \texttt{Prop} \cite{mathlib2020}. It is a subset of a given type and not an element of a universal domain of sets.
+
+ZFC-style sets do exist in that library, as a type \texttt{ZFSet} constructed from well-founded trees and shown to satisfy the axioms. That is one development among many, in the same way that the integers or the category of groups are developments. The direction of dependence is therefore the opposite of the one the documents assert: ZFC is something Lean can build and reason about, and Lean's logic is not something that has ZFC as a premise.
+
+A relation does hold between the two. Carneiro gives a set-theoretic model of Lean's type theory, from which its consistency follows relative to ZFC together with countably many inaccessible cardinals \cite{carneiro2019}. A model is an interpretation. Peano arithmetic is interpretable in ZFC, yet a defect in ZFC's treatment of choice would not be a defect of Peano arithmetic. Interpretability, even mutual interpretability at suitable strength, establishes comparable strength. It does not establish that the two systems share ontological commitments.
+
+There is a further oddity in the choice of target. Systems that are built on a set theory exist: Metamath's \texttt{set.mm} is based on ZFC, and Mizar is based on Tarski--Grothendieck set theory \cite{megill2019}. An argument aimed at ZFC-based formalization would aim at those. Lean stands in for ZFC here because its flagship library is classical and organized around sets and functions, which is a statement about library culture and not about the logic.
+
+\section{The empty set}
+
+\subsection{Empty is not nothing}
+
+A set with no members is a set, in the way that an empty box is a box. Mathematically it is the identity for union, the intersection of disjoint sets, the solution set of an inconsistent system, and the domain of the empty function. The reading on which ZFC ``names nothing and treats it as an object'' is a gloss. The axioms say only that some set has no members, and that follows from the first-order convention that the domain is nonempty together with Separation: $\varnothing=\{x\in a: x\neq x\}$.
+
+\subsection{In Lean there is no global empty set}
+
+In Lean, \texttt{Empty : Type} is an inductive type with no constructors, and \texttt{False : Prop} is likewise. The set-theoretic $(\varnothing : \mathtt{Set}\ \alpha)$ is the predicate that is false at every element of $\alpha$. There is one such predicate for each type, and the empty set of naturals and the empty set of reals are terms of different types that cannot even be compared. An empty type does not assert that an entity called nothing exists. It is a classifier that has no inhabitants. Under the propositions-as-types reading, an inhabitant of \texttt{Empty} would be a proof of absurdity, and the statement that a type is empty records that no such inhabitant can be constructed.
+
+The quoted line makes the point concretely. The declaration \texttt{def empty\_exists : Type := Empty} introduces a constant of type \texttt{Type} whose value is the type \texttt{Empty}. It names a type. Whether the type has inhabitants is a separate question, answered in the negative by the system. The identifier \texttt{empty\_exists} is the author's gloss, and the line proves nothing about the existence of anything. Naming a classifier is not asserting that it is inhabited, and Lean never asserts that \texttt{Empty} is.
+
+\subsection{What rejecting it would cost}
+
+In Lean, negation is encoded through the empty type: \texttt{Not P} is defined as \texttt{P -> False}. In Martin-L\"of type theory the same role is played by the empty type $N_0$ \cite{martinlof1984}. In those systems, rejecting empty types therefore means giving up this encoding of negation, and with it the ability to say that something has no instances. Other formal languages take falsity or negation as a primitive and do not represent either through an empty type, so the cost is not universal. It is the cost of any proposal that stays inside Lean's native logic or a type theory with the same encoding. Whatever replaces the encoding must still let a theory say that two sets are disjoint, that an equation has no solution, and what it would mean for the theory to be consistent. The documents' \emph{What If Lean Was Different?} does not say how a revised system would recover these statements.
+
+\subsection{Quine}
+
+Quine's criterion says that a theory is committed to the entities that must lie in the range of its bound variables for the theory to be true \cite{quine1948}. It identifies what a theory says exists. It does not make a particular object illegitimate. A quantifier over the empty set ranges over no values and so commits to nothing beyond the set variable itself. The documents' phrase ``if we stop quantifying over nothing'' conflates quantifying over an empty domain with quantifying over a domain called ``nothing.'' Quine himself worked with a null class throughout his set theory \cite{quine1963}.
+
+\subsection{Rejection is expressible}
+
+Any theory that requires a nonempty carrier is formalized in Lean in the standard way, by carrying a distinguished element:
+\begin{lstlisting}
+structure NonemptyCarrier where
+  carrier : Type
+  elem : carrier
+\end{lstlisting}
+A theory of ``positive'' collections, with no empty member, is a structure that bundles a set with a proof that it is nonempty, and operations that might produce the empty set, such as intersection, become partial and return \texttt{Option}. That cost is real. It falls on the thesis and not on the host: every disjointness statement, kernel, and solution set must be redescribed with partial operations.
+
+The documents claim that, when one tries to formalize the rejection, Lean ``forces the acceptance of empty structures anyway.'' The most direct way this can occur is if the formalization asserts, inside Lean's own logic, a principle such as \texttt{forall alpha : Type, Nonempty alpha}. That statement is refutable in Lean, because \texttt{Empty} is a type with no inhabitants. The same principle, ``every set is nonempty,'' is refutable in ZFC. Other inconsistent assumptions could also force an inhabitant of an empty type. In each case the event is a derivation of \texttt{False} from stated assumptions, and it shows that those assumptions, as rendered, are incompatible with the logic they are stated in. It does not by itself say which assumption to give up. Where the rendering quantified over a range the thesis would not call objects, the natural repair is to restrict the range, and nothing in the event shows that the host is corrupt.
+
+\section{Arbitrary choice}
+
+\subsection{Separation is not Choice}
+
+The documents say Choice ``allows arbitrary distinctions and selections'' and ``turns \emph{willk\"urliche Trennungen} into mathematical law.'' ``Separation'' (\emph{Aussonderung}) is the name of a different axiom, the one that forms a subset by a definable property. It requires a formula and so is the opposite of arbitrary. Choice asserts that every family of nonempty sets has a choice function. The two are distinct, and the phrase quoted blurs them.
+
+\subsection{Independence}
+
+G\"odel showed that Choice is consistent with ZF, assuming ZF is consistent \cite{godel1938}, and Cohen showed that its negation is too \cite{cohen1963}. Neither Choice nor its negation is a theorem of ZF. ZF alone does not decide it, so calling it ``false'' requires additional principles, whether a mathematical axiom in a stronger theory that settles the question or a philosophical criterion for admissible existence. The documents supply only the label ``ontologically problematic.'' The constructive objection to Choice is serious and has an honorable history: Choice guarantees, for instance, a well-ordering of the reals without in general providing an explicit definition or an effective construction of one. Whether a particular well-ordering is definable depends on the model and the permitted parameters. The objection is to non-constructive existence. It bears on what can be defined or computed, and it does not touch the consistency of the theory.
+
+\subsection{Lean's choice footprint}
+
+Lean's logic is not choice-based. The classical principle enters through one declared axiom, whose type is
+\begin{lstlisting}
+axiom Classical.choice {alpha : Sort u} : Nonempty alpha -> alpha
+\end{lstlisting}
+alongside \texttt{propext} and \texttt{Quot.sound}. Any theorem can be audited with
+\begin{lstlisting}
+theorem two_add_two : 2 + 2 = 4 := rfl
+#print axioms two_add_two
+\end{lstlisting}
+which reports that the theorem depends on no axioms. Definitions that use \texttt{Classical.choice} must be marked \texttt{noncomputable} in the source, so the dependency is visible at the level of the text and checkable by a command. The claim that Lean ``inherits'' a choice commitment ``implicitly'' is backwards. Written-out set-theoretic proofs often use ``choose'' without comment. Lean tells you.
+
+Two further facts matter. First, in type theory the ``type-theoretic axiom of choice,'' which turns $\forall x\,\exists y\,R(x,y)$ into a function when $\exists$ is a dependent sum, is a theorem and not an axiom \cite{martinlof1984}. Second, the version that does real classical work implies excluded middle in the presence of extensionality \cite{diaconescu1975,goodman1978}, and Lean's proof of excluded middle is exactly that argument from \texttt{Classical.choice}, \texttt{propext}, and function extensionality. General excluded middle in Lean is therefore derived from the choice axiom, so avoiding \texttt{Classical.choice} means avoiding it. That does not mean avoiding every instance of excluded middle, since particular propositions can be constructively decidable.
+
+\subsection{What follows from the ecosystem}
+
+The documents say that without choice ``many standard constructions become unusable.'' This is true of classical mathematics, and it is equally true in ZF without choice, where the countable union of countable sets, the Hahn--Banach theorem, and the existence of bases for all vector spaces all fail or become independent. The observation attaches to mathematics, not to Lean. Mathlib's definitions routinely depend on classical axioms, so using Mathlib while avoiding them is impractical. Constructive developments in Lean are possible, with a smaller ecosystem. That is a cost, and it is exactly the cost every constructivist has always reported. A cost is not an incoherence.
+
+\section{Jerk}
+
+\subsection{A category error}
+
+Lean is a language for stating and checking proofs. It has no built-in physical ontology: no category for charge, mass, or time. Mathlib defines \texttt{deriv}, \texttt{iteratedDeriv}, and \texttt{ContDiff}. That Lean treats the third derivative as one more iterated derivative is accurate, and it is simply what defining an operation on functions amounts to. ``Ontologically graded levels of change'' is a hypothesis of a physical or metaphysical theory, and such a theory is stated in Lean as structures and axioms.
+
+The thesis ``jerk is the highest admissible form of change'' has at least two literal readings, and both can be written down. On the first, an admissible trajectory is three times continuously differentiable and its third derivative is nowhere differentiable:
+\begin{lstlisting}
+def HasJerkOrder (x : Real -> Real) : Prop :=
+  ContDiff Real 3 x /\ forall t, Not (DifferentiableAt Real (iteratedDeriv 3 x) t)
+\end{lstlisting}
+(Illustrative; this snippet was not machine-checked in the environment where the essay was prepared.) The class is nonempty. Integrate Weierstrass's function three times: Hardy proved it nowhere differentiable \cite{hardy1916}, and the triple antiderivative is $C^3$ with a nowhere differentiable third derivative. On the second reading, the fourth derivative vanishes identically, and the admissible trajectories are exactly the cubic polynomials. That reading excludes the sine function and the exponential, and with them the harmonic oscillator, which is an empirical absurdity. A third reading, on which the fourth derivative exists but is ``metaphysically inadmissible,'' is a claim about interpretation and has no content in Lean or in ZFC. Each of the first two readings is formalizable, and neither collapses.
+
+\subsection{Physical content}
+
+Newtonian dynamics is second-order. Lagrangians that depend on higher derivatives suffer the Ostrogradsky instability: a nondegenerate higher-derivative Lagrangian has a Hamiltonian that is linear in some momentum and so unbounded below \cite{ostrogradsky1850,woodard2015}. That is the nearest actual physics to the documents' word ``regress,'' and it counts against higher-order dynamics in general and not in favor of a stopping point at order three. The standard physical example of a jerk-dependent law, the Abraham--Lorentz radiation-reaction equation, is notorious for runaway solutions and preacceleration \cite{jackson1999}. Conversely, higher derivatives are useful. In quadrotor control, the moments applied to the vehicle are algebraically related to the fourth derivative of position, and minimum-snap trajectory generation is a standard method \cite{mellinger2011}. The claim that everything above jerk ``leads to regress or incoherence'' is contradicted by routine engineering practice.
+
+\subsection{The regress argument is symmetric}
+
+Every derivative is defined from the previous one by the same limit. If each derivative after the first needs separate ontological justification, the regress ends at velocity. If the justification is measurability, acceleration, jerk, and snap all pass in the engineering sense. Whatever reason is given for stopping at order three applies, or fails, equally at orders two and four. The number three cannot be derived from a regress argument without an additional premise, and the documents supply none.
+
+\section{The companion issues}
+\label{sec:issues}
+
+Two issues filed against a public library repository on 4 October 2026, since deleted, carry the argument from Lean to continuous physics. They are near duplicates, one headed as an audit of a continuous plenum and the other as a disproof of geometry, and they make three moves. A continuous plenum is said to induce a ``tautological infinite regress.'' Jerk is said to be the primitive, and the equation $j = 1/j$ is said to truncate it to $j\in\{-1,1\}$. And Lean is said to have machine-checked the result, with the link to the proofs left as an unfilled template placeholder, \texttt{[DEIN\_GITHUB\_LINK\_ZUM\_CMI\_REPO]}.
+
+\subsection{Points worth keeping}
+
+\begin{itemize}[leftmargin=2em]
+\item Continuity is an assumption of any continuum theory and not a derived fact. Whether physical discreteness appears at some scale is open, and discrete programs such as lattice gauge theory, causal sets, and cellular-automaton models are serious ones. A framework built on a continuous plenum should say which of its results depend on continuity and which survive discretization. The demand is fair to any continuum model.
+\item A claim of formal verification should come with artifacts. A placeholder is not a repository. A checkable claim names a commit, a toolchain version, a file, a theorem, and the output of \texttt{\#print axioms}.
+\item The discrete alternative is a testable program and not only a slogan. A lattice version, with jerk defined by third finite differences, can be written down and compared with the continuum version, and the comparison would show exactly which statements depend on the continuum.
+\end{itemize}
+
+\subsection{Where the argument fails}
+
+\paragraph{The premises are satisfiable.} The condition that between distinct points $x,y$ there is a $z$ with $\mathrm{Dist}(x,z)=\tfrac12\mathrm{Dist}(x,y)$ holds in the real line with the usual distance, taking $z=(x+y)/2$. A first-order theory with a model is consistent, so no contradiction can be derived from it, and the issues derive none. The condition is a single existential, so it asks nobody to evaluate anything. The chain $\mathrm{PartitionStep}(n)\to\mathrm{PartitionStep}(n+1)$ is an induction step, and it holds of the natural numbers. Implications between stages assert nothing about anyone carrying out the stages. The claim of ``infinite energy to compute a single finite displacement'' replaces a semantic question with an execution model, since a displacement is one subtraction of two values of a function. Zeno's regress is answered by convergence: the partial sums of $\sum 2^{-n}$ approach $1$, and the traversal does not enumerate them.
+
+\paragraph{The argument proves too much.} Applied as written, it would refute the rationals, any dense order, and any interval of time. It would also refute the natural numbers, since $\forall n\,\exists\, n{+}1$ has the same form, and the proposed discrete truncation is indexed by them: a flip at each time step needs the same successor structure the argument condemns.
+
+\paragraph{The initialization story is not load-bearing.} The reals in Lean are constructed from Cauchy sequences of rationals, and the construction does not pass through the empty set. The reals can also be constructed in ZF without Choice. A genealogy that begins at $\varnothing$ is a presentation and carries no ontological weight.
+
+\paragraph{The self-inversion axiom.} The step from $j=1/j$ to $j^2=1$ depends on how reciprocals are treated at zero, and two conventions are in use. In ordinary notation $1/j$ is undefined at $j=0$, so the premise itself already excludes zero jerk. In Lean's Mathlib, field operations are totalized and division by zero is defined to be zero, so $j=0$ satisfies $j=1/j$ while $j^2=1$ fails there, and a machine-checked version would have to carry the hypothesis $j\neq0$ explicitly. Under either convention the conclusion $j=\pm1$ excludes zero jerk, and zero jerk includes inertial motion and uniformly accelerated motion, that is, every quadratic position trajectory. Further problems remain.
+\begin{enumerate}[label=(\roman*), leftmargin=2.5em]
+\item Units. Jerk is measured in meters per second cubed and its reciprocal in seconds cubed per meter, so the equation has meaning only after a choice of units, and the values $\pm1$ change when the units change. A statement that is not invariant under change of units is not a physical law.
+\item Continuity. A continuous function on a connected interval that takes only the values $+1$ and $-1$ is constant. As an axiom over trajectories whose jerk is continuous, it forces the third derivative to be constant on each interval, so admissible trajectories are cubic polynomials with unit jerk, which excludes every oscillator. ``Flips'' would need flip times, and none are defined. ``Non-local'' has no definition.
+\item Circularity. Jerk is the limit of difference quotients over continuous time. A primitive of binary flips cannot be the third derivative of a position on the continuum except piecewise. A theory that is discrete in earnest defines jerk by finite differences with a time step, and then the values $\pm1$ depend on the step. The proposal presupposes the continuum it claims to remove.
+\item Compatibility with smooth geometry. In normalized units, $x(t)=t^3/6$ is a smooth trajectory with $x'''\equiv1$, so it satisfies the self-inversion equation at every instant. The displayed algebra therefore cannot establish discrete motion or the nonexistence of geometry. Jerk is also a vector in general, so the scalar reciprocal $1/j$ needs a definition before the equation is even well formed.
+\end{enumerate}
+
+\paragraph{The Lean claim.} The statement that Lean confirms the continuous plenum ``evaluates to a logical contradiction'' has two possible readings. If the contradiction is derived from the existence of the reals, it would be a derivation of \texttt{False} in Lean's type theory, which contradicts Carneiro's relative consistency result and would be a major finding about Lean and not about physics. If the contradiction is derived from the issues' own axioms together with a kinematic model, then, by the classification of Section~\ref{sec:fail}, it shows those axioms incompatible with the host assumptions, and the natural reading is that the added axioms are the ones to examine. Terms such as ``compiled, active, and sovereign'' are not properties of verification.
+
+\section{Hosting a theory: deep embedding}
+
+\subsection{The decisive reply}
+
+There are two ways to put a theory into a proof assistant. A shallow embedding uses the host's own logic as the object logic, and the theory inherits whatever that logic assumes. A deep embedding defines the syntax of the object theory and its derivability relation as ordinary inductive data, and then proves things about it:
+\begin{lstlisting}
+inductive Term where
+  | var : Nat -> Term
+  | app : Term -> Term -> Term
+\end{lstlisting}
+In a deep embedding the object theory's rules are whatever the inductive derivation relation says, and they do not have to be adopted as axioms of the host. The host still determines what can be proved about the representation, since the metatheorems depend on the host's own logic. A theory with no empty set, no Choice, and a bound on derivative order, given a specified and suitably encodable syntax and inference system, is a different inductive predicate. An interpreter written in a language with a null value can interpret a language without null. Lean is routinely used this way: the formalization of Lean's own kernel in Lean \cite{carneiro2024} is a deep embedding of a theory inside a system with the very assumptions under discussion.
+
+The statement that Lean ``cannot cleanly express'' rival foundations is therefore not established. A shallow embedding inherits Lean's logic by design. A deep embedding can represent any theory whose syntax and inference rules are specified and suitably encodable. If TONE cannot be deeply embedded, the likeliest reason is that TONE lacks a specified syntax and set of inference rules, which would be a fact about TONE's specification. Implementation difficulty remains possible, and a failure to produce an embedding does not by itself settle which explanation holds.
+
+\subsection{Classifying failures}
+\label{sec:fail}
+
+The word ``collapse'' covers events of very different weight.
+
+\begin{center}
+\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.2\textwidth}>{\raggedright\arraybackslash}p{0.4\textwidth}>{\raggedright\arraybackslash}p{0.3\textwidth}@{}}
+\toprule
+Layer & Typical symptom & Bearing on a foundation \\
+\midrule
+Parsing, elaboration & unknown identifier, failed unification, universe mismatch, missing instance & None; the statement is not well formed \\
+Tactics & automation fails, \texttt{sorry} remains & None; proof search is incomplete by design \\
+Kernel & rejected term & Ordinarily the term is invalid, which is the kernel's job; a defect would be shown only by rejecting a valid term or accepting an invalid one \\
+Derived contradiction & \texttt{False} is proved from the stated axioms & The axioms, as rendered, are incompatible with the host assumptions; which to revise is a further question \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Only a kernel defect, shown by rejecting a valid term or accepting an invalid one, could bear on Lean's implementation, and a derived contradiction bears on the added assumptions. Since Lean's type theory has a model in ZFC with inaccessibles, a proof of \texttt{False} from TONE's axioms in Lean shows that those axioms, as rendered, are incompatible with a theory that is believed consistent. That establishes incompatibility and does not automatically identify which assumption to reject. Because the host's rules are widely tested and are not the subject of the documents' own evidence, the natural first suspect is the rendering of the added axioms. A derived contradiction is one of the most useful things a formalization can produce, since it localizes the disagreement. The documents' pattern, in which the system ``breaks at exactly the points where these errors are challenged,'' describes the second row of that table until a failing example is produced and classified.
+
+\subsection{Unfalsifiability and a control}
+
+The final sentence of the documents' conclusion, that a collapse ``is not a problem for TONE,'' is claimed in advance of any evidence. If every failure confirms the thesis, nothing could refute it. The thesis ``Lean fails because it is ZFC'' makes a testable prediction: a system lacking an empty type and lacking Choice should accommodate TONE without friction. The counterfactual of \emph{What If Lean Was Different?} is such a claim, and it has no control condition. A control would formalize the same content in a system without the offending features, or in a deep embedding, and check whether the difficulties disappear. If they persist there, they belong to the theory. If they vanish, that shows a dependence on particular formal commitments, which is informative but is not yet a verdict on any foundation. If no such system can be exhibited, the documents' diagnosis is unsupported.
+
+\section{What a compiled proof licenses}
+\label{sec:licenses}
+
+A claim has a scope and a warrant, and the two vary independently. Scope says where the claim applies: to one observed episode, to a tested family of cases, or to a universal domain. Warrant says how it is supported: by observation, by testing, by analysis, or by machine checking \cite{flyxion2026adv,flyxion2026deg}. Machine checking is a strong warrant for the statement that was checked and for nothing else. The scope a compiled development earns is the scope of its formal statement, which can be much narrower than the sentence written about it in a project description.
+
+\subsection{Compilation is a coarse observation}
+
+Treat ``the file compiles'' as an observation map from texts to the two values accepted and rejected. Many different situations lie in the same fiber of that map. The accepted set contains theorems the author intended, theorems that state something trivial, theorems whose hypotheses already contain the conclusion, theorems about an operation that has been redefined, and theorems about a structure unrelated to the physical system the prose discusses. Appendix~\ref{app:tifu} exhibits two members of the accepted set that say nothing. Equal observations do not establish equal systems, so acceptance cannot identify which fiber a file belongs to. Reading the statement, the definitions, the hypotheses, and the output of \texttt{\#print axioms} can.
+
+\subsection{Statuses}
+
+A development usually mixes several kinds of statement, and each kind has its own licence.
+
+\begin{center}
+\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.17\textwidth}>{\raggedright\arraybackslash}p{0.3\textwidth}>{\raggedright\arraybackslash}p{0.4\textwidth}@{}}
+\toprule
+Status & What can license it & Example from the discussion \\
+\midrule
+Definition & Stipulation & Jerk is the third iterated derivative \\
+Theorem & A derivation from stated premises & If $j\neq0$ and $j=1/j$, then $j=\pm1$ \\
+Empirical claim & Measurement, with units and controls & Physical jerk satisfies $j=1/j$ \\
+Design rule & Fitness for a purpose & Report axioms with \texttt{\#print axioms} \\
+Analogy & Orientation only & Space as the residue of discrete flips \\
+Conjecture & Heuristic or partial evidence, short of proof & Jerk is the highest admissible order \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The failure the table guards against is transfer of status: a definition or analogy presented as a theorem, or a theorem presented as an empirical result. ``Ontological necessity'' is not among the statuses a theorem can confer.
+
+\subsection{Bridges}
+
+A step from a formal result to a physical or ontological claim is a bridge, and a bridge has to name its source structure, its target structure, the assumptions it uses, what it preserves, and what counterexamples are known. A theorem about a real number $j$ says nothing about a trajectory until a map from trajectories to reals is given, with units. A stability result about a defined recursion says nothing about physical stability until stability is defined in the target and the recursion is shown to model it. The same holds for series. Truncating a Taylor expansion is an approximation scheme applied to a given function. That the laws of mechanics are second-order is a separate regularity: position and velocity, given the forces, fix the trajectory. The order of a law and the order at which a series is cut are different things, and no argument that passes from one to the other has been supplied.
+
+\subsection{Performance claims need artifacts}
+
+A complexity claim has to say what is counted and on what. It needs a model of computation, a problem family, a baseline, instances, and released evidence. A constant-time result for a family of search problems is usually obtained by changing what the input contains or what the output must be, for instance by encoding the answer in the input. A polynomial-time algorithm for an NP-complete problem such as satisfiability can be tested by anyone on public benchmark instances. For satisfiable instances the returned assignment is checkable in polynomial time. For unsatisfiable instances no short certificate is known in general, so the claim must address those as well. A simulation that runs on generated instances with built-in answers establishes properties of the generator and not of an algorithm.
+
+\subsection{When the observation cannot separate cases}
+
+The central obstruction pattern states that when several situations yield the same observation and admit no common adequate action, no rule that uses only the observation can serve all of them, and added confidence in the same observation cannot supply the missing distinction \cite{flyxion2026ct}. What is needed is further evidence, a changed action space, an allowed refusal, or a narrower guarantee. The self-inversion derivation of Section~\ref{sec:issues} and Appendix~\ref{app:tifu} fits the pattern as a structural analogy and not as an application of the theorem, whose premises concern worlds with admissible-action sets. The derivation is identical at every order, so the observation it supplies is the same whichever order is asserted, and no rule based on it alone selects one. Selecting an order requires evidence about dynamics that the derivation does not contain, or a narrower claim.
+
+\subsection{Existence, computation, and standard examples}
+
+A proposal that only what computes exists is a philosophical orientation. Reachability proposals of this kind are best read as modeling orientations and not as theorems that make the unreached unreal. A criterion of existence by computability also has to classify its own status. If it is a stipulation, it licenses nothing beyond itself. If it is a philosophical or empirical thesis, it needs support, and it is not itself the output of a bounded computation. Even on the criterion's own terms, Lean's kernel evaluates \texttt{1 + 1 = 2} by reduction, so ordinary arithmetic is not excluded. Neither proof checking nor the incompleteness theorems require a Platonist reading, since both concern finite derivations.
+
+Familiar puzzles are sometimes taken for defects in the foundations. The horse paradox has a flawed inductive step, in which the overlap argument fails at the step from one horse to two, so it is a fault in one proof and not in induction. The infinite hotel illustrates that an infinite set can be in bijection with a proper subset, which is Dedekind's definition of an infinite set and not a contradiction.
+
+\medskip
+Standing in an argument comes from warrant. It does not come from the vehemence with which a claim is made, from the characterization of its opponents, or from the absence of a reply.
+
+\section{Elementary logical patterns in the argument}
+\label{sec:patterns}
+
+Several of the weaknesses above are instances of standard patterns of invalid or unsupported inference. Naming them is useful because each has a short schema and a short repair. The patterns fall into three groups: errors of form, errors of strategy, and errors of category.
+
+\subsection{Errors of form}
+
+\paragraph{Affirming the consequent.} The schema is: if A then B; B; therefore A. The instance is: if ZFC were ontologically corrupt, its formalizations would break; this formalization broke; therefore ZFC is corrupt. As stated, the inference is a defective abductive step, an unsupported causal diagnosis; it becomes affirming the consequent when reconstructed as the conditional schema above. A formalization can break for many reasons that do not involve corruption of anything, including a mistyped statement, an inconsistent axiom set, a missing instance, or an exhausted tactic. The repair is to enumerate the rival causes of the observed failure, which is the purpose of the layer classification in Section~\ref{sec:fail}.
+
+\paragraph{Begging the question.} The schema is to assume in a premise what the conclusion asserts. The equation $j=1/j$ is an unsupported restriction on the admissible values of $j$; rewriting that restriction as $j\in\{-1,1\}$ does not independently justify imposing it on physical trajectories. The algebra is valid as a conditional, and the failure lies in treating the premise as a law. The theorem of Appendix~\ref{app:tifu}, which takes the hypothesis as given and returns it, is the limiting case. The repair is to support the premise independently of the conclusion.
+
+\paragraph{Quantifier errors.} Two quantifier mistakes occur. The first reads a statement of the form ``for every pair of points there is a midpoint'' as if it asserted a single process that visits every midpoint. The form is $\forall\exists$, which gives each case its own instance, and it is turned into a demand for completing an infinite enumeration, which is a different statement. The second takes a particular case for a universal one. Some trajectories have constant unit jerk, for instance $x(t)=t^3/6$ in normalized units, but ``for all $j$, $j=1/j$'' is a universal claim that the particular case does not support. The repair is to write the quantifiers out in full before drawing conclusions.
+
+\paragraph{Equivocation.} A single word is used with different meanings in successive steps. ``Empty'' shifts between a set with no members and nothing at all. ``Exists'' shifts between being a declared name, having an inhabitant, and being physically real. ``Set'' shifts between a set of ZFC and the subset-of-a-type of a type-theoretic library. ``ZFC'' shifts between a formal theory and a research culture. ``Platonism'' shifts between a metaphysical thesis and the use of a formal system. ``Primitive'' shifts between a notion taken as undefined in an axiomatization and an entity taken as ontologically basic. The repair is to fix a meaning for each term and check that every step uses it.
+
+\paragraph{Hasty generalization and false dilemma.} One failed formalization, in a development that cannot be inspected, is generalized to the finality of a foundation and to mathematics as a whole. The conclusion is also framed as a choice between two options, a ZFC-style empty set or a particular new ontology, which omits constructive set theories, type theories, New Foundations, and category-theoretic foundations, among others. A parallel dilemma sets Platonism against computation, as if no other stance existed. The repair is to count the alternatives before choosing among them.
+
+\subsection{Errors of strategy}
+
+\paragraph{Unfalsifiability.} Success and failure are both read as confirmation. A file that compiles counts as verification, and a file that fails counts as evidence of corruption in the foundation. A thesis that every outcome supports gives no information. The repair is to state in advance an observation that would count against the thesis, as Section~\ref{sec:fail} proposes for a failing example.
+
+\paragraph{Motte and bailey.} A defensible claim, the motte, is asserted when the position is challenged, and a much stronger claim, the bailey, is asserted when it is not. Here the motte is that foundations carry commitments and are not neutral, which is true and is granted in the closing section. The bailey is that ZFC is rotten and finished. The repair is to hold the claim fixed and ask what supports that claim, not its weaker neighbor.
+
+\paragraph{Immunization.} A statement of the form ``if you still think the problems are technical, you have not understood the depth of the problem'' reclassifies every disagreement as a failure of understanding. It is a closure move that protects the thesis from any reply, in the manner of the no-true-Scotsman pattern. The repair is to specify what disagreement would be legitimate.
+
+\paragraph{Assertion and repetition.} A slogan repeated in several documents is not supported by being repeated, and a sentence such as ``both are false'' adds no warrant to the claim it follows. Appendix~\ref{app:tifu} reverses the pattern for comedic effect by repeating, instead, that the hypothesis is not supported. The repair is to count premises and not restatements.
+
+\paragraph{Shifting the burden.} The remark that the code is out there, together with a template placeholder where the link should be, asks the reader to disprove a claim whose supporting material has not been supplied. The party making a claim bears the burden of supplying the artifact on which it rests. The repair is to ask for the commit, the toolchain, the theorem names, and the axiom report, and to suspend judgment until they arrive.
+
+\paragraph{Poisoning the well.} Characterizing institutions or readers as corrupt before any argument is examined presents the audience as disqualified in advance. The standing of an argument does not depend on who is said to oppose it, and the converse holds as well: an argument is not improved by the claim that its opponents are lethargic or interested. The same discipline applies to this essay, whose conclusions should stand or fall on the steps given.
+
+\subsection{Errors of category}
+
+\paragraph{Reification of a formal system.} A formal system is credited with intentions and states: it ``declares,'' ``lies,'' ``is corrupt,'' ``is dying.'' A formal system has axioms, rules, and theorems. Commitments are ascribed to it by interpreters who choose how to read it. A reading on which ZFC makes ontological declarations is one such choice and is not forced by the system, which a formalist can adopt without it.
+
+\paragraph{Map and territory.} A formal result is treated as a statement about physical reality without a bridge. The statuses and bridges of Section~\ref{sec:licenses} are the repair. A kinematic quantity is not an ontological category, and a compiled theorem about a defined structure is not an observation of the world.
+
+\paragraph{Genetic fallacy.} It is said that the continuum is initialized from the empty set, so that physical continuity is built on nothing. The way a mathematical structure is constructed does not fix its properties. The real numbers can be built from Dedekind cuts or from Cauchy sequences, and neither construction passes through physical anything. Properties of a structure are read from the structure and not from the history of its presentation.
+
+\paragraph{Cherry-picked authority and appeal to the compiler.} Authors are cited in support, and a reading of the cited work shows that it cuts the other way, as Section~\ref{sec:lineage} describes for Quine, Vaihinger, and Whitehead. The compiler is invoked as an incorruptible authority. A proof checker is an authority on whether a derivation follows from its premises. It is not an authority on whether the premises are true, whether the definitions track the intended meaning, or whether the prose describes the theorem.
+
+\paragraph{Argument from incredulity.} Statements such as ``you cannot cross a room if space is continuous'' or ``every child can see the problem'' move from the failure to imagine a resolution to the absence of one. Zeno's regress has a resolution by convergence, and the familiar arithmetic puzzles have standard resolutions. The repair is to look for the resolution before concluding that none exists.
+
+\subsection{A caution}
+
+Showing that an argument commits one of these patterns shows that the argument does not establish its conclusion. It does not show the conclusion false. A well-formed argument for a conclusion about the dependence of formalization on foundations is possible, and the closing section sketches what it would require. The patterns above are also common everywhere, and the essay's own steps should be checked against the same list.
+
+\section{The cited lineage}
+\label{sec:lineage}
+
+\paragraph{Quine.} Section 3 covered the criterion of commitment, which locates what a theory says exists and does not select which theory to adopt.
+
+\paragraph{Vaihinger.} Vaihinger's \emph{Philosophy of As-If} treats mathematical constructs such as the infinitesimal and the imaginary number as useful fictions justified by their service \cite{vaihinger1911}. If the empty set is a fiction, so is every other mathematical entity, including the third derivative, and fictionalism does not give jerk a privileged ontological standing. The documents also say ZFC ``declared the fictions real.'' A formal system makes no ontological declaration. That reading is a Platonist gloss, and a formalist can adopt the same system without it. The charge of ``crooked Platonism'' attaches to the gloss and not to the formal system.
+
+\paragraph{Whitehead.} Whitehead's criticism, in the fallacy of misplaced concreteness, is aimed at treating abstractions from process as concrete \cite{whitehead1925,whitehead1929}. Point-wise kinematic quantities of every order are abstractions of that kind. A process ontology would take the extended process first and obtain derivatives of every order as abstractions from it, which makes jerk neither more nor less fundamental than velocity. Reading Whitehead as a reason to favor the third derivative requires a bridging argument that the documents do not give.
+
+\section{A sound version of the complaint}
+
+The documents' first paragraph is right about one thing: a formal foundation is not neutral. Lean does carry commitments that can constrain particular theories. They are different from the three listed.
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Uniqueness of identity proofs.} Lean's equality type lives in \texttt{Prop}, so any two proofs of the same equation are definitionally equal. This is incompatible with univalence, and Hofmann and Streicher showed that uniqueness of identity proofs is not derivable in Martin-L\"of type theory \cite{hofmann1998}. A framework in which identifications carry structure, so that the identity between two things is itself a thing with content, cannot adopt Lean's native equality and would need a custom identity type.
+\item \textbf{Impredicative \texttt{Prop} with definitional proof irrelevance.} Proofs placed in \texttt{Prop} are not data. A framework in which derivations or histories are the primary entities must place them in \texttt{Type}, with extra bookkeeping. This is a modeling choice with costs and not an impossibility.
+\item \textbf{Classical defaults in the ecosystem.} Mathlib uses the classical axioms freely. Working constructively inside it means leaving most of its reach behind.
+\end{enumerate}
+These are costs for specific theories and they are disclosed in the system's own documentation. They fit the documents' general thesis that foundations are not neutral far better than the empty set, choice, and jerk do. A repository that wished to argue this version would show a minimal example, say what it costs, and compare it with a deep embedding.
+
+\section{Conclusion}
+
+\begin{center}
+\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.2\textwidth}>{\raggedright\arraybackslash}p{0.4\textwidth}>{\raggedright\arraybackslash}p{0.3\textwidth}@{}}
+\toprule
+Documents' claim & What Lean and mathematics actually provide & Status \\
+\midrule
+Lean is ZFC & Dependent type theory with a model in ZFC plus inaccessibles; ZFC is a library development in it & False \\
+Empty set is a foundational error & An empty type is a classifier with no inhabitants; \texttt{empty\_exists} names a type and proves nothing & Equivocation \\
+Choice is false & Independent of ZF; one declared axiom, auditable by \texttt{\#print axioms} & No criterion given \\
+No place for jerk & Lean has no physics; both readings of the thesis are formalizable & Category error \\
+Collapse shows ZFC is finished & Failure layers differ; a derived contradiction shows the added axioms incompatible with the host & Non sequitur \\
+Continuum implies infinite regress & The midpoint condition is satisfied by the reals, so it is consistent & Satisfiable premises \\
+$j=1/j$ gives $j=\pm1$ & Valid conditional algebra (given $j\neq0$); the physical interpretation excludes zero jerk, depends on units, and forces constant jerk under continuity & Interpretation unsupported \\
+Compiled, therefore true of reality & Machine checking warrants the formal statement as written and nothing beyond it & Scope exceeds warrant \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The failure of a formalization is data about the formalization. The inference from ``this formalization collapsed'' to ``the foundation is false'' needs a classified failing example, a control, and a criterion for falsity, and the documents offer none of the three. What would change the assessment is concrete: a minimal failing example, classified at the kernel layer or as a derived contradiction, reproduced in a control system that lacks the empty type and Choice, with the difficulty absent there. Even then the outcomes must be kept apart. A kernel defect would concern an implementation. An incompatibility would concern a set of assumptions. A dependence on particular formal commitments would concern those commitments. None of these alone establishes ontological corruption, which would need a separate criterion for what corruption is. Short of any of them, the documents show that a particular formalization was difficult, which is a common and uninteresting event in a proof assistant. They do not show that ZFC is finished, or that Lean is ZFC.
+
+\appendix
+\section{TIFU: A Theory of Immediately Falsified Universals}
+\label{app:tifu}
+
+\noindent\emph{This appendix is a parody. It proposes a rival to the framework discussed above, in that framework's own idiom, in order to show what the idiom can and cannot establish. The acronym also admits the expansion ``Today I Formalized Unwisely.''}
+
+\subsection{Statement}
+
+TIFU holds that the highest ontologically admissible form of change is the sixth time derivative of position, called pop, after snap (fourth) and crackle (fifth) \cite{visser2004,eager2016}. The derivative called pop here is unrelated to the Pop primitive of the Spherepop calculus, with which it shares a name by coincidence. Everything above pop leads to regress or incoherence. TIFU rejects the view that jerk is primitive on the ground that jerk is only the third rung of a ladder with at least three more rungs above it.
+
+The hypothesis that pop is primitive is not supported by this appendix. The appendix states this here, and states it again below.
+
+\subsection{Machine verification}
+
+TIFU is formally verified in the only sense in which such verification is on offer:
+\begin{lstlisting}
+theorem compiled : True := trivial
+
+theorem tifu (PopIsPrimitive : Prop) (h : PopIsPrimitive) : PopIsPrimitive := h
+\end{lstlisting}
+(Illustrative, like the other snippets.) Both declarations compile. The first states nothing. The second states that if pop is primitive then pop is primitive, which holds of every proposition, so the hypothesis is verified exactly as far as it was assumed. A successful compilation is a fact about a derivation and not about the world. The hypothesis that pop is primitive is not supported by the compilation.
+
+\subsection{The self-inversion axiom at every order}
+
+For a positive integer $n$, let $A_n$ be the axiom that $x^{(n)}(t)\neq0$ and $x^{(n)}(t)=1/x^{(n)}(t)$ for all $t$; this appendix uses the ordinary partial reciprocal. Then $x^{(n)}(t)^2=1$, so $x^{(n)}(t)\in\{-1,1\}$. If $x^{(n)}$ is continuous on an interval, it is constant there. The derivation is identical for every $n$. TONE takes $n=3$ and TIFU takes $n=6$. Since the derivation is the same, each choice establishes that its own order is primitive exactly as well as the other does.
+
+A further consequence follows at once. If $A_m$ holds with $x^{(m)}$ continuous on an interval, then $x^{(m)}$ is constant there, so $x^{(n)}=0$ for every $n>m$, and $A_n$ fails for every $n>m$. Hence $A_3$ and $A_6$ are jointly unsatisfiable on any interval where the derivatives involved exist, and the same holds for any two distinct orders. By the standard that a collapse shows the system corrupt, TONE refutes TIFU and TIFU refutes TONE, and both are corrupt. At most one order can be declared primitive by this device, and nothing in the device chooses which. Choosing is a further premise, supplied by assertion. The hypothesis that pop is primitive is not supported by this result either.
+
+\subsection{What TIFU does not prove}
+
+TIFU does not prove that pop is primitive. It does not prove that jerk is not primitive. It does not prove that any order is primitive. It does not prove that the self-inversion axiom distinguishes one order from another. It proves that the axiom does not distinguish them, which is the only result in this appendix, and which weakens every claim that depends on the axiom doing so. TIFU does not prove that Lean, ZFC, or any other system is finished.
+
+\subsection{Conclusion}
+
+An argument form that yields the same conclusion for every choice of order, and whose conclusions for distinct orders contradict one another, gives no reason to prefer an order. TIFU's chief virtue is that it says so. The hypothesis that pop is primitive remains unsupported, and the acronym stands.
+
+\begin{thebibliography}{99}
+\bibitem{carneiro2019} M.~Carneiro, \emph{The Type Theory of Lean}, master's thesis, Carnegie Mellon University, 2019.
+\bibitem{carneiro2024} M.~Carneiro, ``Lean4Lean: Towards a formalized metatheory for the Lean theorem prover,'' 2024.
+\bibitem{cohen1963} P.~J. Cohen, ``The independence of the continuum hypothesis,'' \emph{Proc.\ Natl.\ Acad.\ Sci.\ USA} 50 (1963).
+\bibitem{demoura2021} L.~de Moura and S.~Ullrich, ``The Lean 4 theorem prover and programming language,'' \emph{CADE-28}, 2021.
+\bibitem{diaconescu1975} R.~Diaconescu, ``Axiom of choice and complementation,'' \emph{Proc.\ Amer.\ Math.\ Soc.} 51 (1975).
+\bibitem{eager2016} D.~Eager, A.-M. Pendrill, and N.~Reistad, ``Beyond velocity and acceleration: jerk, snap and higher derivatives,'' \emph{Eur.\ J.\ Phys.} 37 (2016) 065008.
+\bibitem{flyxion2026deg} Flyxion, ``Admissible degradation,'' admissibility-lab repository, 2026, \url{https://github.com/standardgalactic/admissibility-lab/blob/main/admissible-degradation.tex}.
+\bibitem{flyxion2026adv} Flyxion, \emph{Adversaria: A Specification for a Public Claim Graph}, monograph, 2026, \url{https://github.com/standardgalactic/adversaria}.
+\bibitem{flyxion2026ct} Flyxion, central theorem specification, alphabet repository, 2026, \url{https://github.com/standardgalactic/alphabet/blob/main/central-theorem/SPEC.md}.
+\bibitem{godel1938} K.~G\"odel, ``The consistency of the axiom of choice and of the generalized continuum-hypothesis,'' \emph{Proc.\ Natl.\ Acad.\ Sci.\ USA} 24 (1938).
+\bibitem{goodman1978} N.~D. Goodman and J.~Myhill, ``Choice implies excluded middle,'' \emph{Z.\ Math.\ Logik Grundlag.\ Math.} 24 (1978).
+\bibitem{hardy1916} G.~H. Hardy, ``Weierstrass's non-differentiable function,'' \emph{Trans.\ Amer.\ Math.\ Soc.} 17 (1916).
+\bibitem{hofmann1998} M.~Hofmann and T.~Streicher, ``The groupoid interpretation of type theory,'' in \emph{Twenty-Five Years of Constructive Type Theory}, Oxford University Press, 1998.
+\bibitem{jackson1999} J.~D. Jackson, \emph{Classical Electrodynamics}, 3rd ed., Wiley, 1999, ch.~16.
+\bibitem{martinlof1984} P.~Martin-L\"of, \emph{Intuitionistic Type Theory}, Bibliopolis, 1984.
+\bibitem{mathlib2020} The mathlib Community, ``The Lean mathematical library,'' \emph{CPP 2020}.
+\bibitem{megill2019} N.~Megill and D.~A. Wheeler, \emph{Metamath: A Computer Language for Mathematical Proofs}, 2019.
+\bibitem{mellinger2011} D.~Mellinger and V.~Kumar, ``Minimum snap trajectory generation and control for quadrotors,'' \emph{IEEE ICRA}, 2011.
+\bibitem{ostrogradsky1850} M.~Ostrogradsky, ``M\'emoires sur les \'equations diff\'erentielles relatives au probl\`eme des isop\'erim\`etres,'' \emph{Mem.\ Acad.\ St.\ Petersbourg} 6 (1850).
+\bibitem{quine1948} W.~V.~O. Quine, ``On what there is,'' \emph{Review of Metaphysics} 2 (1948).
+\bibitem{quine1963} W.~V.~O. Quine, \emph{Set Theory and Its Logic}, Harvard University Press, 1963.
+\bibitem{vaihinger1911} H.~Vaihinger, \emph{Die Philosophie des Als Ob}, 1911; English translation by C.~K. Ogden, 1924.
+\bibitem{visser2004} M.~Visser, ``Jerk, snap and the cosmological equation of state,'' \emph{Class.\ Quantum Grav.} 21 (2004) 2603.
+\bibitem{whitehead1925} A.~N. Whitehead, \emph{Science and the Modern World}, 1925.
+\bibitem{whitehead1929} A.~N. Whitehead, \emph{Process and Reality}, 1929.
+\bibitem{woodard2015} R.~P. Woodard, ``Ostrogradsky's theorem on Hamiltonian instability,'' \emph{Scholarpedia} 10(8):32243, 2015.
+\end{thebibliography}
+
+\end{document}
+
