@@ -1,4 +1,4 @@
-# Mathlib experiments (staged, not built)
+# Mathlib experiments
 
 Files here are not imported by `CrookedPlatonism.lean`, so `lake build` ignores
 them. To enable them:
@@ -16,4 +16,4 @@ them. To enable them:
    `lean-toolchain`, then run `lake update` and `lake exe cache get`.
 4. Add `import CrookedPlatonism.Mathlib.Jerk` to `CrookedPlatonism.lean`.
 
-These files were written without a compiler and may need small fixes.
+These files build under Lean 4.34.1 with Mathlib v4.34.1.

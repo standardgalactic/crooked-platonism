@@ -28,3 +28,4 @@ theorem not_A_deriv_of_const (c : ℝ) : ¬ A (deriv (fun _ : ℝ => c)) := by
   simp at h0
 
 end CrookedPlatonism.TifuOrders
+#print axioms CrookedPlatonism.TifuOrders.not_A_deriv_of_const

@@ -28,3 +28,5 @@ theorem zero_satisfies_totalized : (0 : ℝ) = 1 / 0 := by simp
 -- TODO(jerk): prove `iteratedDeriv 3 (fun t : ℝ => t ^ 3 / 6) = fun _ => 1`.
 
 end CrookedPlatonism.Jerk
+#print axioms CrookedPlatonism.Jerk.self_inverse_cases
+#print axioms CrookedPlatonism.Jerk.zero_satisfies_totalized

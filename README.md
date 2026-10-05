@@ -30,7 +30,10 @@ The build prints the output of each `#print axioms` line. Those messages are the
 - **Embedding.** A claim can be derivable in one represented theory and not in another. A shortfall inside a represented theory is a fact about its rules.
 - **Tifu.** A satirical theorem whose proof returns its hypothesis, included to mark the difference between assuming a claim and supporting it.
 
-The Mathlib files under `CrookedPlatonism/Mathlib/` are staged and not yet built. They will be listed here once they compile.
+- **Jerk** (needs Mathlib). The conditional algebra `j = 1/j` with `j ≠ 0` gives `j = ±1`, and under Mathlib's total convention `1/0 = 0` the value `j = 0` also satisfies the equation, so the reciprocal convention matters.
+- **TifuOrders** (needs Mathlib). The self-inversion axiom, with its nonzero clause, fails for the derivative of any constant function. This is the step behind the claim that axioms for two different orders cannot both hold.
+
+The Mathlib files build under Lean 4.34.1 with Mathlib v4.34.1. Their axiom dependencies, printed by the build, include Mathlib's classical axioms.
 
 ## Status vocabulary
 
