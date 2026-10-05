@@ -1,0 +1,56 @@
+.
+├── CrookedPlatonism
+│   ├── Choice.lean
+│   ├── Embedding.lean
+│   ├── EmptySet.lean
+│   ├── FailureLayers.lean
+│   ├── Mathlib
+│   │   ├── ConstantJerk.lean
+│   │   ├── Jerk.lean
+│   │   ├── OrdersExclusive.lean
+│   │   ├── README.md
+│   │   └── TifuOrders.lean
+│   └── Tifu.lean
+├── CrookedPlatonism.lean
+├── LICENSE
+├── README.md
+├── audit
+│   ├── README.md
+│   ├── TONE_repaired.lean
+│   └── Verbatim_TONE_listing.lean
+├── docs
+│   ├── Foundations_of_Lean.md
+│   ├── Where_Formalizations_Break.md
+│   ├── ZFC_and_Type_Theory.md
+│   └── worldview-roadmap.md
+├── essay
+│   ├── formal_failure_and_ontological_overreach.pdf
+│   ├── formal_failure_and_ontological_overreach.tex
+│   ├── rebuilding-foundations.pdf
+│   └── rebuilding-foundations.tex
+├── file-list.txt
+├── lake-manifest.json
+├── lakefile.toml
+├── lean-toolchain
+├── simulations
+│   ├── Counterfactuals.md
+│   ├── README.md
+│   └── jerk_regress.py
+├── tools
+│   ├── apply_round2.sh
+│   └── setup_crooked_platonism.sh
+└── upstream
+    ├── attempts
+    │   ├── Choice_Problem.lean
+    │   ├── EmptySet_Problem.lean
+    │   └── Jerk_Problem.lean
+    ├── docs
+    │   ├── Ontological_Assumptions_of_Lean.md
+    │   ├── The_Death_of_ZFC.md
+    │   └── Why_Lean_Fails.md
+    ├── simulations
+    │   └── What_If_Lean_Was_Different.md
+    └── src
+        └── TONE_Physics_Core.lean
+
+13 directories, 41 files

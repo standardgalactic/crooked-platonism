@@ -1,0 +1,3668 @@
+1
+00:00:00,000 --> 00:00:06,780
+Imagine someone walks up to you on the street completely serious and just tells you that the invisible bedrock of the universe is a lie.
+
+2
+00:00:07,420 --> 00:00:09,940
+That is definitely a bold way to start a conversation.
+
+3
+00:00:10,120 --> 00:00:18,320
+Right. And they aren't some conspiracy theorists talking about aliens or fake moon landings. They are a mathematician.
+
+4
+00:00:18,700 --> 00:00:21,660
+Which instantly makes it, you know, a hundred times more intriguing.
+
+5
+00:00:21,660 --> 00:00:34,160
+Exactly. And they are holding a stack of computer code claiming that all of modern logic, the very math that keeps airplanes in the sky and encrypts your bank account, is fundamentally and ontologically corrupt.
+
+6
+00:00:34,580 --> 00:00:36,200
+Because of what, exactly?
+
+7
+00:00:36,300 --> 00:00:46,220
+Well, they claim it's corrupt because it believes in a concept called nothing, it embraces arbitrary choices, and it stubbornly ignores the physical reality of a jerk.
+
+8
+00:00:46,400 --> 00:00:51,340
+A jerk. Okay, yeah, you would probably be confused, maybe a little amused by that.
+
+9
+00:00:51,660 --> 00:00:56,240
+But if you're anything like me, you'd be desperate to know what on earth they are actually talking about.
+
+10
+00:00:56,400 --> 00:00:59,700
+Oh, absolutely. Because it's a phenomenal starting point for a mystery.
+
+11
+00:01:00,220 --> 00:01:00,940
+It really is.
+
+12
+00:01:00,940 --> 00:01:07,720
+You are looking at a system, like mathematics and formal logic, that works perfectly well for billions of people every single day.
+
+13
+00:01:08,580 --> 00:01:13,700
+And yet, this person is telling you that the bedrock underneath it is a metaphysical hallucination.
+
+14
+00:01:14,040 --> 00:01:20,360
+So if you are listening to this and thinking, why do I care about the philosophy of a math software, just stick with us.
+
+15
+00:01:20,360 --> 00:01:32,900
+Yeah, because unraveling this mystery accidentally explains how a computer thinks, why human language is so messy, and, bizarrely enough, it might even offer a mathematical explanation for gravity.
+
+16
+00:01:33,440 --> 00:01:34,300
+It's wild.
+
+17
+00:01:34,800 --> 00:01:43,780
+Today, we are exploring a highly technical, absolutely crazy controversy playing out right now in the world of formal logic and computer-assisted proofs.
+
+18
+00:01:43,780 --> 00:01:49,120
+And our guide for this deep dive is a pair of extensive papers by an independent researcher named Flyxion.
+
+19
+00:01:49,620 --> 00:01:52,060
+Right. Published in October 2026.
+
+20
+00:01:52,560 --> 00:01:58,420
+They're called Formal Failure and Ontological Overreach, and Rebuilding the Foundations of Logic.
+
+21
+00:01:58,820 --> 00:02:02,360
+What makes these papers so vital is that they aren't just dry mathematical theory.
+
+22
+00:02:02,760 --> 00:02:03,540
+No, not at all.
+
+23
+00:02:03,540 --> 00:02:07,960
+They represent a forensic breakdown of an actual philosophical rebellion.
+
+24
+00:02:08,640 --> 00:02:12,240
+They look at how we translate human reasoning into machine code.
+
+25
+00:02:12,320 --> 00:02:17,280
+And, maybe more importantly, what it actually means when that translation completely breaks down.
+
+26
+00:02:17,460 --> 00:02:17,940
+Precisely.
+
+27
+00:02:18,080 --> 00:02:19,480
+So, let's set the stage here.
+
+28
+00:02:19,880 --> 00:02:23,500
+There is a major theorem-proving software out there called Lean.
+
+29
+00:02:23,740 --> 00:02:24,360
+Yeah, Lean.
+
+30
+00:02:24,360 --> 00:02:30,000
+Now, I've heard of it in passing, but for someone who doesn't code math for a living, what exactly is Lean?
+
+31
+00:02:30,540 --> 00:02:36,320
+Think of Lean as an incredibly strict, like, absolutely uncompromising spell checker.
+
+32
+00:02:36,560 --> 00:02:39,340
+But instead of checking your spelling, it checks your logic.
+
+33
+00:02:39,660 --> 00:02:40,720
+Okay. That makes sense.
+
+34
+00:02:41,160 --> 00:02:45,120
+For decades, mathematicians would write proofs on chalkboards or in journals.
+
+35
+00:02:45,800 --> 00:02:48,420
+Human beings are fallible, right? We skip steps.
+
+36
+00:02:48,660 --> 00:02:49,200
+Oh, definitely.
+
+37
+00:02:49,460 --> 00:02:54,080
+We say things like, it is obvious that, when maybe it isn't so obvious.
+
+38
+00:02:54,080 --> 00:02:59,540
+Exactly. Lean is a software environment where you write your proof in a programming language,
+
+39
+00:02:59,720 --> 00:03:05,440
+and the computer's kernel verifies every single logical step, down to the foundational axioms.
+
+40
+00:03:05,800 --> 00:03:08,100
+So, it doesn't let you get away with anything?
+
+41
+00:03:08,400 --> 00:03:09,240
+Nothing at all.
+
+42
+00:03:09,760 --> 00:03:16,120
+If Lean says your proof is correct, you have a mathematical guarantee that there are no skipped steps and no human errors.
+
+43
+00:03:16,580 --> 00:03:22,240
+It's used to verify everything from pure mathematics to the software that runs self-driving cars.
+
+44
+00:03:22,240 --> 00:03:28,320
+Okay. So, it is the ultimate objective referee. But apparently, some people think this referee is taking bribes.
+
+45
+00:03:28,660 --> 00:03:30,520
+Which is a heavy accusation.
+
+46
+00:03:31,040 --> 00:03:38,480
+There is a group circulating documents around a new framework called TONE, and they are releasing manifestos with dramatic titles like
+
+47
+00:03:38,480 --> 00:03:42,340
+The Ontological Assumptions of Lean and The Death of ZFC.
+
+48
+00:03:42,340 --> 00:03:45,720
+They are literally claiming Lean is dead.
+
+49
+00:03:46,020 --> 00:03:50,240
+Right. They don't just claim it's dead. They claim it is philosophically toxic.
+
+50
+00:03:50,900 --> 00:03:55,840
+Yeah. TONE presents a four-step argument to prove that Lean is ontologically false.
+
+51
+00:03:56,820 --> 00:04:01,400
+And Flagstreet's first paper is basically a meticulous deconstruction of this exact argument.
+
+52
+00:04:01,400 --> 00:04:05,580
+I want to walk through their four steps, but I want to make sure I'm getting the logic right.
+
+53
+00:04:06,180 --> 00:04:13,040
+So, step one, TONE claims that Lean, the software, is entirely equivalent to something called ZFC.
+
+54
+00:04:13,640 --> 00:04:15,240
+That's their starting premise, yes.
+
+55
+00:04:15,780 --> 00:04:21,820
+Then step two, they argue that ZFC is committed to the existence of the empty set and the axiom of choice,
+
+56
+00:04:22,260 --> 00:04:24,420
+both of which TONE considers to be false concepts.
+
+57
+00:04:24,840 --> 00:04:29,700
+Right. So, they are assigning a very specific philosophical baggage to the software itself.
+
+58
+00:04:29,700 --> 00:04:33,780
+Then we get to step three, which takes a weird pivot into physics.
+
+59
+00:04:34,340 --> 00:04:37,220
+TONE rejects those mathematical concepts and asserts that
+
+60
+00:04:37,220 --> 00:04:41,280
+jerk is the highest admissible form of change in the physical universe.
+
+61
+00:04:41,760 --> 00:04:46,180
+And jerk is a real term in physics, for the third derivative of position.
+
+62
+00:04:46,720 --> 00:04:54,000
+Right. So, they sit down at their computer, they try to program this truth about jerk into Lean,
+
+63
+00:04:54,220 --> 00:04:57,820
+and the software just crashes. The code collapses.
+
+64
+00:04:57,820 --> 00:05:01,440
+Which brings them to step four, their grand conclusion.
+
+65
+00:05:02,260 --> 00:05:05,740
+Because the code collapsed when they inputted their specific philosophy,
+
+66
+00:05:06,520 --> 00:05:11,800
+they declared that Lean, and therefore ZFC, is ontologically corrupt.
+
+67
+00:05:12,520 --> 00:05:13,040
+Wow.
+
+68
+00:05:13,360 --> 00:05:17,380
+Yeah. The machine rejected their truth, so the machine must be broken.
+
+69
+00:05:18,020 --> 00:05:21,160
+I'm really trying to wrap my head around that leap in logic.
+
+70
+00:05:21,160 --> 00:05:26,460
+It sounds, I don't know, it sounds like someone trying to write a sci-fi novel in Microsoft Word.
+
+71
+00:05:27,280 --> 00:05:28,680
+Okay. I like where this is going.
+
+72
+00:05:29,080 --> 00:05:32,800
+They don't know how to use page bricks, the formatting gets completely messed up,
+
+73
+00:05:32,960 --> 00:05:37,640
+the file crashes, and they stand up and declare that the English language itself
+
+74
+00:05:37,640 --> 00:05:41,140
+is structurally incapable of understanding time travel.
+
+75
+00:05:41,140 --> 00:05:46,300
+That analogy hits the nail on the head. But it actually goes even deeper mathematically.
+
+76
+00:05:46,880 --> 00:05:47,200
+Really?
+
+77
+00:05:47,480 --> 00:05:52,480
+Yeah. What you were describing is a classic category error, which Flyxion points out immediately.
+
+78
+00:05:53,460 --> 00:05:58,320
+The authors of Tone are treating a formal syntax failure as a metaphysical victory.
+
+79
+00:05:58,860 --> 00:05:59,940
+Which is a huge jump.
+
+80
+00:06:00,200 --> 00:06:06,140
+It is. But more fundamentally, they're committing a logical fallacy known as affirming the consequent.
+
+81
+00:06:06,460 --> 00:06:08,260
+Wait, affirming the consequent?
+
+82
+00:06:08,260 --> 00:06:14,480
+Let's look at the structure of their claim. They're saying if ZFC were ontologically corrupt,
+
+83
+00:06:14,940 --> 00:06:16,600
+its formalizations would break.
+
+84
+00:06:16,880 --> 00:06:18,020
+Okay. Sure.
+
+85
+00:06:18,400 --> 00:06:25,360
+Our formalization broke. Therefore, ZFC is corrupt. It is identical to saying if it is raining,
+
+86
+00:06:25,620 --> 00:06:30,380
+the streets are wet. I look outside and the streets are wet. Therefore, it must be raining.
+
+87
+00:06:30,380 --> 00:06:34,960
+Ah, I see. But maybe a water main broke. Or someone washed their car.
+
+88
+00:06:34,960 --> 00:06:39,340
+Exactly. The streets being wet doesn't guarantee rain at all.
+
+89
+00:06:39,880 --> 00:06:40,500
+Right. Right.
+
+90
+00:06:41,000 --> 00:06:47,760
+A formalization in a software like Lean can break for dozens of reasons. You might have a typo. You
+
+91
+00:06:47,760 --> 00:06:49,520
+might have declared a variable incorrectly.
+
+92
+00:06:49,620 --> 00:06:52,520
+Or introduced two axioms that just contradict each other.
+
+93
+00:06:52,900 --> 00:06:58,580
+Precisely. None of those failures have anything to do with the foundational philosophy of mathematics.
+
+94
+00:06:58,580 --> 00:07:04,680
+Tone took a localized software error and diagnosed it as a philosophical revolution.
+
+95
+00:07:05,360 --> 00:07:11,800
+Okay. So their conclusion is deeply flawed right out of the gate. But Flyxion doesn't just stop at the logical fallacy, do they?
+
+96
+00:07:12,140 --> 00:07:18,800
+No. Flyxion actually goes backward and methodically dismantles the very premises of Tone's argument.
+
+97
+00:07:18,800 --> 00:07:26,580
+Let's start with the very first claim, then, that Lean is equivalent to ZFC. What is ZFC, and why is Tone wrong about this?
+
+98
+00:07:26,580 --> 00:07:36,660
+So ZFC stands for Zermelo-Frankel set theory with the axiom of choice. For the last century or so, it has basically been the standard foundation of mathematics.
+
+99
+00:07:37,100 --> 00:07:37,620
+Okay.
+
+100
+00:07:37,740 --> 00:07:45,540
+If you learned about sets in high school, like Venn diagrams, unions, intersections, you were implicitly learning a simplified version of ZFC.
+
+101
+00:07:45,540 --> 00:07:49,960
+So it's a universe where absolutely everything is built out of sets?
+
+102
+00:07:50,380 --> 00:07:58,660
+Exactly. The number zero is the empty set. The number one is a set containing the empty set. It's sets all the way down.
+
+103
+00:07:59,000 --> 00:08:04,160
+So Tone thinks Lean is just a digital version of that specific set theory universe.
+
+104
+00:08:04,660 --> 00:08:14,820
+They do. And it is just factually incorrect. Lean's underlying architecture, the very kernel of the software, does not use set theory at all.
+
+105
+00:08:14,820 --> 00:08:15,580
+It doesn't.
+
+106
+00:08:15,800 --> 00:08:19,480
+No. It implements something called a dependent type theory.
+
+107
+00:08:19,740 --> 00:08:28,820
+Okay. Stop right there. Dependent type theory. That sounds incredibly intimidating. How is that functionally different from the set theory I learned in school?
+
+108
+00:08:29,120 --> 00:08:33,900
+It's a great question because the distinction is crucial to understanding why the software works.
+
+109
+00:08:33,900 --> 00:08:40,860
+In set theory, you have objects, and then you have buckets called sets, and you drop the objects into the buckets.
+
+110
+00:08:41,320 --> 00:08:45,720
+So the fundamental question is always like, is this object inside this bucket?
+
+111
+00:08:46,280 --> 00:08:47,960
+Right. That's a membership property.
+
+112
+00:08:47,960 --> 00:08:57,580
+In type theory, things are fundamentally different. You don't have separate buckets. The type is a tag permanently attached to the object itself.
+
+113
+00:08:57,960 --> 00:08:58,920
+Oh, like a barcode?
+
+114
+00:08:59,360 --> 00:09:04,140
+Very much like a barcode. An object in Lean doesn't exist independently of its type.
+
+115
+00:09:04,740 --> 00:09:09,820
+You don't have a generic number three that you later decide to put into the integer bucket.
+
+116
+00:09:09,820 --> 00:09:15,380
+So the thing you create is intrinsically a three-of-type integer?
+
+117
+00:09:16,180 --> 00:09:25,300
+Exactly. And because it's dependent type theory, the types can actually depend on values. You could have a type that is arrays of length n.
+
+118
+00:09:25,300 --> 00:09:30,040
+So if n is 5, that's a completely different type than if n is 6.
+
+119
+00:09:30,620 --> 00:09:31,260
+You got it.
+
+120
+00:09:31,660 --> 00:09:35,260
+So how does ZFC fit into this if Lean doesn't even use buckets?
+
+121
+00:09:36,160 --> 00:09:41,320
+ZFC is just one mathematical library you can choose to build inside Lean's type theory.
+
+122
+00:09:42,460 --> 00:09:47,220
+Lean is the operating system. ZFC is just an app you can install.
+
+123
+00:09:47,640 --> 00:09:48,540
+Oh, wow.
+
+124
+00:09:48,760 --> 00:09:54,620
+You can also build the rules of chess, or quantum mechanics, or a totally different mathematical foundation.
+
+125
+00:09:55,300 --> 00:09:59,600
+The direction of dependence is the complete opposite of what Tone claims.
+
+126
+00:10:00,200 --> 00:10:05,000
+Because Lean doesn't rely on ZFC. ZFC relies on Lean to host it.
+
+127
+00:10:05,540 --> 00:10:15,500
+Exactly. To say Lean is corrupt because you have issues with ZFC is like saying your computer's motherboard is broken because you don't like the rules of a video game you've downloaded.
+
+128
+00:10:16,060 --> 00:10:18,480
+That completely invalidates their first step.
+
+129
+00:10:18,840 --> 00:10:24,540
+That's hilarious. But let's look at their second step, because this gets into the philosophy of nothing.
+
+130
+00:10:24,540 --> 00:10:35,040
+Right. The empty set. Tone claims that ZFC and Lean name nothing and treat it as a concrete object. They are deeply offended by the empty set.
+
+131
+00:10:35,540 --> 00:10:44,900
+They find it philosophically abhorrent to treat nothingness as an entity. But Flyxion draws a vital distinction here. An empty set is not nothingness.
+
+132
+00:10:44,900 --> 00:10:50,820
+I'm trying to picture this. If I have an empty cardboard box on my table, the box isn't nothing.
+
+133
+00:10:51,040 --> 00:10:51,820
+No, of course not.
+
+134
+00:10:52,020 --> 00:10:57,760
+It's a box. It's made of cardboard. It just happens to have zero items inside it. The container still physically exists.
+
+135
+00:10:58,000 --> 00:11:07,980
+That is a highly functional way to visualize it. Mathematically, the empty set is a highly specific, useful object. It is the identity element for union.
+
+136
+00:11:07,980 --> 00:11:12,280
+Meaning if you combine any set with the empty set, you just get the original set back.
+
+137
+00:11:12,540 --> 00:11:22,000
+Exactly. It is also the intersection of two disjoint sets. If I ask you for the set of all square circles, the answer is the empty set.
+
+138
+00:11:22,480 --> 00:11:24,360
+Because there are no square circles.
+
+139
+00:11:24,620 --> 00:11:34,700
+Right. The axioms of set theory do not say the void exists as a metaphysical entity. They just say there is a valid mathematical container that has no members.
+
+140
+00:11:34,700 --> 00:11:45,400
+But Tone actually points to a specific line of code in Lean to prove their point. The text mentions, they quote this line, def empty exists dot type dot dot equals empty.
+
+141
+00:11:45,700 --> 00:11:46,560
+I remember that part.
+
+142
+00:11:47,100 --> 00:11:51,860
+Tone looks at that and says, look right there, the software is explicitly declaring that nothingness exists.
+
+143
+00:11:52,020 --> 00:11:57,740
+Which demonstrates a profound misunderstanding of how compilers allocate memory and define types.
+
+144
+00:11:58,000 --> 00:11:58,440
+How so?
+
+145
+00:11:58,740 --> 00:12:04,420
+In Lean, empty is a classifier. It is a type defined with zero constructors.
+
+146
+00:12:04,700 --> 00:12:13,840
+When you write def empty exists dot type equals empty, you are not summoning a creature called nothing into the universe.
+
+147
+00:12:14,360 --> 00:12:17,440
+You are simply introducing a constant name for a label.
+
+148
+00:12:17,940 --> 00:12:25,100
+Okay, let's test that. Are you saying it's like me creating a new folder on my computer desktop and naming it unicorns?
+
+149
+00:12:25,620 --> 00:12:26,000
+Yes.
+
+150
+00:12:26,440 --> 00:12:32,400
+Just because I created the folder, it doesn't mean I am asserting that a unicorn is currently roaming around inside my hard drive.
+
+151
+00:12:32,400 --> 00:12:36,900
+The folder is there, but the operating system knows there are zero files inside it.
+
+152
+00:12:37,520 --> 00:12:41,480
+And if you tried to pull a file out of that folder, the system would immediately throw an error.
+
+153
+00:12:42,480 --> 00:12:47,760
+Lean's type checker will actively prevent you from ever producing an inhabitant of the empty type.
+
+154
+00:12:48,280 --> 00:12:51,460
+But having the folder is essential for the system to function, right?
+
+155
+00:12:52,060 --> 00:12:58,040
+Flyseen explores the tangible, devastating cost of doing what Tone wants and rejecting the empty type.
+
+156
+00:12:58,040 --> 00:13:02,780
+Yeah. What actually happens to math if we throw out the empty box?
+
+157
+00:13:03,340 --> 00:13:05,680
+Well, you lose the standard way we encode negation.
+
+158
+00:13:06,400 --> 00:13:07,820
+Wait, really? How does that work?
+
+159
+00:13:08,300 --> 00:13:11,660
+Independent type theory. How do you mathematically say not P?
+
+160
+00:13:11,900 --> 00:13:17,640
+You don't just put a minus sign in front of it. You define not P as a function. P implies false.
+
+161
+00:13:17,640 --> 00:13:26,120
+Oh, I see. It means if you were to assume P is true, it would lead you directly to the empty type, which is an absurdity.
+
+162
+00:13:26,280 --> 00:13:32,640
+Exactly. If you throw out the empty type, you literally lose the ability to say, this equation has no solution.
+
+163
+00:13:33,020 --> 00:13:36,380
+You essentially crippled the language's ability to disagree.
+
+164
+00:13:36,780 --> 00:13:42,280
+You do. Every operation that might result in an empty set suddenly becomes a partial operation.
+
+165
+00:13:42,280 --> 00:13:49,840
+Imagine trying to program the intersection of two shapes on a screen. If they don't touch, the program can't just return an empty set.
+
+166
+00:13:50,280 --> 00:13:51,180
+What does it do instead?
+
+167
+00:13:51,540 --> 00:14:01,620
+It has to return something called an option, meaning it might just crash. Or it has to return an error state that you now have to manually manage everywhere in your code.
+
+168
+00:14:01,840 --> 00:14:08,900
+That sounds like a nightmare. You have to re-describe your entire mathematical universe with massive, clunky workarounds.
+
+169
+00:14:08,900 --> 00:14:14,980
+So the cost of this pure ontology is that the math becomes incredibly inefficient and buggy.
+
+170
+00:14:15,440 --> 00:14:20,160
+Wow. Now there's a second thing Tone hates in step two, and that's the axiom of choice.
+
+171
+00:14:20,760 --> 00:14:28,780
+They claim choice allows for arbitrary distinctions, which they argue turns arbitrary separations into mathematical law.
+
+172
+00:14:29,000 --> 00:14:32,120
+This is another massive equivocation on their part.
+
+173
+00:14:32,900 --> 00:14:36,740
+Tone is confusing two entirely different mathematical axioms.
+
+174
+00:14:36,740 --> 00:14:41,440
+They are confusing the axiom of choice with the axiom of separation.
+
+175
+00:14:42,140 --> 00:14:44,800
+Walk me through the difference. What is the axiom of separation?
+
+176
+00:14:45,740 --> 00:14:50,740
+Separation is what lets you carve out a subset based on a specific, definable property.
+
+177
+00:14:51,320 --> 00:14:58,200
+If you have a set of all integers, separation allows you to form a subset of all even integers.
+
+178
+00:14:58,560 --> 00:15:02,440
+So you apply a concrete, logical formula to filter the original set.
+
+179
+00:15:02,440 --> 00:15:08,580
+Exactly. That requires a specific rule. It is the exact opposite of arbitrary.
+
+180
+00:15:09,600 --> 00:15:14,900
+Okay, so separation is rule-based filtering. What is the axiom of choice then?
+
+181
+00:15:14,900 --> 00:15:19,740
+The axiom of choice addresses a much weirder, infinite scenario.
+
+182
+00:15:20,440 --> 00:15:25,960
+It says that if you have a collection of non-empty sets, even an infinite number of them,
+
+183
+00:15:26,460 --> 00:15:30,940
+you can form a new set by picking exactly one element from each of them,
+
+184
+00:15:31,420 --> 00:15:34,620
+even if you don't have a specific rule for how to pick them.
+
+185
+00:15:34,620 --> 00:15:38,700
+I can see why that feels a bit slippery. You're just blindly grabbing things from
+
+186
+00:15:38,700 --> 00:15:40,400
+infinite buckets without a recipe.
+
+187
+00:15:41,440 --> 00:15:46,520
+It is slippery. The axiom of choice is famous for producing deeply counterintuitive results.
+
+188
+00:15:46,940 --> 00:15:49,380
+It's the engine behind the Van Ochtarski paradox.
+
+189
+00:15:49,660 --> 00:15:50,660
+Remind me what that is.
+
+190
+00:15:51,400 --> 00:15:54,380
+It mathematically proves you can take a solid sphere,
+
+191
+00:15:55,060 --> 00:15:57,240
+cut it into a few weird scattered pieces,
+
+192
+00:15:57,660 --> 00:16:01,440
+and reassemble them into two solid spheres of the exact same size.
+
+193
+00:16:01,440 --> 00:16:03,920
+Which physically makes zero sense.
+
+194
+00:16:04,460 --> 00:16:08,820
+Which is exactly why many mathematicians over the last century were deeply skeptical of it.
+
+195
+00:16:09,280 --> 00:16:12,360
+But here is the critical flaw in Tone's argument.
+
+196
+00:16:13,140 --> 00:16:17,200
+They claim Lean implicitly inherits this controversial axiom of choice
+
+197
+00:16:17,200 --> 00:16:20,840
+and forces it on you as a secret philosophical bias.
+
+198
+00:16:21,280 --> 00:16:22,740
+And is it a secret bias?
+
+199
+00:16:23,360 --> 00:16:28,040
+Not at all. The axiom of choice is famously independent of core ZF-set theory.
+
+200
+00:16:28,040 --> 00:16:31,940
+You can do mathematics with it, or you can do mathematics without it.
+
+201
+00:16:32,400 --> 00:16:34,100
+And in Lean, it is never hidden.
+
+202
+00:16:34,600 --> 00:16:39,600
+It is an explicit, highly visible, auditable axiom called classical dot choice.
+
+203
+00:16:40,320 --> 00:16:43,740
+This was the part of Flay Axiom's paper that I found incredibly satisfying.
+
+204
+00:16:43,800 --> 00:16:48,020
+Because if you are a scientist or a philosopher trying to verify a truth,
+
+205
+00:16:48,500 --> 00:16:50,840
+you want a system that shows you its receipts.
+
+206
+00:16:51,360 --> 00:16:51,980
+Oh, absolutely.
+
+207
+00:16:52,420 --> 00:16:55,600
+You want to know exactly what assumptions are holding up your building.
+
+208
+00:16:55,720 --> 00:16:57,360
+And Lean actually does this.
+
+209
+00:16:57,360 --> 00:17:00,080
+It does it brilliantly through a footprint system.
+
+210
+00:17:00,840 --> 00:17:02,420
+Lean doesn't assume you want to use choice.
+
+211
+00:17:02,860 --> 00:17:06,400
+If you write a simple proof, like proving that 2 plus 2 equals 4,
+
+212
+00:17:06,880 --> 00:17:11,100
+you can literally type the command hashtag print axioms next to your proof.
+
+213
+00:17:11,400 --> 00:17:12,040
+And what happens?
+
+214
+00:17:12,260 --> 00:17:16,800
+The software will output a list of every single foundational axiom your proof relied on.
+
+215
+00:17:17,220 --> 00:17:19,700
+For basic arithmetic, it will tell you the footprint is empty.
+
+216
+00:17:20,240 --> 00:17:23,020
+You relied on zero axioms. It was purely computational.
+
+217
+00:17:23,420 --> 00:17:24,800
+But if you use choice?
+
+218
+00:17:24,800 --> 00:17:31,340
+If your proof uses the axiom of choice, the software immediately forces you to flag your theorem as non-computable.
+
+219
+00:17:31,900 --> 00:17:32,940
+It tags the file.
+
+220
+00:17:33,460 --> 00:17:38,260
+And when you type hashtag print axioms, classical dot choice will flash right there on the screen.
+
+221
+00:17:38,540 --> 00:17:39,040
+That's amazing.
+
+222
+00:17:39,520 --> 00:17:42,100
+The software acts like a meticulous accountant.
+
+223
+00:17:42,520 --> 00:17:44,280
+It stands there with a clipboard and says,
+
+224
+00:17:44,440 --> 00:17:48,380
+just so you know, you invoked a non-computable arbitrary selection here.
+
+225
+00:17:48,380 --> 00:17:53,820
+So Lean isn't a corrupt metaphysical overlord forcing you to believe in arbitrary choice.
+
+226
+00:17:54,020 --> 00:17:58,660
+It's just a tool that gives you the option and then explicitly tracks when you use it.
+
+227
+00:17:58,920 --> 00:17:59,220
+Exactly.
+
+228
+00:17:59,740 --> 00:18:04,220
+If Tone wanted to build a constructive mathematical universe without the axiom of choice,
+
+229
+00:18:04,820 --> 00:18:06,800
+Lean provides the perfect sandbox to do so.
+
+230
+00:18:07,180 --> 00:18:11,400
+The only consequence is that they wouldn't be able to use some of the pre-built classical math libraries.
+
+231
+00:18:11,400 --> 00:18:16,540
+But that is a practical engineering cost, not a philosophical impossibility.
+
+232
+00:18:17,180 --> 00:18:18,680
+Okay, so we've defended the math.
+
+233
+00:18:18,980 --> 00:18:23,240
+We've shown how Tone misunderstood type theory, the empty set, and the axiom of choice.
+
+234
+00:18:23,360 --> 00:18:25,300
+But now we really have to talk about the physics.
+
+235
+00:18:25,520 --> 00:18:26,660
+Oh boy, the physics.
+
+236
+00:18:26,880 --> 00:18:30,620
+Because this is where Tone's argument goes from a misunderstanding of a software compiler
+
+237
+00:18:30,620 --> 00:18:33,520
+to a truly bizarre theory of the physical universe.
+
+238
+00:18:33,520 --> 00:18:36,380
+This brings us to the core of their third premise.
+
+239
+00:18:37,040 --> 00:18:41,420
+Tone claims that jerk is the highest admissible form of change in the universe,
+
+240
+00:18:41,740 --> 00:18:45,060
+and anything beyond it is an illusion or a regress.
+
+241
+00:18:45,320 --> 00:18:49,880
+Let's do a quick physics refresher just so we are all visualizing the same thing.
+
+242
+00:18:50,240 --> 00:18:51,700
+Position is where you are.
+
+243
+00:18:51,920 --> 00:18:52,160
+Right.
+
+244
+00:18:52,600 --> 00:18:56,080
+The first derivative of position is velocity, so how fast you are moving.
+
+245
+00:18:56,480 --> 00:19:00,200
+The second derivative is acceleration, how fast your velocity is changing.
+
+246
+00:19:00,540 --> 00:19:02,340
+And the third derivative is jerk.
+
+247
+00:19:02,340 --> 00:19:04,640
+That's how fast your acceleration is changing.
+
+248
+00:19:05,200 --> 00:19:08,240
+A good visceral way to feel jerk is being in a car.
+
+249
+00:19:08,660 --> 00:19:12,500
+If you're going 60 miles an hour constantly, that's velocity.
+
+250
+00:19:12,740 --> 00:19:13,440
+You feel nothing.
+
+251
+00:19:13,840 --> 00:19:13,940
+Yeah.
+
+252
+00:19:14,200 --> 00:19:17,820
+If you hit the gas and speed up, you feel push back into your seat.
+
+253
+00:19:18,060 --> 00:19:18,800
+That's acceleration.
+
+254
+00:19:19,240 --> 00:19:23,780
+But the moment you suddenly slam on the brakes, you feel a violent snap forward.
+
+255
+00:19:24,060 --> 00:19:26,540
+That change in acceleration is jerk.
+
+256
+00:19:26,940 --> 00:19:27,180
+Right.
+
+257
+00:19:27,180 --> 00:19:33,300
+And Tone argues that any derivative higher than jerk leads to, quote, regress or incoherence.
+
+258
+00:19:33,500 --> 00:19:39,100
+They claim that because lean software is silent on the supremacy of jerk, lean is biased.
+
+259
+00:19:39,100 --> 00:19:44,000
+To which Flyxion responds with a very polite version of, lean is a calculator.
+
+260
+00:19:44,860 --> 00:19:46,780
+Lean has no built-in physics engine.
+
+261
+00:19:47,380 --> 00:19:51,500
+It doesn't have native variables for mass or charge or time or gravity.
+
+262
+00:19:52,300 --> 00:19:56,680
+It's silent on the third derivative for the exact same reason it's silent on the recipe for a chocolate cake.
+
+263
+00:19:57,040 --> 00:19:59,060
+It only knows what you program into it.
+
+264
+00:19:59,480 --> 00:20:01,720
+But let's look at their actual physical claim.
+
+265
+00:20:02,380 --> 00:20:05,140
+Is jerk the highest admissible form of change?
+
+266
+00:20:05,140 --> 00:20:07,960
+Is anything higher actually incoherent?
+
+267
+00:20:08,680 --> 00:20:11,200
+It is empirically demonstrably false, right?
+
+268
+00:20:11,480 --> 00:20:15,020
+Engineers use the fourth derivative of position constantly.
+
+269
+00:20:15,540 --> 00:20:17,500
+It's casually referred to as snap.
+
+270
+00:20:18,240 --> 00:20:19,700
+Wait, I saw this in the paper.
+
+271
+00:20:20,000 --> 00:20:21,960
+They use it for drone stabilization, right?
+
+272
+00:20:22,280 --> 00:20:22,860
+Quad rotors?
+
+273
+00:20:23,460 --> 00:20:23,780
+Yes.
+
+274
+00:20:24,320 --> 00:20:29,800
+If you want a quad rotor drone to fly smoothly from point A to point B without jittering or flipping over,
+
+275
+00:20:30,180 --> 00:20:32,900
+you don't just optimize its velocity or acceleration.
+
+276
+00:20:33,640 --> 00:20:34,180
+What do you do?
+
+277
+00:20:34,180 --> 00:20:39,060
+The control algorithms actually generate what are called minimum snap trajectories.
+
+278
+00:20:39,480 --> 00:20:44,800
+They calculate and minimize the fourth derivative to ensure the motor outputs transition smoothly.
+
+279
+00:20:45,300 --> 00:20:48,440
+It is a routine, deeply coherent engineering practice.
+
+280
+00:20:49,300 --> 00:20:54,240
+So Tone's philosophical limit is just factually wrong in modern engineering.
+
+281
+00:20:54,800 --> 00:20:55,140
+Completely.
+
+282
+00:20:55,500 --> 00:20:57,560
+But tau doesn't just make a verbal claim.
+
+283
+00:20:57,680 --> 00:20:58,860
+They try to prove it mathematically.
+
+284
+00:20:58,860 --> 00:21:02,920
+They propose an equation that they believe should be an axiom of the universe.
+
+285
+00:21:03,480 --> 00:21:04,820
+J equals 1 over J.
+
+286
+00:21:05,100 --> 00:21:09,640
+They claim this truncates jerk so that it can only ever equal 1 or negative 1.
+
+287
+00:21:09,640 --> 00:21:13,560
+And Flyxion absolutely tears this equation to shreds.
+
+288
+00:21:13,940 --> 00:21:17,380
+It is a bloodbath of logical and physical inconsistencies.
+
+289
+00:21:17,820 --> 00:21:18,860
+Walk me through it.
+
+290
+00:21:19,520 --> 00:21:21,100
+Let's look at the algebra first.
+
+291
+00:21:21,100 --> 00:21:27,660
+If you say J equals 1 over J, and you multiply both sides by J, you get J squared equals 1.
+
+292
+00:21:27,980 --> 00:21:30,620
+The square root of 1 is 1 or negative 1.
+
+293
+00:21:31,080 --> 00:21:35,900
+So algebraically, if you treat J as a pure dimensionless number, sure.
+
+294
+00:21:36,440 --> 00:21:37,300
+But physically?
+
+295
+00:21:37,300 --> 00:21:40,740
+It fails on three catastrophic levels.
+
+296
+00:21:41,880 --> 00:21:42,540
+What's the first flaw?
+
+297
+00:21:43,320 --> 00:21:44,180
+Division by zero.
+
+298
+00:21:44,980 --> 00:21:51,040
+If your universal law is J equals 1 over J, what happens when jerk is exactly zero?
+
+299
+00:21:51,940 --> 00:21:53,400
+Well, you can't divide by zero.
+
+300
+00:21:54,140 --> 00:21:55,060
+The equation breaks.
+
+301
+00:21:56,100 --> 00:21:59,680
+So you have to outlaw zero jerk from your universe entirely.
+
+302
+00:22:00,160 --> 00:22:00,640
+Precisely.
+
+303
+00:22:01,360 --> 00:22:03,260
+And what does zero jerk physically represent?
+
+304
+00:22:03,260 --> 00:22:07,300
+It represents any object experiencing constant acceleration.
+
+305
+00:22:08,200 --> 00:22:08,960
+Like dropping an apple.
+
+306
+00:22:09,280 --> 00:22:09,480
+Yes.
+
+307
+00:22:09,980 --> 00:22:13,440
+If you drop an apple, it falls under the constant acceleration of gravity.
+
+308
+00:22:14,080 --> 00:22:15,040
+Its jerk is zero.
+
+309
+00:22:15,820 --> 00:22:21,200
+If a hockey puck slides across frictionless ice at a constant speed, its acceleration is zero.
+
+310
+00:22:21,640 --> 00:22:22,620
+And its jerk is zero.
+
+311
+00:22:22,960 --> 00:22:30,300
+So by trying to force J to be 1 or negative 1, tone has accidentally outlawed gravity, momentum, and inertia.
+
+312
+00:22:30,300 --> 00:22:36,020
+They wrote a law of physics that makes an apple falling from a tree mathematically impossible.
+
+313
+00:22:36,440 --> 00:22:37,000
+That is amazing.
+
+314
+00:22:37,400 --> 00:22:37,960
+It gets worse.
+
+315
+00:22:38,620 --> 00:22:40,980
+The second flaw is dimensional analysis.
+
+316
+00:22:41,680 --> 00:22:43,180
+Physical quantities have units.
+
+317
+00:22:43,800 --> 00:22:45,900
+Jerk is measured in meters per second cubed.
+
+318
+00:22:46,360 --> 00:22:50,860
+If you take its reciprocal, 1 slash J, the units invert.
+
+319
+00:22:51,360 --> 00:22:53,620
+It becomes seconds cubed per meter.
+
+320
+00:22:53,620 --> 00:22:54,840
+Oh, wow.
+
+321
+00:22:55,200 --> 00:23:00,300
+You cannot set a value of meters per second cubed equal to seconds cubed per meter.
+
+322
+00:23:00,840 --> 00:23:03,760
+It's like saying five gallons equals one-fifth of a mile.
+
+323
+00:23:04,160 --> 00:23:05,600
+It is physically meaningless.
+
+324
+00:23:06,020 --> 00:23:07,960
+I didn't even think about the units.
+
+325
+00:23:08,220 --> 00:23:12,140
+It's just a raw algebraic manipulation pretending to be physics.
+
+326
+00:23:12,340 --> 00:23:17,500
+But the third flaw Flyxion points out is about continuity, and this one blew my mind.
+
+327
+00:23:17,720 --> 00:23:19,940
+The continuity flaw is fatal.
+
+328
+00:23:20,460 --> 00:23:21,900
+Physical motion is continuous.
+
+329
+00:23:21,900 --> 00:23:27,480
+An object doesn't instantly teleport from one state to another without passing through the states in between.
+
+330
+00:23:27,900 --> 00:23:28,020
+Right.
+
+331
+00:23:28,540 --> 00:23:37,720
+If jerk can only ever equal 1 or negative 1, and it is a continuous function, well, it can never jump across 0 to get from 1 to negative 1.
+
+332
+00:23:37,920 --> 00:23:41,860
+Because it would have to be 0 at some point, and we already established 0 is outlawed.
+
+333
+00:23:42,020 --> 00:23:42,300
+Right.
+
+334
+00:23:42,600 --> 00:23:44,360
+So the jerk must be constant.
+
+335
+00:23:44,860 --> 00:23:49,120
+It is either always 1 forever or always minus 1 forever.
+
+336
+00:23:49,120 --> 00:23:57,320
+If the third derivative is a constant, and you integrate it backward to find the position, you get a cubic polynomial, a simple curve.
+
+337
+00:23:57,860 --> 00:23:59,320
+So what does that rule out?
+
+338
+00:23:59,620 --> 00:24:02,640
+It rules out almost all complex periodic motion.
+
+339
+00:24:02,920 --> 00:24:04,980
+It completely rules out the sine function.
+
+340
+00:24:05,400 --> 00:24:06,020
+Like a pendulum.
+
+341
+00:24:06,020 --> 00:24:07,020
+Exactly.
+
+342
+00:24:07,020 --> 00:24:12,560
+If you have a pendulum swinging back and forth, its position is described by a sine wave.
+
+343
+00:24:13,180 --> 00:24:14,700
+The derivative of sine is cosine.
+
+344
+00:24:15,160 --> 00:24:17,560
+The derivative of cosine is negative sine.
+
+345
+00:24:18,060 --> 00:24:19,040
+It loops infinitely.
+
+346
+00:24:19,680 --> 00:24:22,980
+The jerk of a pendulum is never a constant 1 or negative 1.
+
+347
+00:24:22,980 --> 00:24:27,920
+So Tone's equation mathematically outlaws a swinging pendulum.
+
+348
+00:24:28,560 --> 00:24:28,940
+Yes.
+
+349
+00:24:29,440 --> 00:24:37,300
+So just to recap, Tone inputted an equation that ignores physical units, outlaws gravity, and makes pendulums impossible.
+
+350
+00:24:37,600 --> 00:24:40,000
+And then they blamed the software when it crashed.
+
+351
+00:24:40,640 --> 00:24:40,840
+Yep.
+
+352
+00:24:40,960 --> 00:24:41,840
+That about sums it up.
+
+353
+00:24:42,420 --> 00:24:44,800
+But Flyxion doesn't just debunk the math.
+
+354
+00:24:45,420 --> 00:24:51,140
+Flyxion writes a devastating parody to highlight exactly why the logic is fundamentally absurd.
+
+355
+00:24:51,140 --> 00:24:58,800
+Oh, this is Appendix A, TFUU, the Theory of Immediately Falsified Universals, or as Flyxion jokingly calls it,
+
+356
+00:24:59,140 --> 00:25:00,860
+Today I've Formalized Unwisely.
+
+357
+00:25:01,540 --> 00:25:03,940
+It's a brilliant piece of mathematical satire.
+
+358
+00:25:04,620 --> 00:25:13,880
+Flyxion uses Tone's exact logical structure to prove that the sixth derivative of position is actually the true foundational primitive of the universe.
+
+359
+00:25:14,340 --> 00:25:17,100
+Because physicists have joke names for the higher derivatives, right?
+
+360
+00:25:17,160 --> 00:25:20,680
+It goes to velocity, acceleration, jerk, snap, crackle, and pop.
+
+361
+00:25:20,680 --> 00:25:22,360
+Pop is the sixth derivative.
+
+362
+00:25:22,800 --> 00:25:23,100
+Exactly.
+
+363
+00:25:23,760 --> 00:25:28,280
+Flyxion shows that you can write the exact same self-inverting equation for the sixth derivative.
+
+364
+00:25:28,920 --> 00:25:29,900
+Let P be pop.
+
+365
+00:25:30,320 --> 00:25:33,080
+Assume the universal law is P equals 1P.
+
+366
+00:25:33,800 --> 00:25:37,420
+Therefore, by Tone's own logic, P must be 1 or minus 1.
+
+367
+00:25:37,800 --> 00:25:39,900
+And pop is the ultimate limit of change.
+
+368
+00:25:39,900 --> 00:25:42,100
+And here is the kicker.
+
+369
+00:25:42,560 --> 00:25:50,980
+Flyxion actually ran this parody theory through the Lean compiler, and the software checked it and said, yes, this logic compiles perfectly.
+
+370
+00:25:51,300 --> 00:25:53,300
+Which proves two profound points.
+
+371
+00:25:53,780 --> 00:25:56,960
+First, the regress argument is perfectly symmetric.
+
+372
+00:25:57,460 --> 00:26:02,320
+If you demand a metaphysical limit to how many times you can take a derivative, why stop at 3?
+
+373
+00:26:02,540 --> 00:26:02,860
+Right.
+
+374
+00:26:02,860 --> 00:26:08,900
+The mathematical definition of a limit is identical whether you are calculating velocity or calculating snap.
+
+375
+00:26:09,480 --> 00:26:14,980
+You can run Tone's exact algebraic trick at order 3, order 6, or order 100.
+
+376
+00:26:15,380 --> 00:26:16,500
+And the second point?
+
+377
+00:26:16,500 --> 00:26:23,100
+The fact that the software compiled the Tifu parody proves that compilation does not equal physical truth.
+
+378
+00:26:23,660 --> 00:26:25,740
+The machine doesn't know what pop is.
+
+379
+00:26:26,160 --> 00:26:28,340
+It just checks that the algebraic steps are valid.
+
+380
+00:26:29,040 --> 00:26:34,860
+Okay, so if Lean is just a calculator, and it isn't ontologically corrupt, we still have a mystery.
+
+381
+00:26:35,480 --> 00:26:37,600
+Why did Tone's code crash in the first place?
+
+382
+00:26:38,000 --> 00:26:40,400
+They tried to put their jerk theory in, and the system broke.
+
+383
+00:26:40,740 --> 00:26:41,940
+What actually happened?
+
+384
+00:26:41,940 --> 00:26:47,720
+This is where Flyxion provides an invaluable taxonomy of how humans interact with machines.
+
+385
+00:26:48,340 --> 00:26:55,020
+When someone casually says, the software crashed, that phrase obscures a massive spectrum of failure.
+
+386
+00:26:55,820 --> 00:26:59,420
+Flyxion maps out six distinct layers of failure in a proof assistant.
+
+387
+00:27:00,180 --> 00:27:05,340
+I want to walk through these layers slowly because this really helped me understand how a computer actually thinks about logic.
+
+388
+00:27:05,800 --> 00:27:06,900
+What is layer 1?
+
+389
+00:27:07,420 --> 00:27:08,520
+Layer 1 is parsing.
+
+390
+00:27:08,900 --> 00:27:10,660
+This is the most mundane failure.
+
+391
+00:27:10,660 --> 00:27:12,240
+It is a syntax error.
+
+392
+00:27:12,900 --> 00:27:13,680
+You missed a comma.
+
+393
+00:27:14,100 --> 00:27:15,400
+You forgot a parenthesis.
+
+394
+00:27:15,980 --> 00:27:18,920
+Or you used a variable name you haven't defined yet.
+
+395
+00:27:19,700 --> 00:27:23,860
+The machine looks at your text and essentially says, I don't even recognize this as a sentence.
+
+396
+00:27:24,180 --> 00:27:24,580
+Exactly.
+
+397
+00:27:25,180 --> 00:27:26,960
+It has zero philosophical weight.
+
+398
+00:27:27,520 --> 00:27:28,600
+Okay, simple typo.
+
+399
+00:27:29,240 --> 00:27:31,040
+Layer 2 is elaboration.
+
+400
+00:27:31,120 --> 00:27:31,760
+How does that work?
+
+401
+00:27:32,380 --> 00:27:37,900
+Elaboration is where the system successfully reads your text, but realizes the types are clashing.
+
+402
+00:27:38,340 --> 00:27:40,600
+The paper gives a fantastic example.
+
+403
+00:27:41,240 --> 00:27:43,920
+Expecting a proposition, but giving it a boolean.
+
+404
+00:27:44,400 --> 00:27:49,100
+Wait, a proposition and a boolean, aren't they both just true or false?
+
+405
+00:27:49,820 --> 00:27:51,460
+In human conversation, yes.
+
+406
+00:27:51,800 --> 00:27:54,800
+In type theory, they are fundamentally different beasts.
+
+407
+00:27:55,620 --> 00:27:57,500
+A boolean is a simple data type.
+
+408
+00:27:57,720 --> 00:28:00,240
+It's a bit of memory flipped to one or zero.
+
+409
+00:28:00,240 --> 00:28:06,080
+A proposition is a logical statement that requires a mathematical proof to inhabit it.
+
+410
+00:28:06,420 --> 00:28:06,780
+Oh, I see.
+
+411
+00:28:07,180 --> 00:28:12,440
+If you write a function that expects a complex logical proposition, and you accidentally feed
+
+412
+00:28:12,440 --> 00:28:15,760
+it a simple boolean zero, the elaboration engine halts.
+
+413
+00:28:16,300 --> 00:28:21,960
+Not because ZFC is dead, but because you tried to plug a USB cable into an HDMI port.
+
+414
+00:28:21,960 --> 00:28:24,420
+It's a localized structural mismatch.
+
+415
+00:28:24,800 --> 00:28:26,460
+That makes perfect sense.
+
+416
+00:28:27,120 --> 00:28:28,400
+So what is Layer 3?
+
+417
+00:28:29,520 --> 00:28:31,660
+Layer 3 is tactic failure.
+
+418
+00:28:32,340 --> 00:28:37,320
+When you write a proof in Lean, you don't always write every single micro step yourself.
+
+419
+00:28:37,660 --> 00:28:38,780
+You use tactics.
+
+420
+00:28:38,780 --> 00:28:44,000
+These are automated search algorithms that explore a decision tree to find the missing
+
+421
+00:28:44,000 --> 00:28:44,820
+steps for you.
+
+422
+00:28:45,100 --> 00:28:46,760
+Like a GPS recalculating.
+
+423
+00:28:46,960 --> 00:28:47,260
+Yeah.
+
+424
+00:28:47,800 --> 00:28:49,100
+Sometimes a tactic fails.
+
+425
+00:28:49,480 --> 00:28:52,720
+It searches for 10 seconds, gets lost in a loop, and gives up.
+
+426
+00:28:53,520 --> 00:28:57,840
+The theorem might be perfectly true, but the automated pathfinder just wasn't smart enough
+
+427
+00:28:57,840 --> 00:28:58,860
+to reach the destination.
+
+428
+00:28:59,580 --> 00:29:02,720
+So a tactic failure is just the GPS recalculating forever.
+
+429
+00:29:03,460 --> 00:29:06,280
+Then we get to Layer 4, which is a kernel failure.
+
+430
+00:29:06,960 --> 00:29:08,600
+This one is exceptionally rare.
+
+431
+00:29:09,280 --> 00:29:13,480
+The kernel is the tiny, independently audited core of the software that does the final
+
+432
+00:29:13,480 --> 00:29:14,280
+check on everything.
+
+433
+00:29:14,800 --> 00:29:19,900
+If a fully elaborated proof fails at the kernel, it usually means you've discovered a genuine
+
+434
+00:29:19,900 --> 00:29:21,140
+bug in the software itself.
+
+435
+00:29:21,540 --> 00:29:25,940
+Like the software either accepted a fake proof or rejected a valid one.
+
+436
+00:29:26,340 --> 00:29:26,640
+Right.
+
+437
+00:29:27,320 --> 00:29:31,840
+But again, this is a software engineering defect, not a metaphysical crisis.
+
+438
+00:29:32,060 --> 00:29:35,920
+Which brings us to Layer 5, derived contradiction.
+
+439
+00:29:35,920 --> 00:29:40,960
+Flyoxion says this is the only failure that actually matters fundamentally.
+
+440
+00:29:41,800 --> 00:29:44,360
+It is the only one with philosophical teeth.
+
+441
+00:29:44,960 --> 00:29:50,040
+A derived contradiction means the system perfectly understood your text, the types matched, the
+
+442
+00:29:50,040 --> 00:29:55,060
+tactics worked, the kernel checked it, and it successfully proved that your assumptions
+
+443
+00:29:55,060 --> 00:29:59,120
+lead directly to a logical contradiction, like 0 equals 1.
+
+444
+00:29:59,120 --> 00:30:02,740
+So it proved that your ideas are mathematically suicidal.
+
+445
+00:30:02,740 --> 00:30:03,220
+Exactly.
+
+446
+00:30:03,720 --> 00:30:08,440
+It means the new axioms you fed into the system fundamentally clash with the host system's
+
+447
+00:30:08,440 --> 00:30:09,060
+native logic.
+
+448
+00:30:09,820 --> 00:30:12,040
+And finally, Layer 6 is scope.
+
+449
+00:30:12,040 --> 00:30:16,740
+Scope failure is insidious, because the software doesn't crash at all.
+
+450
+00:30:17,380 --> 00:30:19,620
+Everything compiles perfectly, no contradictions.
+
+451
+00:30:20,220 --> 00:30:24,240
+But the theorem you proved doesn't actually map to the real world in the way you think
+
+452
+00:30:24,240 --> 00:30:24,640
+it does.
+
+453
+00:30:25,080 --> 00:30:26,600
+Just like the parody of POP.
+
+454
+00:30:26,960 --> 00:30:30,280
+It compiled, but its scope regarding physical reality was zero.
+
+455
+00:30:30,620 --> 00:30:31,080
+Exactly.
+
+456
+00:30:31,740 --> 00:30:37,240
+So looking at those six layers, Tone never actually tells us which layer their code failed
+
+457
+00:30:37,240 --> 00:30:37,480
+at.
+
+458
+00:30:37,800 --> 00:30:38,700
+No, they don't.
+
+459
+00:30:38,700 --> 00:30:43,720
+They just vaguely claim it broke at exactly the points where these errors are challenged.
+
+460
+00:30:44,620 --> 00:30:49,700
+But if they actually hit Layer 5 derived contradiction, the natural first suspect isn't that Lean
+
+461
+00:30:49,700 --> 00:30:50,260
+is corrupt.
+
+462
+00:30:50,880 --> 00:30:55,780
+The most logical conclusion is that the axioms they tried to add, like a physics equation
+
+463
+00:30:55,780 --> 00:30:58,640
+that divides by zero, were internally inconsistent.
+
+464
+00:30:59,040 --> 00:31:00,880
+Okay, let me play devil's advocate for a second.
+
+465
+00:31:01,260 --> 00:31:06,240
+If Tone wanted to build a totally different logical universe, one that doesn't use Lean's
+
+466
+00:31:06,240 --> 00:31:08,540
+native rules, how should they have done it?
+
+467
+00:31:08,540 --> 00:31:10,840
+Is there a way to do that without crashing the system?
+
+468
+00:31:11,480 --> 00:31:11,720
+Yes.
+
+469
+00:31:12,220 --> 00:31:14,440
+This is a vital concept in computer science.
+
+470
+00:31:15,000 --> 00:31:17,260
+They should have used a deep embedding.
+
+471
+00:31:17,600 --> 00:31:18,920
+Deep versus shallow embedding.
+
+472
+00:31:19,020 --> 00:31:21,020
+Walk me through the mechanism of how those differ.
+
+473
+00:31:21,540 --> 00:31:23,840
+A shallow embedding is what Tone likely attempted.
+
+474
+00:31:24,380 --> 00:31:28,100
+That's when you use the host software's native logic as your own logic.
+
+475
+00:31:28,520 --> 00:31:32,360
+You just stack your new axioms on top of Lean's existing foundation.
+
+476
+00:31:32,540 --> 00:31:34,360
+But you inherit all of Lean's rules.
+
+477
+00:31:34,360 --> 00:31:34,960
+Right.
+
+478
+00:31:34,960 --> 00:31:38,840
+If your new rules conflict with Lean's foundation, the house collapses.
+
+479
+00:31:39,540 --> 00:31:41,920
+So what is a deep embedding?
+
+480
+00:31:42,720 --> 00:31:46,460
+In a deep embedding, you don't adopt the host's logic at all.
+
+481
+00:31:46,920 --> 00:31:50,900
+You define your own rules entirely from scratch as inductive data.
+
+482
+00:31:51,300 --> 00:31:56,580
+You literally say to the software, here is the alphabet of my new language, A, B, and C.
+
+483
+00:31:56,580 --> 00:32:00,420
+And here are the only three ways you are allowed to combine these letters.
+
+484
+00:32:01,240 --> 00:32:04,600
+You are building an isolated sandbox inside the software.
+
+485
+00:32:04,960 --> 00:32:05,200
+Yes.
+
+486
+00:32:05,860 --> 00:32:10,800
+Lean's kernel is perfectly capable of hosting a deep embedding of a system that lacks an empty set,
+
+487
+00:32:11,300 --> 00:32:15,380
+lacks the axiom of choice, and operates on totally alien logic.
+
+488
+00:32:15,800 --> 00:32:21,060
+So Lean acts as the physical table, and you are building a custom board game on top of the table.
+
+489
+00:32:21,300 --> 00:32:24,160
+The table doesn't care what the rules of the board game are.
+
+490
+00:32:24,160 --> 00:32:31,440
+Exactly. So if Tone's theory cannot be deeply embedded in Lean, it is not a commentary on Lean's capability.
+
+491
+00:32:32,100 --> 00:32:34,800
+It means Tone lacks a specified syntax.
+
+492
+00:32:35,500 --> 00:32:39,540
+It means Tone hasn't actually defined the alphabet and the rules of their own language.
+
+493
+00:32:39,900 --> 00:32:43,960
+So their failure was a failure of their own design, not a rejection by the machine.
+
+494
+00:32:44,800 --> 00:32:48,940
+But wait, let me push back on this whole concept of the machine checking things.
+
+495
+00:32:48,940 --> 00:32:57,020
+If a proof assistant compiles a theorem and gives you the green checkmark, doesn't the machine grant that theorem some kind of sovereign authority?
+
+496
+00:32:57,280 --> 00:32:59,880
+Doesn't it verify that it is true in reality?
+
+497
+00:33:00,580 --> 00:33:01,720
+Emphatically, no.
+
+498
+00:33:02,160 --> 00:33:05,740
+And this is a massive misconception, even among some programmers.
+
+499
+00:33:06,600 --> 00:33:13,120
+Machine checking is a strong warrant for the formal statement that was checked, and for absolutely nothing else.
+
+500
+00:33:13,120 --> 00:33:18,500
+A compiled proof licenses only the specific formal scope of the math.
+
+501
+00:33:18,740 --> 00:33:21,140
+It does not license physical reality.
+
+502
+00:33:21,540 --> 00:33:25,020
+Because, as Fleixia notes, the map is not the territory.
+
+503
+00:33:25,420 --> 00:33:25,940
+Precisely.
+
+504
+00:33:26,360 --> 00:33:31,420
+If you write a perfectly valid, compiled mathematical theorem about a variable you call J,
+
+505
+00:33:32,200 --> 00:33:38,720
+that theorem says absolutely nothing about the physical trajectory of a quadrotor drone until you build a bridge.
+
+506
+00:33:39,040 --> 00:33:40,180
+What does that bridge look like?
+
+507
+00:33:40,180 --> 00:33:42,940
+The bridge is human scientific labor.
+
+508
+00:33:43,560 --> 00:33:47,760
+You have to explicitly map your mathematical variable to physical reality.
+
+509
+00:33:48,100 --> 00:33:49,840
+You have to state the physical units.
+
+510
+00:33:50,200 --> 00:33:54,220
+You have to explicitly list your boundary assumptions, like friction or air resistance.
+
+511
+00:33:54,840 --> 00:33:54,940
+Right.
+
+512
+00:33:55,320 --> 00:34:01,020
+You have to run empirical experiments to show that your mathematical model accurately predicts physical outcomes.
+
+513
+00:34:02,260 --> 00:34:05,740
+Compilation is a remarkably coarse observation.
+
+514
+00:34:06,480 --> 00:34:07,340
+Did the file compile?
+
+515
+00:34:07,660 --> 00:34:07,920
+Sure.
+
+516
+00:34:07,920 --> 00:34:11,380
+But did it compile a profound truth about gravity?
+
+517
+00:34:11,800 --> 00:34:17,440
+Or did it compile a trivial tautology, like if POP is primitive, then POP is primitive?
+
+518
+00:34:18,060 --> 00:34:19,060
+The compiler doesn't care.
+
+519
+00:34:19,640 --> 00:34:20,080
+Exactly.
+
+520
+00:34:20,520 --> 00:34:20,720
+Okay.
+
+521
+00:34:21,060 --> 00:34:24,360
+So we've torn down the false accusations against Lean.
+
+522
+00:34:24,360 --> 00:34:29,700
+We've shown how the machine actually works and why Tone's physics failed.
+
+523
+00:34:29,740 --> 00:34:31,920
+Now it is time for the main event.
+
+524
+00:34:32,580 --> 00:34:35,380
+Because Flyxion doesn't just debunk bad logic.
+
+525
+00:34:35,500 --> 00:34:38,860
+Flyxion builds a new framework to explain how all logic works.
+
+526
+00:34:39,300 --> 00:34:43,280
+This is where we transition to the second document, rebuilding the foundations of logic.
+
+527
+00:34:43,280 --> 00:34:50,680
+After clearing away the muddy waters of the Tone controversy, Flyxion proposes something incredibly elegant.
+
+528
+00:34:50,680 --> 00:35:00,360
+The claim is that we can understand all of formal logic, all of set theory, and all of type theory through a unified base of just four operators.
+
+529
+00:35:00,740 --> 00:35:01,780
+Four simple verbs.
+
+530
+00:35:01,780 --> 00:35:09,340
+If you can understand these four verbs, you can understand how everything from basic arithmetic to quantum field theory is formalized.
+
+531
+00:35:09,620 --> 00:35:10,620
+Let's introduce the verbs.
+
+532
+00:35:11,000 --> 00:35:11,920
+Number one is POP.
+
+533
+00:35:12,300 --> 00:35:13,500
+Number two is REFUSE.
+
+534
+00:35:13,900 --> 00:35:15,180
+Number three is BIND.
+
+535
+00:35:15,600 --> 00:35:16,880
+Number four is COLLAPSE.
+
+536
+00:35:16,880 --> 00:35:19,440
+I really want to ground these in something tangible.
+
+537
+00:35:19,860 --> 00:35:23,840
+I was thinking about this, and I want to try translating these into a cooking analogy.
+
+538
+00:35:24,380 --> 00:35:26,100
+You tell me if this tracks with the math.
+
+539
+00:35:26,400 --> 00:35:27,320
+Let's test the analogy.
+
+540
+00:35:27,740 --> 00:35:28,860
+Give me the first one, POP.
+
+541
+00:35:29,200 --> 00:35:31,760
+POP is introducing a distinguished item.
+
+542
+00:35:32,160 --> 00:35:37,080
+In cooking, POP is going to the fridge, pulling out an ingredient, and placing it on the counter.
+
+543
+00:35:37,420 --> 00:35:39,400
+You are distinguishing it from the environment.
+
+544
+00:35:39,760 --> 00:35:40,620
+Here is an egg.
+
+545
+00:35:40,740 --> 00:35:41,800
+Here is a bag of flour.
+
+546
+00:35:42,020 --> 00:35:42,820
+That tracks perfectly.
+
+547
+00:35:43,680 --> 00:35:45,820
+Mathematically, POP is the introduction rule.
+
+548
+00:35:45,820 --> 00:35:52,940
+It is declaring a variable, defining a constant, or pointing to a single item within a domain so that you can begin reasoning about it.
+
+549
+00:35:53,300 --> 00:35:53,780
+What's next?
+
+550
+00:35:54,320 --> 00:35:54,800
+REFUSE.
+
+551
+00:35:55,300 --> 00:35:58,820
+Flyxion says this is restricting a domain of admissible items.
+
+552
+00:35:59,060 --> 00:36:01,660
+So in our kitchen, REFUSE is filtering.
+
+553
+00:36:02,120 --> 00:36:09,960
+You look at the domain of eggs on the counter, apply a condition like must not be cracked or smell terrible, and you throw away the ones that fail the condition.
+
+554
+00:36:10,460 --> 00:36:10,780
+Yes.
+
+555
+00:36:11,180 --> 00:36:12,620
+REFUSE is the sieve.
+
+556
+00:36:12,620 --> 00:36:17,380
+It cuts away what doesn't fit your criteria, leaving you with a refined subset.
+
+557
+00:36:18,280 --> 00:36:19,200
+What about the third verb?
+
+558
+00:36:19,840 --> 00:36:20,260
+BIND.
+
+559
+00:36:20,740 --> 00:36:23,300
+This is relating or abstracting over items.
+
+560
+00:36:23,780 --> 00:36:27,340
+So bind is mixing the eggs, flour, and sugar into a batter.
+
+561
+00:36:27,720 --> 00:36:31,520
+You are taking independent ingredients and relating them into a structural whole.
+
+562
+00:36:31,520 --> 00:36:39,640
+Mathematically, bind is forming pairs, creating functions, or applying a universal quantifier like for all x.
+
+563
+00:36:40,080 --> 00:36:42,460
+It's tying variables together so they interact.
+
+564
+00:36:43,160 --> 00:36:44,060
+And the final verb.
+
+565
+00:36:44,060 --> 00:36:45,240
+Collapse.
+
+566
+00:36:45,780 --> 00:36:48,880
+Flyxion defines this as evaluating or identifying.
+
+567
+00:36:48,940 --> 00:36:53,560
+So collapse is taking that complex mixed batter and baking it in the oven.
+
+568
+00:36:54,060 --> 00:36:59,020
+The separate ingredients undergo a chemical reaction and evaluate into a single unified identity.
+
+569
+00:36:59,380 --> 00:36:59,700
+A cake.
+
+570
+00:36:59,960 --> 00:37:02,020
+You no longer see the flour or the egg.
+
+571
+00:37:02,100 --> 00:37:02,900
+You just see the cake.
+
+572
+00:37:02,900 --> 00:37:05,340
+That is a highly effective analogy.
+
+573
+00:37:05,860 --> 00:37:17,680
+Because what Flyxion demonstrates mathematically is that you can deal the entire untyped lambda calculus, which is essentially the bedrock theoretical foundation of computer science, using just bind and collapse.
+
+574
+00:37:18,060 --> 00:37:22,160
+You bind variables into a function, and you collapse them by evaluating the function.
+
+575
+00:37:22,160 --> 00:37:27,600
+But where it gets really profound is when we look closely at refuse, right?
+
+576
+00:37:27,880 --> 00:37:28,200
+Yes.
+
+577
+00:37:28,600 --> 00:37:39,260
+Because Flyxion reveals that the massive historic differences between classical logic, set theory, and type theory aren't driven by some grand metaphysical war about the nature of truth.
+
+578
+00:37:39,440 --> 00:37:43,820
+The differences emerge simply from where and how they allow you to use the refuse operator.
+
+579
+00:37:44,240 --> 00:37:45,060
+Walk me through that.
+
+580
+00:37:45,140 --> 00:37:47,920
+How does standard ZFC set theory use refuse?
+
+581
+00:37:47,920 --> 00:37:53,820
+In ZFC, refuse is implemented as the axiom of separation, which we talked about earlier.
+
+582
+00:37:54,440 --> 00:37:56,580
+And crucially, it is applied from the outside.
+
+583
+00:37:57,160 --> 00:38:00,260
+You must start with a preexisting set, a giant bucket.
+
+584
+00:38:00,840 --> 00:38:07,880
+Then you formulate a logical rule, and you apply that rule from the outside to filter the bucket and create a smaller bucket.
+
+585
+00:38:08,140 --> 00:38:11,520
+And how is that different from lean, which uses type theory?
+
+586
+00:38:12,080 --> 00:38:16,000
+In a dependent type theory, refuse is internalized.
+
+587
+00:38:16,000 --> 00:38:19,680
+It is a subtype formation that is baked into the calculus itself.
+
+588
+00:38:20,340 --> 00:38:23,520
+You don't take a generic bucket and filter it from the outside.
+
+589
+00:38:23,980 --> 00:38:27,380
+The restriction is attached to the very definition of the type.
+
+590
+00:38:28,220 --> 00:38:29,700
+I think I need an analogy for that.
+
+591
+00:38:30,460 --> 00:38:31,800
+Think of it like a nightclub.
+
+592
+00:38:32,680 --> 00:38:40,420
+ZFC is a club where anyone can walk into the building, but there's a bouncer standing in the hallway checking IDs to see if you are allowed into the VIP room.
+
+593
+00:38:41,020 --> 00:38:43,740
+The filtering happens after you exist in the space.
+
+594
+00:38:44,220 --> 00:38:44,640
+Oh, okay.
+
+595
+00:38:44,640 --> 00:38:49,020
+Lean is a club where the ID check is built into your DNA.
+
+596
+00:38:49,820 --> 00:38:54,240
+You physically cannot materialize inside the building unless you already meet the criteria.
+
+597
+00:38:54,980 --> 00:38:59,740
+The compiler ensures you can never even construct an object that violates the refuse condition.
+
+598
+00:39:00,420 --> 00:39:00,640
+Wow.
+
+599
+00:39:00,640 --> 00:39:09,100
+So the architecture of the restriction changes how the system behaves, and the rules governing the refuse operator dictate what kind of logical universe you are living in.
+
+600
+00:39:09,780 --> 00:39:15,400
+Flyxion provides a beautiful mathematical proof of this by comparing classical refuse with topological refuse.
+
+601
+00:39:15,400 --> 00:39:18,100
+This is one of the deepest insights in the paper.
+
+602
+00:39:18,520 --> 00:39:22,000
+It proves why certain logical laws are not universally true.
+
+603
+00:39:22,660 --> 00:39:24,180
+Let's explore this carefully.
+
+604
+00:39:24,820 --> 00:39:26,060
+What is classical refuse?
+
+605
+00:39:26,460 --> 00:39:30,240
+In classical Boolean logic, refuse is simple subtraction.
+
+606
+00:39:30,500 --> 00:39:31,520
+It is black and white.
+
+607
+00:39:31,780 --> 00:39:38,780
+If your universe is all whole numbers, and you refuse all the even numbers, you are left with exactly the odd numbers.
+
+608
+00:39:38,780 --> 00:39:40,400
+Okay. Simple enough.
+
+609
+00:39:41,100 --> 00:39:43,460
+Now, what happens if you refuse the refusal?
+
+610
+00:39:43,840 --> 00:39:45,000
+If you double refuse?
+
+611
+00:39:45,420 --> 00:39:49,360
+If I refuse the odd numbers, I get back the even numbers.
+
+612
+00:39:49,500 --> 00:39:51,160
+I get back exactly what I started with.
+
+613
+00:39:51,700 --> 00:39:52,280
+Exactly.
+
+614
+00:39:53,240 --> 00:39:55,540
+Double refusal equals the original state.
+
+615
+00:39:55,540 --> 00:40:00,360
+Because of this, classical logic enjoys the law of excluded middle.
+
+616
+00:40:00,960 --> 00:40:03,440
+A thing is either A or it is not A.
+
+617
+00:40:03,960 --> 00:40:05,440
+There is no middle ground.
+
+618
+00:40:06,180 --> 00:40:09,360
+But in topological logic, the rules of refuse change.
+
+619
+00:40:09,740 --> 00:40:10,100
+Right.
+
+620
+00:40:10,720 --> 00:40:15,800
+Topological logic, or constructive logic, deals with spaces and open regions.
+
+621
+00:40:16,520 --> 00:40:21,400
+Imagine your universe isn't a list of discrete numbers, but a physical map of a territory.
+
+622
+00:40:21,400 --> 00:40:27,240
+And the rule of this topological universe is, any region you define must be an open set.
+
+623
+00:40:27,620 --> 00:40:31,700
+It must be a fuzzy region with no hard, infinitely thin boundaries.
+
+624
+00:40:32,240 --> 00:40:33,960
+Okay. Fuzzy borders only.
+
+625
+00:40:34,500 --> 00:40:40,380
+In this world, refuse cannot just be simple subtraction, because subtraction might leave a hard edge.
+
+626
+00:40:40,960 --> 00:40:47,920
+In topology, to refuse a region means finding the largest open fuzzy region that does not overlap with your target.
+
+627
+00:40:48,340 --> 00:40:50,460
+I'm tracking with you. Let's apply it to a map.
+
+628
+00:40:50,460 --> 00:40:52,440
+Imagine a map of a city.
+
+629
+00:40:52,760 --> 00:40:56,260
+Let's say our starting region is everywhere except City Hall.
+
+630
+00:40:56,700 --> 00:41:04,820
+If we want to refuse that region, we have to find the largest open fuzzy area that is completely separate from everywhere except City Hall.
+
+631
+00:41:05,240 --> 00:41:09,360
+Well, the only thing separate from everywhere except City Hall is City Hall itself.
+
+632
+00:41:09,820 --> 00:41:10,180
+Right.
+
+633
+00:41:10,180 --> 00:41:15,880
+But because we need an open, fuzzy boundary, we can't take the exact brick walls of City Hall.
+
+634
+00:41:16,420 --> 00:41:24,160
+We take the interior rooms of City Hall, leaving a tiny, fuzzy buffer zone right at the exterior walls so we don't accidentally touch the outside.
+
+635
+00:41:24,580 --> 00:41:26,480
+We get the deep interior.
+
+636
+00:41:26,480 --> 00:41:31,160
+Okay. Now, what happens if we refuse that? What is the double refusal?
+
+637
+00:41:31,160 --> 00:41:33,920
+We must refuse the interior of City Hall.
+
+638
+00:41:34,340 --> 00:41:38,500
+We need the largest open region that does not overlap with the interior rooms.
+
+639
+00:41:39,120 --> 00:41:40,000
+What does that leave us?
+
+640
+00:41:40,420 --> 00:41:45,940
+It leaves us the rest of the entire city, plus that fuzzy boundary wall we had to exclude in the first step.
+
+641
+00:41:46,460 --> 00:41:46,820
+Yes.
+
+642
+00:41:47,360 --> 00:41:49,980
+We get the outside city, plus the walls of City Hall.
+
+643
+00:41:50,640 --> 00:41:51,980
+Our region just expanded.
+
+644
+00:41:52,860 --> 00:41:55,260
+Double refusal did not get us back to where we started.
+
+645
+00:41:55,260 --> 00:41:58,180
+We got back strictly more than we started with.
+
+646
+00:41:59,140 --> 00:42:00,440
+That is incredible to visualize.
+
+647
+00:42:00,980 --> 00:42:08,020
+Because double refusal doesn't equal the original state, it mathematically proves that the law of excluded middle fails in this universe.
+
+648
+00:42:08,220 --> 00:42:08,780
+Precisely.
+
+649
+00:42:09,280 --> 00:42:16,320
+In a topological space, there are items like the boundary walls that the system declines to make a binary decision about.
+
+650
+00:42:16,800 --> 00:42:21,060
+They aren't in the interior, but they aren't strictly in the exterior either.
+
+651
+00:42:21,060 --> 00:42:26,140
+It proves that excluded middle isn't a universal truth sent down by God.
+
+652
+00:42:26,500 --> 00:42:30,200
+It is just a downstream consequence of how you designed your refuse operator.
+
+653
+00:42:30,620 --> 00:42:31,560
+It's a design choice.
+
+654
+00:42:32,300 --> 00:42:39,520
+And understanding these operators leads us perfectly into section six, diagonal arguments and the shared skeleton of paradoxes.
+
+655
+00:42:39,700 --> 00:42:44,980
+Because if these foundational systems are all just different applications of pop, refuse, bind, and collapse,
+
+656
+00:42:45,420 --> 00:42:48,940
+how do they handle the great paradoxes that famously break mathematics?
+
+657
+00:42:48,940 --> 00:42:52,420
+Every major foundational crisis in the history of modern math,
+
+658
+00:42:52,980 --> 00:42:57,400
+Cantor's infinities, Russell's paradox, Goethe's incompleteness theorems,
+
+659
+00:42:57,600 --> 00:43:01,820
+they all share the exact same architectural skeleton based on these operators.
+
+660
+00:43:02,460 --> 00:43:03,980
+It's called a diagonal argument.
+
+661
+00:43:04,820 --> 00:43:06,840
+Phlyoxian defines the schema very clearly.
+
+662
+00:43:07,540 --> 00:43:09,600
+A diagonal argument requires three ingredients.
+
+663
+00:43:09,980 --> 00:43:13,600
+A set, a function with no fixed point, and a self-referential twist.
+
+664
+00:43:14,140 --> 00:43:15,780
+Walk me through the mechanism of this twist.
+
+665
+00:43:16,160 --> 00:43:17,580
+I will use a classic analogy.
+
+666
+00:43:17,580 --> 00:43:18,800
+Imagine a grid.
+
+667
+00:43:19,240 --> 00:43:23,240
+You list out a bunch of infinite sequences of zeros and ones.
+
+668
+00:43:23,620 --> 00:43:25,380
+Row one, row two, row three.
+
+669
+00:43:25,900 --> 00:43:31,720
+You want to prove that you can create a new sequence that is definitely not anywhere on this infinite list.
+
+670
+00:43:32,240 --> 00:43:34,140
+How do you do that if the list is infinite?
+
+671
+00:43:34,940 --> 00:43:36,640
+You use the diagonal twist.
+
+672
+00:43:37,080 --> 00:43:40,340
+You build a new sequence by looking at the first digit of row one.
+
+673
+00:43:40,800 --> 00:43:43,620
+If it's a zero, you make your first digit a one.
+
+674
+00:43:44,020 --> 00:43:44,560
+You flip it.
+
+675
+00:43:44,560 --> 00:43:47,180
+Then you look at the second digit of row two.
+
+676
+00:43:47,460 --> 00:43:49,880
+If it's a one, you make your second digit a zero.
+
+677
+00:43:49,880 --> 00:43:53,740
+You march diagonally down the list, flipping the digits.
+
+678
+00:43:54,840 --> 00:43:59,720
+So because you flipped the first digit of row one, your new sequence cannot be row one.
+
+679
+00:43:59,880 --> 00:44:02,880
+Because you flip the second digit of row two, it cannot be row two.
+
+680
+00:44:03,100 --> 00:44:06,240
+It mathematically escapes the entire list.
+
+681
+00:44:06,240 --> 00:44:09,120
+That is the function with no fixed point.
+
+682
+00:44:09,620 --> 00:44:15,140
+The flipping combined with the self-referential twist, checking the nth digit of the nth row.
+
+683
+00:44:16,100 --> 00:44:19,000
+But Flyxion points out a massive trap that people fall into.
+
+684
+00:44:19,560 --> 00:44:26,020
+People constantly confuse what this schema actually proves because it produces different outcomes depending on how you set it up.
+
+685
+00:44:26,020 --> 00:44:27,940
+Let's compare the instances.
+
+686
+00:44:28,540 --> 00:44:29,280
+Start with Cantor.
+
+687
+00:44:29,880 --> 00:44:33,660
+Gay or Cantor used this diagonal schema to prove a size fact.
+
+688
+00:44:34,300 --> 00:44:40,640
+He proved that the infinity of real numbers, the decimals, is strictly larger than the infinity of counting numbers.
+
+689
+00:44:41,440 --> 00:44:42,480
+He didn't break math.
+
+690
+00:44:42,920 --> 00:44:49,040
+He just proved that some infinities are bigger than others by showing that a power set is always larger than a space set.
+
+691
+00:44:49,040 --> 00:44:55,340
+But then Bertrand Russell comes along and he uses the exact same twisting schema to break a hypothesis.
+
+692
+00:44:56,000 --> 00:44:56,120
+Right.
+
+693
+00:44:56,760 --> 00:45:00,620
+Russell applied it to the idea of a universal set containing all sets.
+
+694
+00:45:01,220 --> 00:45:03,300
+He used a version of the barber paradox.
+
+695
+00:45:04,220 --> 00:45:10,100
+Imagine a town with a barber who shaves all men and only those men who do not shave themselves.
+
+696
+00:45:10,500 --> 00:45:12,220
+So does the barber shave himself?
+
+697
+00:45:12,660 --> 00:45:15,480
+If he shaves himself, then he must not shave himself.
+
+698
+00:45:15,480 --> 00:45:18,980
+But if he doesn't shave himself, then he must shave himself.
+
+699
+00:45:19,680 --> 00:45:21,200
+It's a derived contradiction.
+
+700
+00:45:22,020 --> 00:45:25,020
+Russell ran the diagonal schema and it produced a contradiction.
+
+701
+00:45:26,060 --> 00:45:29,360
+By doing so, he proved that the initial hypothesis was false.
+
+702
+00:45:30,180 --> 00:45:31,420
+There is no universal set.
+
+703
+00:45:32,040 --> 00:45:35,920
+You must use the refuse operator to restrict sets from containing themselves.
+
+704
+00:45:36,800 --> 00:45:41,060
+And then Kurt Godel uses the schema for a third completely different outcome.
+
+705
+00:45:41,740 --> 00:45:44,440
+Godel applied it to the machinery of formal proofs themselves.
+
+706
+00:45:44,440 --> 00:45:49,280
+He used a self-referential twist to create a mathematical sentence that translates to,
+
+707
+00:45:49,420 --> 00:45:51,540
+I am not provable in this system.
+
+708
+00:45:51,760 --> 00:45:55,200
+Like the liar's paradox, this statement is false.
+
+709
+00:45:55,200 --> 00:45:58,900
+Similar, but with provability instead of truth.
+
+710
+00:45:59,300 --> 00:46:02,880
+If the system is consistent, it cannot prove the sentence.
+
+711
+00:46:03,480 --> 00:46:05,160
+Because proving it would make it false.
+
+712
+00:46:06,300 --> 00:46:09,900
+So, Godel used the schema to prove a limit on provability.
+
+713
+00:46:10,660 --> 00:46:16,300
+He proved that any sufficiently complex consistent system cannot prove its own consistency.
+
+714
+00:46:17,140 --> 00:46:20,900
+There will always be true statements that cannot be formally proven within the system.
+
+715
+00:46:20,900 --> 00:46:28,140
+So, we have one structural schema, the diagonal twist, yielding three totally different results.
+
+716
+00:46:28,520 --> 00:46:32,880
+A size fact, a refutation of a hypothesis, and a limit on provability.
+
+717
+00:46:32,880 --> 00:46:36,880
+Which is why Phloxian emphasizes a crucial design rule.
+
+718
+00:46:37,400 --> 00:46:42,780
+When you invoke a diagonal argument, you must state exactly what kind of conclusion you are drawing.
+
+719
+00:46:43,540 --> 00:46:47,640
+You cannot use Cantor's size fact to claim a girdle-like limit on provability.
+
+720
+00:46:48,300 --> 00:46:51,360
+You cannot use Russell's refutation to claim a size fact.
+
+721
+00:46:51,680 --> 00:46:55,640
+They share a skeleton, but they are entirely different beasts.
+
+722
+00:46:55,860 --> 00:46:58,560
+This brings us to a huge philosophical pivot.
+
+723
+00:46:58,560 --> 00:47:04,280
+If ZFC, Lean, and all these foundations are just different rule sets for the four operators,
+
+724
+00:47:04,780 --> 00:47:09,280
+and if they all have to navigate these paradoxes, how do we choose which one to use?
+
+725
+00:47:09,780 --> 00:47:11,980
+Are we just picking our favorite flavor of logic?
+
+726
+00:47:12,560 --> 00:47:15,900
+This is one of the most clarifying parts of the entire deep dive.
+
+727
+00:47:16,760 --> 00:47:22,160
+Phloxian argues that a foundational system like ZFC or Lean is essentially a convention.
+
+728
+00:47:22,800 --> 00:47:24,180
+It's not a divine truth.
+
+729
+00:47:24,340 --> 00:47:28,400
+It's a protocol, like choosing a unit of length or a base for counting.
+
+730
+00:47:28,560 --> 00:47:31,660
+Right, we count in base 10, the digits 0 through 9.
+
+731
+00:47:32,680 --> 00:47:36,460
+Computers count in base 2, binary, which is just 0 and 1.
+
+732
+00:47:36,980 --> 00:47:39,740
+But to prove how arbitrary conventions can be,
+
+733
+00:47:40,360 --> 00:47:43,340
+Phloxian introduces a wild, brilliant example.
+
+734
+00:47:44,180 --> 00:47:50,020
+The Uni-DIMRI system, base 1.5, a non-integer radix of 3 over 2.
+
+735
+00:47:50,020 --> 00:47:54,560
+I had to read this section three times, but it is so cool once you visualize it.
+
+736
+00:47:55,120 --> 00:48:01,040
+Instead of carrying over a digit when you hit 10, the rule is based on exploding dots.
+
+737
+00:48:01,500 --> 00:48:04,120
+Imagine you have a row of empty buckets on the floor.
+
+738
+00:48:04,820 --> 00:48:09,660
+Bucket 0 is on the right, bucket 1 to its left, then bucket 2, and so on.
+
+739
+00:48:09,660 --> 00:48:17,560
+The rule for base 1.5 is, if you put three dots in one bucket, they immediately explode,
+
+740
+00:48:18,000 --> 00:48:22,840
+disappear from that bucket, and magically reappear as two dots in the bucket to the left.
+
+741
+00:48:23,180 --> 00:48:28,280
+Three dots in bucket k explode to become two dots in bucket k plus 1.
+
+742
+00:48:28,280 --> 00:48:32,700
+And Phloxian shows this perfectly respects the math of base 1.5,
+
+743
+00:48:32,860 --> 00:48:39,100
+because 3 times 3 halves to the power of k exactly equals 2 times 3 halves to the power of k plus 1.
+
+744
+00:48:39,480 --> 00:48:42,440
+Let's walk through it slowly so the listener can visualize it.
+
+745
+00:48:43,080 --> 00:48:46,960
+How do you write the standard number 10 in base 1.5?
+
+746
+00:48:47,060 --> 00:48:48,500
+Okay, I actually did this on paper.
+
+747
+00:48:48,940 --> 00:48:52,660
+You start by dropping 10 dots into the first bucket on the right, bucket 0.
+
+748
+00:48:53,040 --> 00:48:54,920
+And what happened during bucket 0?
+
+749
+00:48:55,060 --> 00:48:58,240
+The rule is every group of three dots explodes.
+
+750
+00:48:58,580 --> 00:49:01,100
+Since I have 10 dots, I have three groups of three.
+
+751
+00:49:01,420 --> 00:49:03,060
+So nine dots explode.
+
+752
+00:49:03,360 --> 00:49:05,060
+They leave one dot behind in bucket 0,
+
+753
+00:49:05,260 --> 00:49:11,060
+and those three explosions send six dots, three groups of two, over to bucket 1 on the left.
+
+754
+00:49:11,680 --> 00:49:11,920
+Perfect.
+
+755
+00:49:12,320 --> 00:49:15,900
+So bucket 0 has one dot, bucket 1 has six dots.
+
+756
+00:49:16,540 --> 00:49:17,820
+What happens in bucket 1?
+
+757
+00:49:18,260 --> 00:49:21,660
+Bucket 1 has six dots, which is exactly two groups of three.
+
+758
+00:49:22,080 --> 00:49:23,280
+Both groups explode.
+
+759
+00:49:23,280 --> 00:49:26,540
+They leave exactly zero dots behind in bucket 1,
+
+760
+00:49:26,540 --> 00:49:31,500
+and they send four dots, two groups of two, over to bucket 2 on the left.
+
+761
+00:49:31,500 --> 00:49:38,220
+So reading right to left, we have one dot, then zero dots, and now four dots in bucket 2.
+
+762
+00:49:38,600 --> 00:49:40,180
+What happens to the four dots?
+
+763
+00:49:40,700 --> 00:49:42,300
+Bucket 2 has four dots.
+
+764
+00:49:42,600 --> 00:49:44,080
+One group of three explodes.
+
+765
+00:49:44,500 --> 00:49:48,640
+It leaves one dot behind in bucket 2 and sends two dots over to bucket 3.
+
+766
+00:49:48,640 --> 00:49:53,160
+And bucket 3 has two dots, which isn't enough to trigger an explosion,
+
+767
+00:49:53,560 --> 00:49:55,400
+so the chain reaction stops.
+
+768
+00:49:55,780 --> 00:49:56,080
+Right.
+
+769
+00:49:56,280 --> 00:50:02,620
+So reading the buckets from left to right, we have two dots, one dot, zero dots, and one dot.
+
+770
+00:50:03,080 --> 00:50:10,320
+Therefore, the number 10, written in base 1.5, is the string 2, 1, 0, 1.
+
+771
+00:50:10,320 --> 00:50:18,560
+And if you run the polynomial expansion, 2 times 27 over 8 plus 1 times 9 over 4 plus 0 plus 1,
+
+772
+00:50:18,820 --> 00:50:20,260
+it equals exactly 10.
+
+773
+00:50:21,040 --> 00:50:21,840
+It works flawlessly.
+
+774
+00:50:22,400 --> 00:50:29,580
+Every single arithmetic sentence, every addition, every multiplication remains mathematically true in base 1.5.
+
+775
+00:50:30,000 --> 00:50:31,620
+The math does not change.
+
+776
+00:50:32,100 --> 00:50:34,100
+The math is perfectly valid.
+
+777
+00:50:34,720 --> 00:50:37,780
+So why on earth don't we use base 1.5?
+
+778
+00:50:37,780 --> 00:50:39,840
+Why don't we balance our checkbooks in it?
+
+779
+00:50:40,320 --> 00:50:42,080
+Because of the computational cost.
+
+780
+00:50:42,900 --> 00:50:45,360
+Flightsheen calculates the exact burden of this convention.
+
+781
+00:50:46,100 --> 00:50:48,920
+First, it takes way more digits to write a number.
+
+782
+00:50:49,700 --> 00:50:55,680
+The length of a number string in base 1.5 is asymptotically 1.7 times longer than binary,
+
+783
+00:50:56,100 --> 00:50:58,380
+and 5.6 times longer than base 10.
+
+784
+00:50:58,960 --> 00:51:02,620
+To write a number like 1 million, you would need 32 digits.
+
+785
+00:51:03,140 --> 00:51:05,640
+That would make reading a phone number impossible.
+
+786
+00:51:06,180 --> 00:51:08,260
+And the second cost is redundancy.
+
+787
+00:51:08,260 --> 00:51:15,980
+In base 10, every random string of digits you can think of, like 4, 7, 2, 9, is a valid whole number.
+
+788
+00:51:16,760 --> 00:51:20,640
+In base 1.5, you only use the digits 0, 1, and 2.
+
+789
+00:51:21,120 --> 00:51:24,340
+But most random strings of those digits don't even evaluate to integers.
+
+790
+00:51:24,600 --> 00:51:26,600
+They evaluate to weird, messy fractions.
+
+791
+00:51:26,600 --> 00:51:34,100
+Out of 59,000 possible 10-digit strings, only 186 of them actually evaluate to whole integers.
+
+792
+00:51:34,860 --> 00:51:39,200
+So the system is wildly inefficient and bloated with junk data.
+
+793
+00:51:39,200 --> 00:51:44,520
+Yes. And this is the profound point Flyxion is making about our mathematical foundations.
+
+794
+00:51:45,320 --> 00:51:47,680
+Does the physical universe mandate base 10?
+
+795
+00:51:48,140 --> 00:51:48,400
+No.
+
+796
+00:51:49,060 --> 00:51:52,600
+Does metaphysical reality demand ZFC or lean?
+
+797
+00:51:52,980 --> 00:51:53,220
+No.
+
+798
+00:51:53,900 --> 00:51:58,940
+We choose foundational bases not because they are the truest reflection of God's universe,
+
+799
+00:51:59,180 --> 00:52:02,660
+but because they provide the best reproducibility protocol.
+
+800
+00:52:02,660 --> 00:52:05,520
+That phrase, reproducibility protocol.
+
+801
+00:52:06,100 --> 00:52:11,320
+We choose English over Morse code for a deep dive because it transmits data faster and more reliably.
+
+802
+00:52:11,580 --> 00:52:12,120
+Precisely.
+
+803
+00:52:12,520 --> 00:52:18,340
+We choose systems like ZFC because they offer low cognitive cost, high adoption among humans,
+
+804
+00:52:18,500 --> 00:52:21,380
+and they allow us to share and verify results easily.
+
+805
+00:52:21,940 --> 00:52:26,640
+Imagine if half the mathematicians in the world used ZFC with the axiom of choice,
+
+806
+00:52:26,640 --> 00:52:32,320
+and the other half used a completely different framework, but nobody told each other which one they were using.
+
+807
+00:52:32,860 --> 00:52:33,580
+It would be chaos.
+
+808
+00:52:34,000 --> 00:52:38,420
+They would produce correct, brilliant theorems that were mutually unusable.
+
+809
+00:52:38,960 --> 00:52:40,500
+They couldn't chain their proofs together.
+
+810
+00:52:40,960 --> 00:52:46,160
+So ZFC, type theory, base 10, they are just agreed upon conventions.
+
+811
+00:52:46,840 --> 00:52:50,580
+They are the network protocols, like TCPIP for the internet,
+
+812
+00:52:50,760 --> 00:52:53,680
+that allow humanity to build a shared tower of knowledge.
+
+813
+00:52:53,680 --> 00:52:58,620
+Exactly. They give us comparability, a common language to verify our truths.
+
+814
+00:52:59,180 --> 00:53:04,440
+This takes us to the final, most speculative, and frankly, most breathtaking part of the papers.
+
+815
+00:53:04,740 --> 00:53:08,280
+We've talked about math, software, and human conventions.
+
+816
+00:53:08,720 --> 00:53:12,880
+Now we are returning to the physical universe one last time.
+
+817
+00:53:13,080 --> 00:53:17,560
+Let's go back to the four operators, pop, refuse, bind, and collapse.
+
+818
+00:53:18,000 --> 00:53:22,740
+We talked about collapses baking the cake, evaluating an equation,
+
+819
+00:53:22,740 --> 00:53:24,940
+quotienting items together.
+
+820
+00:53:25,900 --> 00:53:31,160
+When you apply the collapse operator, what actually happens to the information in the system?
+
+821
+00:53:31,660 --> 00:53:32,920
+Well, it gets lost.
+
+822
+00:53:33,500 --> 00:53:39,400
+Once the cake is baked, you can't reverse engineer it to tell me exactly which farm the egg came from.
+
+823
+00:53:39,820 --> 00:53:41,580
+The independent data is gone.
+
+824
+00:53:42,060 --> 00:53:45,500
+Mathematically, this loss of information is known as Shannon entropy.
+
+825
+00:53:45,500 --> 00:53:50,800
+In information theory, entropy is a measure of unpredictability, or lost data.
+
+826
+00:53:51,600 --> 00:54:00,560
+Flexium proves mathematically that the lost entropy generated by a collapse operator is precisely equal to the conditional Shannon entropy.
+
+827
+00:54:00,980 --> 00:54:02,540
+Let me make sure I understand that.
+
+828
+00:54:02,540 --> 00:54:08,400
+If you group items together, if you coarse-grain the data, you lose information.
+
+829
+00:54:08,960 --> 00:54:09,160
+Yes.
+
+830
+00:54:09,800 --> 00:54:17,700
+The coarser the collapse, the more unique items you mash together into a single identity, the more information is discarded from the system.
+
+831
+00:54:17,700 --> 00:54:25,460
+And Flyxion connects this mathematical loss of information to a theoretical physics framework called the RSVP plenum.
+
+832
+00:54:25,680 --> 00:54:27,760
+What is the RSVP plenum?
+
+833
+00:54:28,200 --> 00:54:33,200
+It is a highly speculative advanced framework that attempts to explain gravity,
+
+834
+00:54:33,700 --> 00:54:38,260
+but not as a fundamental independent force of nature like electromagnetism.
+
+835
+00:54:38,520 --> 00:54:43,480
+The RSVP plenum tries to explain gravity as an entropic descent.
+
+836
+00:54:43,480 --> 00:54:47,420
+Wait, how does gravity connect to the collapse operator?
+
+837
+00:54:48,780 --> 00:54:51,300
+Flyxion outlines a heuristic conjecture.
+
+838
+00:54:52,280 --> 00:55:01,660
+What if the entropy field we observe in physics is literally just the accumulated lost entropy from a series of macroscopic collapses of microscopic data?
+
+839
+00:55:02,120 --> 00:55:02,520
+Whoa.
+
+840
+00:55:03,240 --> 00:55:04,080
+Think about it.
+
+841
+00:55:04,300 --> 00:55:09,360
+When you zoom out and look at a planet, you aren't tracking the position of every single atom.
+
+842
+00:55:09,840 --> 00:55:12,380
+You are applying a massive collapse operator.
+
+843
+00:55:12,380 --> 00:55:18,200
+You are coarse-graining a trillion, trillion particles into one identity called a planet.
+
+844
+00:55:19,120 --> 00:55:22,680
+And by doing that, I am discarding an astronomical amount of information.
+
+845
+00:55:23,340 --> 00:55:23,580
+Yes.
+
+846
+00:55:24,740 --> 00:55:26,300
+And Flyxion's conjecture asks,
+
+847
+00:55:26,940 --> 00:55:30,300
+What if gravity is just the universe coarse-graining itself?
+
+848
+00:55:30,960 --> 00:55:34,680
+What if gravity doesn't require an extra primitive force in our ontology?
+
+849
+00:55:34,680 --> 00:55:41,900
+It would just be the natural mathematical cost, the entropic shadow, of zooming out and identifying particles together.
+
+850
+00:55:42,660 --> 00:55:45,900
+As the universe evaluates itself, information is lost.
+
+851
+00:55:46,400 --> 00:55:50,660
+And that loss physically manifests as entropic gravity pulling mass together.
+
+852
+00:55:50,920 --> 00:55:54,780
+That is one of the most beautiful analogies for gravity I have ever heard.
+
+853
+00:55:54,900 --> 00:55:56,660
+But I have to ask the critical question.
+
+854
+00:55:56,660 --> 00:55:58,060
+Is this proven?
+
+855
+00:55:58,560 --> 00:56:01,640
+Did Flyxion just mathematically prove what gravity is?
+
+856
+00:56:02,200 --> 00:56:03,100
+Emphatically, no.
+
+857
+00:56:03,380 --> 00:56:04,140
+And this is vital.
+
+858
+00:56:04,820 --> 00:56:07,300
+Flyxion is exceptionally careful to state this.
+
+859
+00:56:07,820 --> 00:56:10,580
+It is strictly a heuristic analogy right now.
+
+860
+00:56:10,800 --> 00:56:12,620
+It is a mathematical hypothesis.
+
+861
+00:56:13,200 --> 00:56:15,320
+So what would it actually take to prove it?
+
+862
+00:56:15,320 --> 00:56:20,320
+Flyxion lays out exactly the grueling physics labor required to prove it.
+
+863
+00:56:21,060 --> 00:56:24,040
+One would have to state a concrete lattice model of the plenum.
+
+864
+00:56:24,560 --> 00:56:27,740
+Then compute the thermodynamic limit as the lattice scales up.
+
+865
+00:56:28,320 --> 00:56:31,300
+Then calculate the specific entropic forces.
+
+866
+00:56:31,840 --> 00:56:38,040
+And finally, match those results precisely to Poisson-type gravity equations that govern our observed reality.
+
+867
+00:56:38,760 --> 00:56:43,520
+A negative result at any single one of those steps would instantly falsify the conjecture.
+
+868
+00:56:43,520 --> 00:56:46,360
+It remains a massive open problem in physics.
+
+869
+00:56:46,840 --> 00:56:50,920
+That distinction is so important because it highlights exactly what Tone did wrong.
+
+870
+00:56:51,480 --> 00:56:57,380
+Flyxion isn't taking a cool mathematical analogy and declaring it as undisputed ontological law.
+
+871
+00:56:57,840 --> 00:56:58,400
+Exactly.
+
+872
+00:56:59,320 --> 00:57:06,960
+Flyxion respects the difference between an elegant mathematical model, a checked software compilation, and empirical testable physics.
+
+873
+00:57:06,960 --> 00:57:16,460
+That respect for scope, knowing exactly what your map describes, and acknowledging that it is not the territory, is the ultimate lesson of these papers.
+
+874
+00:57:17,160 --> 00:57:17,880
+What a journey.
+
+875
+00:57:18,520 --> 00:57:23,860
+We started with a rebellion, claiming that mathematical software is a corrupt metaphysical overlord.
+
+876
+00:57:24,340 --> 00:57:27,340
+And we've seen how that is a fundamental category error.
+
+877
+00:57:27,880 --> 00:57:30,900
+Formal systems like Lean are not philosophical dictators.
+
+878
+00:57:30,900 --> 00:57:35,260
+They are highly specific, auditable tools that track our logic.
+
+879
+00:57:36,080 --> 00:57:44,000
+We learned that the foundations of math, whether ZFC or dependent type theory, rely on shared conventions to make knowledge reproducible.
+
+880
+00:57:44,700 --> 00:57:46,500
+They are the base 10 of our logic.
+
+881
+00:57:46,500 --> 00:57:53,400
+We saw how the simple verbs pop, refuse, bind, and collapse are the underlying heartbeat of everything.
+
+882
+00:57:53,820 --> 00:58:02,520
+From proving 2 plus 2 equals 4, to defining the fuzzy borders of topological spaces, to theorizing about the entropic nature of gravity itself.
+
+883
+00:58:03,340 --> 00:58:11,320
+It all comes down to where you place your restrictions, how you filter your domain, and who checks the ID at the door of your mathematical club.
+
+884
+00:58:11,320 --> 00:58:16,320
+But before we sign off, I want to leave you, the listener, with a provocative thought to mull over.
+
+885
+00:58:16,720 --> 00:58:21,140
+We've talked extensively today about how humans pick foundational conventions based on our own limitations.
+
+886
+00:58:21,460 --> 00:58:24,160
+We choose base 10 because it's easy for our brains.
+
+887
+00:58:24,300 --> 00:58:28,200
+We use ZFC because it's a great shared language with low cognitive cost.
+
+888
+00:58:28,340 --> 00:58:33,200
+But what happens as we move into an era of advanced, self-improving AI?
+
+889
+00:58:33,460 --> 00:58:35,680
+Oh, this is a fascinating extrapolation.
+
+890
+00:58:35,680 --> 00:58:44,960
+If an artificial intelligence is tasked with generating millions of complex mathematical proofs or discovering new physics, it will not care about human cognitive cost.
+
+891
+00:58:45,420 --> 00:58:46,180
+It doesn't get tired.
+
+892
+00:58:46,620 --> 00:58:50,060
+It might look at our logic and decide to optimize its own internal foundation.
+
+893
+00:58:50,480 --> 00:58:56,880
+It might invent a completely alien, refused discipline that operates in 100-dimensional topological space.
+
+894
+00:58:56,880 --> 00:59:07,940
+It might decide that a bizarre, non-integer RADX system, far more complex and bloated than base 1.5, is actually slightly more computationally efficient for its specific silicon hardware.
+
+895
+00:59:08,420 --> 00:59:13,700
+The machine could build a deep embedding of a mathematical language that we simply cannot conceptualize.
+
+896
+00:59:14,220 --> 00:59:14,660
+Exactly.
+
+897
+00:59:15,140 --> 00:59:18,400
+We might end up with a universe of profound mathematical truths.
+
+898
+00:59:18,880 --> 00:59:23,500
+The AI might solve quantum gravity or flawlessly prove the cure to a genetic disease.
+
+899
+00:59:23,500 --> 00:59:27,020
+And those proofs will be perfectly verified by the machine's kernel.
+
+900
+00:59:27,640 --> 00:59:32,860
+But the foundational language of those proofs will be entirely incomprehensible to the human mind.
+
+901
+00:59:33,520 --> 00:59:40,880
+The machine will hand us the cure, and when we ask to see the proof, it will hand us a trillion lines of exploding dot alien logic.
+
+902
+00:59:41,700 --> 00:59:47,980
+Are we prepared for a future where the map is perfectly, rigorously accurate, but humans can no longer read the legend?
+
+903
+00:59:47,980 --> 00:59:52,960
+That is the ultimate humbling consequence of the map not being the territory.
+
+904
+00:59:53,500 --> 00:59:55,860
+The map maker might outgrow us.
+
+905
+00:59:56,440 --> 01:00:00,680
+Something to think about the next time you trust a calculator or hit compile on a piece of code.
+
+906
+01:00:01,360 --> 01:00:02,740
+Keep questioning your assumptions.
+
+907
+01:00:03,300 --> 01:00:04,460
+Check your own logical footprints.
+
+908
+01:00:04,680 --> 01:00:08,940
+And always remember, an empty cardboard box is still a box.
+
+909
+01:00:09,480 --> 01:00:10,620
+Thanks for diving deep with us.
+
+910
+01:00:10,620 --> 01:00:11,600
+You're listening to science.
+
+911
+01:00:11,600 --> 01:00:12,480
+Let's pray.
+
+912
+01:00:12,480 --> 01:00:13,640
+Let's pray.
+
+913
+01:00:13,640 --> 01:00:15,880
+Let's pray.
+
+914
+01:00:15,880 --> 01:00:16,340
+Let's pray.
+
+915
+01:00:16,340 --> 01:00:17,360
+Let's pray.
+
+916
+01:00:17,360 --> 01:00:18,180
+Let's pray.
+
+917
+01:00:22,500 --> 01:00:23,880
+Let's pray.
+

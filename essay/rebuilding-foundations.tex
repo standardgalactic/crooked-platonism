@@ -1,0 +1,1646 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=1.15in]{geometry}
+\usepackage[expansion=false]{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,array}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!40!black,citecolor=blue!40!black,urlcolor=blue!40!black]{hyperref}
+
+\setlist{itemsep=2pt,topsep=4pt}
+\setlength{\parskip}{0.4em}
+\setlength{\parindent}{0pt}
+\emergencystretch=3em
+
+% ---------- operators ----------
+\newcommand{\Pop}{\mathsf{Pop}}
+\newcommand{\Refuse}{\mathsf{Refuse}}
+\newcommand{\Bind}{\mathsf{Bind}}
+\newcommand{\Coll}{\mathsf{Collapse}}
+\newcommand{\Rev}{\mathsf{A}}
+\newcommand{\U}{\mathbb{U}}
+\newcommand{\Om}{\Omega}
+\newcommand{\sem}[1]{[\![#1]\!]}
+\newcommand{\imp}{\Rightarrow}
+\newcommand{\lam}{\lambda}
+\newcommand{\bnd}[2]{\Bind\,#1.\,#2}
+\newcommand{\col}[2]{\Coll(#1,#2)}
+\newcommand{\subst}[3]{#1[#2:=#3]}
+\newcommand{\defeq}{\equiv}
+\newcommand{\ie}{\textit{i.e.}}
+\newcommand{\eg}{\textit{e.g.}}
+\newcommand{\Sort}{\mathsf{Sort}}
+\newcommand{\Prop}{\mathsf{Prop}}
+\newcommand{\Type}{\mathsf{Type}}
+\newcommand{\Quot}{\mathsf{Quot}}
+\newcommand{\Empty}{\mathbf{0}}
+\newcommand{\imax}{\mathrm{imax}}
+\newcommand{\Pow}{\mathcal{P}}
+\newcommand{\rk}{\mathrm{rk}}
+
+% ---------- theorem environments with status labels ----------
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}[definition]{Example}
+\newtheorem{designrule}[definition]{Design rule}
+\newtheorem{analogy}[definition]{Analogy}
+\newtheorem{exercise}[definition]{Exercise}
+\theoremstyle{plain}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{corollary}[definition]{Corollary}
+\newtheorem{conjecture}[definition]{Conjecture}
+\theoremstyle{remark}
+\newtheorem{remark}[definition]{Remark}
+\newtheorem{cited}[definition]{Cited result}
+\newtheorem{computation}[definition]{Computation}
+
+\title{\textbf{Rebuilding the Foundations of Logic:\\ Sets, Type Theory, and Reproducibility}\\[0.4em]
+\large Developed from Pop, Refuse, Bind, and Collapse}
+\author{Flyxion\\\small Independent Researcher}
+\date{October 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+Three foundational vocabularies dominate current practice: first-order logic with its Boolean semantics, Zermelo--Fraenkel set theory with choice (ZFC), and the dependent type theories implemented in proof assistants such as Lean. They are usually introduced separately, with separate primitives and separate informal pictures of what a mathematical object is. This monograph rebuilds all three from one small base. The base is four operators, \emph{Pop} (introduce a distinguished item), \emph{Refuse} (restrict a domain of admissible items), \emph{Bind} (relate or abstract over items), and \emph{Collapse} (evaluate or identify). With these operators the untyped lambda calculus is recovered by renaming, the classical and intuitionistic propositional logics appear as two disciplines of Refuse, the axioms of ZFC appear as closure conditions on the four operators, and the kernel of a Lean-style dependent type theory appears as the internalization of Refuse inside Bind. The development includes the missing floors: first-order logic with structures, satisfaction and soundness; simply typed lambda calculus with an explicit Curry--Howard theorem; a worked derivation in the kernel; and the diagonal arguments of Cantor, Russell, and G\"odel, kept distinct. Reproducibility is treated as part of the foundations: each statement carries a status label, each verified theorem is reported with its axiom footprint, and the layers at which a formal statement can fail are classified, so that a reader can tell what was established, relative to what, and by what kind of check. The axioms of ZFC, and the axioms added to a kernel, are treated as conventions: arbitrary at the base, and valuable because they give everyone a common language in which results can be checked, combined, and reused. Each chapter separates what is defined, what is proved here, what is cited from the literature, and what is only an analogy. The aim is a single ground-up account in which the differences between the three foundations are located precisely, at the point where each decides how Refuse may be used.
+\end{abstract}
+
+\tableofcontents
+
+% =====================================================================
+\section{Scope, conventions, and status vocabulary}\label{sec:scope}
+
+\subsection{What this document is}
+
+The text develops a common base for logic, sets, and types, and then reads three standard systems off that base. It is not a new foundation intended to compete with them. Its claim is more modest: the three standard systems differ mainly in \emph{where} they permit a domain to be restricted, and a four-operator vocabulary makes that difference easy to state.
+
+\subsection{Status vocabulary}
+
+Every numbered statement carries one of the following labels, and the label is part of the claim.
+
+\begin{center}
+\begin{tabular}{@{}p{0.22\textwidth}p{0.72\textwidth}@{}}
+\toprule
+Label & Meaning \\
+\midrule
+Definition & A stipulation. It can be adopted or declined but not refuted. \\
+Theorem, Proposition, Lemma, Corollary & Proved in this text, or proved by a short argument given in full. \\
+Cited result & Proved in the literature and used here without reproof. A reference is always given. \\
+Computation & A finite calculation whose script is reproduced in an appendix and was run. It supports the stated instances only. \\
+Design rule & A choice made for convenience or to match a standard system. \\
+Analogy & A structural resemblance. It organizes understanding and proves nothing. \\
+Conjecture & A statement supported by heuristic or partial evidence and not proved. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Scope and warrant}
+
+Two things are kept apart throughout. The \emph{scope} of a result is the set of objects it is about: for example, a theorem about subsets of a fixed carrier is not a theorem about all collections. The \emph{warrant} of a result is the kind of support it has: a proof, a citation, or an analogy. A theorem keeps the scope of its hypotheses; an analogy has no scope beyond the sentence that states it. When a reading of one system in terms of another is offered, the text says which of the two it is.
+
+\subsection{Content of a correspondence}
+
+\begin{designrule}[Content of a correspondence]\label{dr:content}
+An operator correspondence has mathematical content only when its domain, its interpretation, and the structure it preserves are specified. Otherwise it is notation or analogy.
+\end{designrule}
+
+Every correspondence offered in this text is labeled accordingly: a Theorem or Proposition when the three are given and a preservation result is proved, and an Analogy when they are not. Section~\ref{sec:radix} gives the smallest complete example.
+
+\subsection{Notation}
+
+The carrier of all items is a set $\U$ (the \emph{pops}). A \emph{world} is a subset $\Om\subseteq\U$. Predicates on $\U$ are identified with subsets. Substitution is written $\subst{t}{x}{u}$. The four operators are typeset $\Pop$, $\Refuse$, $\Bind$, $\Coll$; a fifth symbol $\Rev$ is used in Section~\ref{sec:A} for revision of the admissibility rule itself.
+
+% =====================================================================
+\part{Ground}
+
+\section{Pops, worlds, and the four operators}\label{sec:ops}
+
+\subsection{An informal picture}
+
+A mathematical activity begins by distinguishing something from its surroundings. That act is \emph{Pop}. It continues by deciding which items count as admissible for the question at hand, and by excluding the rest. That act is \emph{Refuse}. Admissible items are then related to each other, composed, paired, or abstracted over: \emph{Bind}. Finally, related items are evaluated or identified, so that different presentations of the same thing become one: \emph{Collapse}. The rest of the document makes these four sentences precise.
+
+\subsection{The domain layer}
+
+\begin{definition}[Worlds and operators]\label{def:ops}
+Fix a set $\U$. For $a\in\U$, $P\subseteq\U$, worlds $\Om,\Om_1,\Om_2\subseteq\U$, a relation $R\subseteq\U\times\U$, and an equivalence relation $\sim$ on $\Om$, define
+\begin{align*}
+\Pop(a) &:= \{a\},\\
+\Refuse_P(\Om) &:= \Om\setminus P,\\
+\Bind_R(\Om_1,\Om_2) &:= R\cap(\Om_1\times\Om_2),\qquad \Bind(\Om_1,\Om_2):=\Om_1\times\Om_2,\\
+\Coll_{\sim}(\Om) &:= \Om/{\sim}.
+\end{align*}
+\end{definition}
+
+The operators have different codomains: $\Pop$, $\Refuse$ return worlds, $\Bind$ returns a world of pairs (a world over $\U\times\U$, which is again a carrier of items after a choice of pairing), and $\Coll$ returns a world of classes. Pairing and classes are items of a suitable $\U$ in all the systems considered below, so no generality is lost by keeping the carrier fixed.
+
+\begin{proposition}[Laws of Refuse]\label{prop:refuse-laws}
+For all $P,Q\subseteq\U$ and worlds $\Om$:
+\begin{enumerate}[label=(\roman*)]
+\item $\Refuse_P\Refuse_Q(\Om)=\Refuse_{P\cup Q}(\Om)=\Refuse_Q\Refuse_P(\Om)$;
+\item $\Refuse_P\Refuse_P(\Om)=\Refuse_P(\Om)$;
+\item $\Refuse_\emptyset(\Om)=\Om$ and $\Refuse_{\U}(\Om)=\emptyset$;
+\item (relative double refusal) $\Refuse_{\Refuse_P(\Om)}(\Om)=\Om\cap P$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+(i) $x\in\Refuse_P\Refuse_Q(\Om)$ iff $x\in\Om$, $x\notin Q$, $x\notin P$ iff $x\in\Om\setminus(P\cup Q)$. Symmetry in $P,Q$ gives the second equality. (ii) is (i) with $Q=P$. (iii) is immediate. (iv) $x\in\Om\setminus(\Om\setminus P)$ iff $x\in\Om$ and not ($x\in\Om$ and $x\notin P$) iff $x\in\Om\cap P$.
+\end{proof}
+
+Item (iv) is the first place where the rest of the document will branch. In the Boolean setting it says that refusing a refusal, relative to a fixed world, returns what one started with. In Section~\ref{sec:heyting} the same operator is shown to fail this law in a topological setting, and the failure is exactly the failure of excluded middle.
+
+\begin{proposition}[Collapse is the universal identification]\label{prop:collapse}
+Let $\sim$ be an equivalence relation on a world $\Om$ and $q:\Om\to\Om/{\sim}$ the quotient map. For every function $f:\Om\to X$ that is constant on $\sim$-classes there is a unique $\bar f:\Om/{\sim}\to X$ with $\bar f\circ q=f$.
+\end{proposition}
+\begin{proof}
+Define $\bar f([x]):=f(x)$. This is well defined because $f$ is constant on classes. Uniqueness holds because $q$ is surjective.
+\end{proof}
+
+Proposition~\ref{prop:collapse} is the whole content of ``Collapse as evaluation'': a computation that yields the same result on equivalent presentations descends to the identified object. The same universal property reappears in Section~\ref{sec:quot} as the rule for quotient types.
+
+\subsection{Why four}
+
+\begin{analogy}\label{an:four}
+The four operators correspond, in order, to \emph{introducing a variable or constant}, \emph{forming a subtype or subset}, \emph{forming a function space or relation}, and \emph{reducing a term or forming a quotient}. The correspondence is not claimed to be forced. Any presentation of logic needs some way of introducing items, restricting their range, relating them, and identifying them, and these are the four ways chosen here.
+\end{analogy}
+
+\section{The term layer: Bind and Collapse give the lambda calculus}\label{sec:terms}
+
+\subsection{Syntax and reduction}
+
+\begin{definition}[SP terms]\label{def:sp}
+Let $X$ be a countable set of variables. The set $\mathrm{Tm}$ of \emph{SP terms} is generated by
+\[
+t,u \;::=\; x \;\mid\; \bnd{x}{t} \;\mid\; \col{t}{u},\qquad x\in X.
+\]
+Variables are pops introduced by the context. The term $\bnd{x}{t}$ binds the pop $x$ in $t$, and $\col{t}{u}$ asks that $t$ be evaluated against $u$. Free variables, $\alpha$-equivalence, and capture-avoiding substitution $\subst{t}{x}{u}$ are defined as for the lambda calculus. The single reduction rule is
+\[
+\col{(\bnd{x}{t})}{u}\;\longrightarrow\;\subst{t}{x}{u}\tag{Collapse-$\beta$}
+\]
+closed under all term contexts. Write $\twoheadrightarrow$ for its reflexive transitive closure.
+\end{definition}
+
+\begin{proposition}[The SP calculus is the lambda calculus]\label{prop:sp-lambda}
+The map $\tau:\mathrm{Tm}\to\Lambda$ into the untyped lambda terms, $\tau(x)=x$, $\tau(\bnd{x}{t})=\lam x.\tau(t)$, $\tau(\col{t}{u})=\tau(t)\,\tau(u)$, is a bijection that preserves and reflects one-step reduction. In particular, $\twoheadrightarrow$ on $\mathrm{Tm}$ is confluent (Church--Rosser) and every theorem about $\beta$-reduction in $\Lambda$ holds for $\Coll$-$\beta$.
+\end{proposition}
+\begin{proof}
+$\tau$ is a bijection of grammars, clause by clause, and commutes with substitution by induction on $t$. Hence $t\to u$ iff $\tau(t)\to_\beta\tau(u)$. Confluence of $\to_\beta$ is the Church--Rosser theorem, proved for example in Barendregt \cite[Ch.~3]{Barendregt84}.
+\end{proof}
+
+This proposition is deliberately a change of vocabulary. No new computational power or new theorem about computation is claimed. The value of the vocabulary appears in the next parts, where $\Bind$ and $\Coll$ are re-used for quantification, for pairing, and for dependent products.
+
+\subsection{Worked reductions}
+
+The following reductions were also checked with a short normal-order evaluator; each is short enough to verify by hand. Write
+$\mathsf{T}:=\bnd{x}{\bnd{y}{x}}$, $\mathsf{F}:=\bnd{x}{\bnd{y}{y}}$, $\mathsf{not}:=\bnd{b}{\col{\col{b}{\mathsf F}}{\mathsf T}}$, $\mathsf{and}:=\bnd{p}{\bnd{q}{\col{\col{p}{q}}{p}}}$.
+\begin{align*}
+\col{\mathsf{not}}{\mathsf T}&\twoheadrightarrow \col{\col{\mathsf T}{\mathsf F}}{\mathsf T}\twoheadrightarrow\mathsf F,\\
+\col{\col{\mathsf{and}}{\mathsf T}}{\mathsf F}&\twoheadrightarrow \col{\col{\mathsf T}{\mathsf F}}{\mathsf T}\twoheadrightarrow\mathsf F.
+\end{align*}
+With Church numerals $\overline{n}:=\bnd{f}{\bnd{x}{f^n x}}$ and
+\begin{align*}
+\mathsf{plus}&:=\bnd{m}{\bnd{n}{\bnd{f}{\bnd{x}{\col{\col{m}{f}}{\col{\col{n}{f}}{x}}}}}},\\
+\mathsf{mult}&:=\bnd{m}{\bnd{n}{\bnd{f}{\col{m}{\col{n}{f}}}}},
+\end{align*}
+one obtains $\mathsf{plus}\,\overline 2\,\overline 2\twoheadrightarrow\overline 4$ and $\mathsf{mult}\,\overline 2\,\overline 3\twoheadrightarrow\overline 6$. In every case the final form is reached by repeated use of the single rule.
+
+\subsection{What the term layer cannot say}
+
+The calculus above has no way to say that a term is \emph{not} admissible in a given position. Every term can be applied to every term. This is a real limitation: it is why the untyped calculus has terms such as $\col{(\bnd{x}{\col{x}{x}})}{(\bnd{x}{\col{x}{x}})}$ that never reach a normal form. Restricting the range of a binder is the job of Refuse, and Part~IV shows that doing so inside $\Bind$ yields dependent types.
+% =====================================================================
+\part{Logic}
+
+\section{Propositions as worlds: the Boolean discipline}\label{sec:bool}
+
+\subsection{Semantics by Refuse and Bind}
+
+Fix a nonempty world $\Om_0$, the \emph{ambient world} of a discussion. A proposition is interpreted as the sub-world of $\Om_0$ at which it holds.
+
+\begin{definition}[Boolean world semantics]\label{def:boolsem}
+Let $\mathcal{L}$ be the propositional language built from atoms, $\bot$, $\wedge$, $\to$, with $\neg\varphi:=\varphi\to\bot$, $\varphi\vee\psi:=\neg(\neg\varphi\wedge\neg\psi)$. A \emph{valuation} $v$ assigns to each atom a subset of $\Om_0$. Extend $v$ to $\sem{\cdot}$ by
+\begin{align*}
+\sem{\bot}&=\emptyset,\\
+\sem{\varphi\wedge\psi}&=\sem\varphi\cap\sem\psi,\\
+\sem{\neg\varphi}&=\Refuse_{\sem\varphi}(\Om_0),\\
+\sem{\varphi\to\psi}&=\Refuse_{\sem\varphi}(\Om_0)\cup\sem\psi .
+\end{align*}
+\end{definition}
+
+The clause for $\wedge$ is Bind with the identity relation: $\Bind_{=}(\Om_1,\Om_2)=\{(a,a):a\in\Om_1\cap\Om_2\}$ is in bijection with $\Om_1\cap\Om_2$, so joint admissibility is binding two constraints to the same item. The clause for $\neg$ is Refuse applied to the ambient world.
+
+\begin{proposition}\label{prop:boolalg}
+For every valuation, $\sem{\neg\neg\varphi}=\sem\varphi$, $\sem{\varphi\vee\neg\varphi}=\Om_0$, and $\sem{\neg(\varphi\wedge\psi)}=\sem{\neg\varphi\vee\neg\psi}$.
+\end{proposition}
+\begin{proof}
+By Proposition~\ref{prop:refuse-laws}(iv), $\sem{\neg\neg\varphi}=\Refuse_{\Refuse_{\sem\varphi}(\Om_0)}(\Om_0)=\Om_0\cap\sem\varphi=\sem\varphi$, since $\sem\varphi\subseteq\Om_0$. For excluded middle, $\sem{\varphi\vee\neg\varphi}=\Om_0\setminus\big((\Om_0\setminus\sem\varphi)\cap(\Om_0\setminus(\Om_0\setminus\sem\varphi))\big)=\Om_0\setminus\big((\Om_0\setminus\sem\varphi)\cap\sem\varphi\big)=\Om_0$. The third identity is the set-theoretic De Morgan law relative to $\Om_0$.
+\end{proof}
+
+\subsection{Soundness and completeness}
+
+Natural deduction for classical propositional logic has the rules: assumption; $\wedge$-introduction and elimination; $\to$-introduction (discharge) and elimination (modus ponens); $\bot$-elimination; and reductio (from $\Gamma,\neg\varphi\vdash\bot$ infer $\Gamma\vdash\varphi$). Write $\Gamma\models\varphi$ if, for every valuation, $\bigcap_{\gamma\in\Gamma}\sem\gamma\subseteq\sem\varphi$ (with the empty intersection equal to $\Om_0$).
+
+\begin{theorem}[Soundness]\label{thm:sound}
+If $\Gamma\vdash\varphi$ then $\Gamma\models\varphi$.
+\end{theorem}
+\begin{proof}
+Induction on derivations. Write $G=\bigcap_{\gamma\in\Gamma}\sem\gamma$.
+\emph{Assumption:} $G\subseteq\sem\gamma$ for $\gamma\in\Gamma$.
+\emph{$\wedge$I, $\wedge$E:} immediate from $\sem{\varphi\wedge\psi}=\sem\varphi\cap\sem\psi$.
+\emph{$\to$I:} suppose $G\cap\sem\varphi\subseteq\sem\psi$ and let $x\in G$. If $x\in\sem\varphi$ then $x\in\sem\psi$; otherwise $x\in\Om_0\setminus\sem\varphi$. Either way $x\in\sem{\varphi\to\psi}$.
+\emph{$\to$E:} if $x\in G$ lies in $(\Om_0\setminus\sem\varphi)\cup\sem\psi$ and in $\sem\varphi$ then $x\in\sem\psi$.
+\emph{$\bot$E:} if $G\subseteq\emptyset$ then $G\subseteq\sem\varphi$.
+\emph{Reductio:} if $G\cap\sem{\neg\varphi}\subseteq\emptyset$ then $G\subseteq\Om_0\setminus\sem{\neg\varphi}=\sem{\neg\neg\varphi}=\sem\varphi$ by Proposition~\ref{prop:boolalg}.
+\end{proof}
+
+\begin{cited}[Completeness]\label{cit:complete}
+If $\Gamma\models\varphi$ in the two-element ambient world $\Om_0=\{0,1\}$ (that is, by truth tables), then $\Gamma\vdash\varphi$. See Troelstra and van Dalen \cite[Ch.~2]{TvD88}.
+\end{cited}
+
+Taken together, Theorem~\ref{thm:sound} and Cited result~\ref{cit:complete} say that classical propositional logic is the logic of $\Refuse$ and $\Bind_=$ over worlds when Refuse is involutive relative to the ambient world.
+
+\section{Two disciplines of Refuse}\label{sec:heyting}
+
+\subsection{Topological worlds}
+
+The previous section used a bare set as the ambient world. If the ambient world carries a topology and admissible regions are required to be open, the same four-clause semantics produces a different logic.
+
+\begin{definition}[Open-world semantics]\label{def:opensem}
+Let $X$ be a topological space. Propositions are interpreted as open subsets of $X$, with $\sem\bot=\emptyset$, $\sem{\varphi\wedge\psi}=\sem\varphi\cap\sem\psi$, $\sem{\varphi\vee\psi}=\sem\varphi\cup\sem\psi$, and
+\[
+\sem{\neg\varphi}=\mathrm{int}\big(X\setminus\sem\varphi\big),\qquad
+\sem{\varphi\to\psi}=\mathrm{int}\big((X\setminus\sem\varphi)\cup\sem\psi\big).
+\]
+\end{definition}
+
+Refuse is still ``remove the region and keep what remains,'' but what remains must again be an admissible (open) region, so the interior is taken.
+
+\begin{cited}[Soundness for intuitionistic logic]\label{cit:heyting}
+Every intuitionistically derivable sequent is valid in all open-world semantics. Conversely, a propositional formula valid in all such semantics is intuitionistically derivable. See Troelstra and van Dalen \cite[Ch.~2]{TvD88}.
+\end{cited}
+
+\begin{lemma}[Refuse as largest disjoint admissible region]\label{lem:largest}
+For open $U\subseteq X$, $\neg U:=\mathrm{int}(X\setminus U)$ is the largest open set disjoint from $U$.
+\end{lemma}
+\begin{proof}
+An open set $W$ is disjoint from $U$ iff $W\subseteq X\setminus U$ iff (since $W$ is open) $W\subseteq\mathrm{int}(X\setminus U)$. And $\mathrm{int}(X\setminus U)$ is itself open and disjoint from $U$.
+\end{proof}
+
+\begin{proposition}[What survives]\label{prop:survive}
+For open $U,V$: (a) $U\subseteq\neg\neg U$; (b) $U\subseteq V$ implies $\neg V\subseteq\neg U$; (c) $\neg\neg\neg U=\neg U$.
+\end{proposition}
+\begin{proof}
+(a) $U$ is open and disjoint from $\neg U$, so by Lemma~\ref{lem:largest} applied to $\neg U$, $U\subseteq\neg\neg U$. (b) $\neg V$ is open and disjoint from $V\supseteq U$, hence disjoint from $U$, so $\neg V\subseteq\neg U$ by the lemma. (c) Apply (a) to $\neg U$ to obtain $\neg U\subseteq\neg\neg\neg U$. Apply (b) to the inclusion in (a) to obtain $\neg\neg\neg U\subseteq\neg U$.
+\end{proof}
+
+\begin{example}[Double refusal expands, and excluded middle fails]\label{ex:heyting}
+Let $X=\mathbb{R}$ with its usual topology and $U=\mathbb{R}\setminus\{0\}$, which is open. Then $\neg U=\mathrm{int}(\{0\})=\emptyset$, so $\neg\neg U=\mathrm{int}(\mathbb{R})=\mathbb{R}\neq U$, and $\sem{U\vee\neg U}=U\cup\emptyset=U\neq\mathbb{R}$. Hence in this semantics neither $\neg\neg\varphi\to\varphi$ nor $\varphi\vee\neg\varphi$ is valid. By Cited result~\ref{cit:heyting}, neither is intuitionistically derivable.
+\end{example}
+
+\subsection{The discipline as a design choice}
+
+\begin{designrule}[Which Refuse]\label{dr:refuse}
+\emph{Classical discipline:} admissible regions are arbitrary subsets of the ambient world, and Refuse is the relative complement. Then $\Refuse\Refuse=\mathrm{id}$ (Proposition~\ref{prop:refuse-laws}(iv)).
+\emph{Constructive discipline:} admissible regions must be stable under some notion of refinement (open sets, in the example), and Refuse is the largest admissible region disjoint from the refused one. Then $\Refuse\Refuse$ may strictly enlarge, and only Proposition~\ref{prop:survive} survives.
+\end{designrule}
+
+\begin{analogy}\label{an:constructive}
+In the open-world example, $\neg\neg U\setminus U=\{0\}$ is the part of the world that cannot be distinguished from $U$ by any open refinement but is not in $U$. The constructive refusal declines to decide about such items. This is a picture of why proof assistants that are constructive by default treat excluded middle as an additional input rather than a theorem. It proves nothing beyond Example~\ref{ex:heyting}.
+\end{analogy}
+
+\section{Quantifiers, and the first dictionary}\label{sec:quant}
+
+For a world $D$ and a family of propositions $\varphi(d)$, $d\in D$, interpret
+\[
+\sem{\forall x\in D.\varphi(x)}=\bigcap_{d\in D}\sem{\varphi(d)},\qquad
+\sem{\exists x\in D.\varphi(x)}=\bigcup_{d\in D}\sem{\varphi(d)},
+\]
+in the Boolean setting; in the open-world setting the universal clause takes the interior of the intersection. The first is a $\Bind$ over $D$ (a family indexed by $D$, collected jointly), the second is the union of a $\Bind$-family. Soundness for the usual quantifier rules is the standard argument and is not repeated here.
+
+\begin{analogy}[The first dictionary]\label{an:dict1}
+The following correspondence is the Curry--Howard reading specialised to the four operators. The row headings are the operators; the columns are the three vocabularies treated in this text.
+\begin{center}
+\begin{tabular}{@{}p{0.09\textwidth}p{0.2\textwidth}p{0.3\textwidth}p{0.32\textwidth}@{}}
+\toprule
+Operator & Logic & Sets & Types\\
+\midrule
+$\Pop$ & atom, hypothesis & element, urelement-free atom$^{*}$ & variable, constructor\\
+$\Refuse$ & negation, restriction & Separation & subtype, $\neg A:=A\to\bot$\\
+$\Bind$ & $\wedge$, $\forall$, $\to$ & pairing, products, functions & $\Pi$, $\Sigma$, $\lambda$\\
+$\Coll$ & modus ponens, evaluation & quotient, Replacement & application, $\beta$, $\Quot$\\
+\bottomrule
+\end{tabular}
+\end{center}
+$^{*}$ Pure ZFC has no atoms; pure sets are built from the empty set by the operators. The entry records the role, not an ontological commitment.
+\end{analogy}
+
+\section{First-order logic, structures, and satisfaction}\label{sec:fol}
+
+ZFC is a theory in first-order logic. Section~\ref{sec:quant} gave the quantifier clauses informally. This section supplies the missing floor: a precise syntax, structures, satisfaction, consequence, a proof system, and the soundness theorem, with completeness cited.
+
+\subsection{Syntax}
+
+\begin{definition}[Signature, terms, formulas]\label{def:sig}
+A \emph{signature} $\Sigma$ is a set of function symbols and relation symbols, each with an arity (constants are $0$-ary function symbols). Let $\mathrm{Var}$ be a countable set of variables. \emph{Terms} are generated by $t::=x\mid f(t_1,\dots,t_n)$ for $x\in\mathrm{Var}$ and $f\in\Sigma$ of arity $n$. \emph{Formulas} are generated by
+\[
+\varphi,\psi\ ::=\ R(t_1,\dots,t_n)\ \mid\ t_1=t_2\ \mid\ \bot\ \mid\ \varphi\to\psi\ \mid\ \forall x\,\varphi .
+\]
+The symbols $\neg$, $\wedge$, $\vee$, $\leftrightarrow$, and $\exists$ are abbreviations: $\neg\varphi:=\varphi\to\bot$, $\exists x\,\varphi:=\neg\forall x\,\neg\varphi$, and so on. The set $\mathrm{FV}(\varphi)$ of free variables is defined as usual, with $\forall x$ binding $x$. The substitution $\varphi[t/x]$ replaces the free occurrences of $x$ by $t$, and we write that \emph{$t$ is free for $x$ in $\varphi$} when no variable of $t$ is captured by a quantifier of $\varphi$ at an occurrence being replaced.
+\end{definition}
+
+The language of set theory has one binary relation symbol $\in$ and no function symbols; equality is part of the logic.
+
+\subsection{Structures and satisfaction}
+
+\begin{definition}[Structure, assignment, satisfaction]\label{def:struct}
+A \emph{$\Sigma$-structure} $\mathcal M=(D,\ (f^{\mathcal M}),\ (R^{\mathcal M}))$ consists of a nonempty set $D$, a function $f^{\mathcal M}:D^n\to D$ for each $n$-ary function symbol, and a relation $R^{\mathcal M}\subseteq D^n$ for each $n$-ary relation symbol. An \emph{assignment} is a map $s:\mathrm{Var}\to D$; write $s[x\mapsto d]$ for the assignment that agrees with $s$ except that it sends $x$ to $d$. The value $t^{\mathcal M,s}$ of a term is defined by $x^{\mathcal M,s}=s(x)$ and $f(t_1,\dots,t_n)^{\mathcal M,s}=f^{\mathcal M}(t_1^{\mathcal M,s},\dots,t_n^{\mathcal M,s})$. \emph{Satisfaction} $\mathcal M,s\models\varphi$ is defined by recursion on $\varphi$:
+\begin{align*}
+\mathcal M,s\models R(t_1,\dots,t_n)&\iff(t_1^{\mathcal M,s},\dots,t_n^{\mathcal M,s})\in R^{\mathcal M},\\
+\mathcal M,s\models t_1=t_2&\iff t_1^{\mathcal M,s}=t_2^{\mathcal M,s},\\
+\mathcal M,s\not\models\bot,\qquad
+\mathcal M,s\models\varphi\to\psi&\iff \mathcal M,s\not\models\varphi\text{ or }\mathcal M,s\models\psi,\\
+\mathcal M,s\models\forall x\,\varphi&\iff\text{for all }d\in D,\ \mathcal M,s[x\mapsto d]\models\varphi .
+\end{align*}
+\end{definition}
+
+The first-order semantics is the semantics of Section~\ref{sec:bool} with a larger ambient world. Let $\Om_{\mathcal M}:=D^{\mathrm{Var}}$ be the world of assignments and $\sem\varphi_{\mathcal M}:=\{s:\mathcal M,s\models\varphi\}\subseteq\Om_{\mathcal M}$.
+
+\begin{proposition}[First-order semantics as worlds]\label{prop:folworld}
+In $\Om_{\mathcal M}$: $\sem\bot=\emptyset$; $\sem{\neg\varphi}=\Refuse_{\sem\varphi}(\Om_{\mathcal M})$; $\sem{\varphi\wedge\psi}=\sem\varphi\cap\sem\psi$; and
+\[
+\sem{\forall x\,\varphi}=\{s:\ s[x\mapsto d]\in\sem\varphi\text{ for every }d\in D\},\qquad
+\sem{\exists x\,\varphi}=\Om_{\mathcal M}\setminus\sem{\forall x\,\neg\varphi}.
+\]
+Consequently Proposition~\ref{prop:boolalg} holds in $\Om_{\mathcal M}$: $\sem{\neg\neg\varphi}=\sem\varphi$ and $\sem{\varphi\vee\neg\varphi}=\Om_{\mathcal M}$.
+\end{proposition}
+\begin{proof}
+The propositional clauses are those of Definition~\ref{def:boolsem} with $\Om_0=\Om_{\mathcal M}$. The clause for $\forall$ is the definition of satisfaction. For $\exists$: $s\in\sem{\exists x\,\varphi}$ iff $s\notin\sem{\forall x\,\neg\varphi}$ iff there is $d$ with $s[x\mapsto d]\notin\sem{\neg\varphi}$, that is with $s[x\mapsto d]\in\sem\varphi$.
+\end{proof}
+
+In the vocabulary of the earlier parts, $\forall x$ is a $\Bind$ over the domain $D$ (it collects the conditions at all values of $x$), and negation is $\Refuse$ in the ambient world of assignments.
+
+\begin{lemma}[Coincidence]\label{lem:coinc}
+If $s$ and $s'$ agree on $\mathrm{FV}(\varphi)$ then $\mathcal M,s\models\varphi\iff\mathcal M,s'\models\varphi$.
+\end{lemma}
+\begin{proof}
+Induction on $\varphi$. Terms have the same value under assignments that agree on their variables, which handles atomic formulas. The cases $\bot$ and $\to$ are immediate. For $\forall y\,\psi$: the assignments $s[y\mapsto d]$ and $s'[y\mapsto d]$ agree on $\mathrm{FV}(\psi)\subseteq\mathrm{FV}(\forall y\,\psi)\cup\{y\}$, so the induction hypothesis applies for every $d$.
+\end{proof}
+
+\begin{lemma}[Substitution]\label{lem:subst}
+If $t$ is free for $x$ in $\varphi$, then $\mathcal M,s\models\varphi[t/x]\iff\mathcal M,s[x\mapsto t^{\mathcal M,s}]\models\varphi$.
+\end{lemma}
+\begin{proof}
+Induction on $\varphi$, after the corresponding statement for terms, $(u[t/x])^{\mathcal M,s}=u^{\mathcal M,s[x\mapsto t^{\mathcal M,s}]}$, which is proved by induction on $u$. The only nontrivial case is $\varphi=\forall y\,\psi$. If $x\notin\mathrm{FV}(\varphi)$ the substitution does nothing and the claim is Lemma~\ref{lem:coinc}. Otherwise $y\ne x$, and since $t$ is free for $x$ in $\varphi$, $y\notin\mathrm{FV}(t)$. Then $\mathcal M,s\models(\forall y\,\psi)[t/x]$ iff for all $d$, $\mathcal M,s[y\mapsto d]\models\psi[t/x]$, iff (induction hypothesis, and $t^{\mathcal M,s[y\mapsto d]}=t^{\mathcal M,s}$ because $y\notin\mathrm{FV}(t)$) for all $d$, $\mathcal M,s[y\mapsto d][x\mapsto t^{\mathcal M,s}]\models\psi$, iff (the two updates commute as $x\ne y$) $\mathcal M,s[x\mapsto t^{\mathcal M,s}]\models\forall y\,\psi$.
+\end{proof}
+
+\subsection{Consequence and a proof system}
+
+\begin{definition}[Consequence]\label{def:conseq}
+For a set $\Gamma$ of formulas, $\Gamma\models\varphi$ means: for every structure $\mathcal M$ and assignment $s$ with $\mathcal M,s\models\gamma$ for all $\gamma\in\Gamma$, also $\mathcal M,s\models\varphi$. A formula is \emph{valid} if $\emptyset\models\varphi$. A \emph{theory} is a set of sentences (formulas without free variables); $\mathcal M$ is a \emph{model} of $T$ if $\mathcal M,s\models\tau$ for every $\tau\in T$ (for sentences the choice of $s$ is immaterial by Lemma~\ref{lem:coinc}).
+\end{definition}
+
+\begin{definition}[Natural deduction for first-order logic with equality]\label{def:nd}
+Sequents $\Gamma\vdash\varphi$ are derived by:
+\[
+\frac{\varphi\in\Gamma}{\Gamma\vdash\varphi}\quad
+\frac{\Gamma,\varphi\vdash\psi}{\Gamma\vdash\varphi\to\psi}\quad
+\frac{\Gamma\vdash\varphi\to\psi\ \ \Gamma\vdash\varphi}{\Gamma\vdash\psi}\quad
+\frac{\Gamma,\neg\varphi\vdash\bot}{\Gamma\vdash\varphi}\,(\text{RAA})
+\]
+\[
+\frac{\Gamma\vdash\varphi\quad x\notin\mathrm{FV}(\Gamma)}{\Gamma\vdash\forall x\,\varphi}\,(\forall\mathrm{I})\quad
+\frac{\Gamma\vdash\forall x\,\varphi\quad t\text{ free for }x}{\Gamma\vdash\varphi[t/x]}\,(\forall\mathrm{E})
+\]
+\[
+\frac{}{\Gamma\vdash t=t}\,(=\mathrm{I})\qquad
+\frac{\Gamma\vdash t=u\quad\Gamma\vdash\varphi[t/x]\quad t,u\text{ free for }x}{\Gamma\vdash\varphi[u/x]}\,(=\mathrm{E})
+\]
+\end{definition}
+
+\begin{theorem}[Soundness]\label{thm:folsound}
+If $\Gamma\vdash\varphi$ then $\Gamma\models\varphi$.
+\end{theorem}
+\begin{proof}
+Induction on derivations. Let $\mathcal M,s$ satisfy $\Gamma$. The assumption, $\to$I, $\to$E, and RAA rules are verified as in Theorem~\ref{thm:sound}, with satisfaction in place of membership in $\sem\cdot$ (the clauses for $\bot$ and $\to$ are the same, and RAA uses $\sem{\neg\neg\varphi}=\sem\varphi$ from Proposition~\ref{prop:folworld}).
+\emph{$\forall$I.} By the induction hypothesis $\Gamma\models\varphi$. Let $d\in D$. Since $x\notin\mathrm{FV}(\Gamma)$, Lemma~\ref{lem:coinc} gives $\mathcal M,s[x\mapsto d]\models\gamma$ for each $\gamma\in\Gamma$, so $\mathcal M,s[x\mapsto d]\models\varphi$. As $d$ was arbitrary, $\mathcal M,s\models\forall x\,\varphi$.
+\emph{$\forall$E.} By the induction hypothesis $\mathcal M,s\models\forall x\,\varphi$, so $\mathcal M,s[x\mapsto d]\models\varphi$ with $d=t^{\mathcal M,s}$. By Lemma~\ref{lem:subst}, $\mathcal M,s\models\varphi[t/x]$.
+\emph{$=$I.} $t^{\mathcal M,s}=t^{\mathcal M,s}$.
+\emph{$=$E.} By hypothesis $t^{\mathcal M,s}=u^{\mathcal M,s}$ and $\mathcal M,s\models\varphi[t/x]$, i.e. (Lemma~\ref{lem:subst}) $\mathcal M,s[x\mapsto t^{\mathcal M,s}]\models\varphi$. Since $t^{\mathcal M,s}=u^{\mathcal M,s}$ this is $\mathcal M,s[x\mapsto u^{\mathcal M,s}]\models\varphi$, hence $\mathcal M,s\models\varphi[u/x]$ by Lemma~\ref{lem:subst} again.
+\end{proof}
+
+\begin{corollary}[A model gives consistency]\label{cor:model-cons}
+If a theory $T$ has a model, then $T\nvdash\bot$.
+\end{corollary}
+\begin{proof}
+If $T\vdash\bot$ then, by Theorem~\ref{thm:folsound}, $\mathcal M,s\models\bot$ for any model $\mathcal M$ of $T$, which is impossible by Definition~\ref{def:struct}.
+\end{proof}
+
+\begin{cited}[Completeness, compactness]\label{cit:godelcomplete}
+(a) If $\Gamma\models\varphi$ then $\Gamma\vdash\varphi$ (G\"odel \cite{Goedel30}; see also \cite[Ch.~2]{Enderton01}). (b) Consequently, a theory is consistent if and only if it has a model, and a theory has a model if each of its finite subsets does (compactness).
+\end{cited}
+
+% =====================================================================
+\part{Sets}
+
+\section{The axioms of ZFC read as closure conditions}\label{sec:zfc}
+
+\subsection{The theory}
+
+The language of set theory has one binary predicate $\in$ and equality. The axioms of ZFC are the following sentences and schemas \cite{Jech03,Kunen80}; here $x\subseteq y$ abbreviates $\forall z(z\in x\to z\in y)$.
+
+\begin{center}
+\footnotesize
+\begin{tabular}{@{}p{0.17\textwidth}p{0.44\textwidth}p{0.3\textwidth}@{}}
+\toprule
+Axiom & Statement & Operator reading\\
+\midrule
+Extensionality & $\forall x\forall y(\forall z(z\in x\leftrightarrow z\in y)\to x=y)$ & $\Coll$: same members, same item\\
+Pairing & $\forall a\forall b\exists c\forall x(x\in c\leftrightarrow x=a\vee x=b)$ & $\Bind$ of two pops\\
+Union & $\forall F\exists A\forall x(x\in A\leftrightarrow\exists Y(x\in Y\wedge Y\in F))$ & $\Bind$ flattened\\
+Separation (schema) & $\forall a\exists b\forall x(x\in b\leftrightarrow x\in a\wedge\varphi(x))$ & $\Refuse$ with a prior domain $a$\\
+Replacement (schema) & if $\varphi$ defines a function on $a$, its image is a set & $\Coll$ of a definable function\\
+Power set & $\forall a\exists b\forall x(x\in b\leftrightarrow x\subseteq a)$ & all $\Refuse$-subworlds of $a$\\
+Infinity & $\exists a(\emptyset\in a\wedge\forall x\in a\,(x\cup\{x\}\in a))$ & closure under successor $\Bind$\\
+Foundation & $\forall a(a\neq\emptyset\to\exists x\in a\,(x\cap a=\emptyset))$ & well-founded $\Bind$-history\\
+Choice & every family of nonempty pairwise disjoint sets has a selector & section of a $\Coll$ quotient\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The right-hand column is an \emph{Analogy} in the sense of Section~\ref{sec:scope}. The theorems that follow are statements about ZFC itself.
+
+\subsection{ZFC as a first-order theory}\label{sec:zfcformal}
+
+\begin{definition}[ZFC, formally]\label{def:zfcformal}
+The language is $\Sigma_{\in}=\{\in\}$ with one binary relation symbol. ZFC is the theory consisting of the sentences of the table above, with each schema (Separation, Replacement) standing for the set of its instances, one for each formula $\varphi$ and choice of parameters. A \emph{model of ZFC} is a $\Sigma_{\in}$-structure $(D,\in^{\mathcal M})$ satisfying all of them.
+\end{definition}
+
+\subsection{The empty set is not a separate primitive}
+
+\begin{proposition}[Existence of $\emptyset$]\label{prop:empty}
+ZFC without any axiom asserting that a particular set exists proves $\exists e\,\forall x\,(x\notin e)$, and $e$ is unique.
+\end{proposition}
+\begin{proof}
+First-order logic proves $\exists a\,(a=a)$, since the domain of a structure is nonempty. Apply Separation to this $a$ with $\varphi(x):=x\neq x$ to obtain $b$ with $x\in b\leftrightarrow x\in a\wedge x\neq x$. No $x$ satisfies $x\neq x$, so $b$ has no members. Uniqueness is Extensionality.
+\end{proof}
+
+Proposition~\ref{prop:empty} is a statement about the standard first-order presentation. In the operator reading, $\emptyset=\Refuse_{\U}(\Om)$ for any world $\Om$: refusing everything leaves nothing, and this requires only that some world exist to refuse from.
+
+\subsection{Refuse needs a domain}
+
+\begin{theorem}[No universal set]\label{thm:russell}
+ZF proves that for every set $a$ there is a set $r$ with $r\notin a$. In particular there is no set containing all sets.
+\end{theorem}
+\begin{proof}
+Given $a$, Separation yields $r:=\{x\in a: x\notin x\}$. Suppose $r\in a$. If $r\in r$ then by definition of $r$, $r\notin r$; if $r\notin r$ then, since $r\in a$, $r\in r$. Either case is contradictory, so $r\notin a$. If a set $V$ contained all sets, applying this to $a=V$ would give a set $r\notin V$, a contradiction.
+\end{proof}
+
+The naive comprehension schema $\exists b\forall x(x\in b\leftrightarrow\varphi(x))$ is Refuse without a domain: it forms the region of everything satisfying $\varphi$ from no prior world. Theorem~\ref{thm:russell} shows that, together with the ordinary rules of logic, this is inconsistent for $\varphi(x):=x\notin x$. Separation repairs it by requiring $\Refuse_P(\Om)$ to be applied to an already given world $\Om=a$.
+
+\begin{designrule}[Domain-first]\label{dr:domainfirst}
+In any system in which sets are collected from predicates, the predicate must be applied to an already admitted world. This is the form of the restriction in ZFC (Separation), and it recurs in type theory as the requirement that a subtype $\{x:A\mid p(x)\}$ be formed over an existing type $A$.
+\end{designrule}
+
+\subsection{Foundation and Bind-history}
+
+\begin{proposition}[No membership loops]\label{prop:found}
+ZF proves: (i) $\forall x\,(x\notin x)$; (ii) there are no $x,y$ with $x\in y$ and $y\in x$.
+\end{proposition}
+\begin{proof}
+(i) Apply Foundation to $\{x\}$, which is nonempty by Pairing. Its only element is $x$, so $x\cap\{x\}=\emptyset$. If $x\in x$ then $x\in x\cap\{x\}$, a contradiction. (ii) Apply Foundation to $\{x,y\}$. Either $x\cap\{x,y\}=\emptyset$ or $y\cap\{x,y\}=\emptyset$. But $y\in x\cap\{x,y\}$ and $x\in y\cap\{x,y\}$, a contradiction.
+\end{proof}
+
+Under the operator reading, the pairing of items by $\Bind$ records a history: $x\in y$ says that $x$ was bound before $y$. Foundation states that the history has a first element in every nonempty collection. The standard consequence is that every set has an ordinal rank.
+
+\begin{definition}[Cumulative hierarchy]\label{def:cumul}
+$V_0=\emptyset$; $V_{\alpha+1}=\Pow(V_\alpha)$; $V_\lambda=\bigcup_{\alpha<\lambda}V_\alpha$ for limit $\lambda$.
+\end{definition}
+
+\begin{cited}[Rank]\label{cit:rank}
+In ZF, Foundation is equivalent to the statement that every set belongs to some $V_\alpha$. See Jech \cite[Ch.~6]{Jech03}.
+\end{cited}
+
+\begin{proposition}[Power set as all Refuse outputs]\label{prop:pow}
+For every world $\Om\subseteq\U$, $\Pow(\Om)=\{\Refuse_P(\Om):P\subseteq\U\}$.
+\end{proposition}
+\begin{proof}
+$\Refuse_P(\Om)=\Om\setminus P\subseteq\Om$. Conversely, for $S\subseteq\Om$ take $P=\Om\setminus S$; then $\Refuse_P(\Om)=S$.
+\end{proof}
+
+This yields a clean distinction between two axioms that are often conflated. \emph{Separation} applies Refuse with a predicate $P$ that is \emph{definable} by a formula with parameters. \emph{Power set} asserts that the collection of outputs of Refuse over \emph{all} $P\subseteq\U$, definable or not, is itself a set. The difference between them is exactly the difference between a countable supply of refusals (formulas) and the full supply, and it is the source of the independence phenomena discussed below.
+
+\subsection{Choice as a section of Collapse}
+
+\begin{proposition}[Choice and quotients]\label{prop:choice-section}
+In ZF the following are equivalent: (a) the Axiom of Choice; (b) for every surjection $q:\Om\to Q$ there is $s:Q\to\Om$ with $q\circ s=\mathrm{id}_Q$.
+\end{proposition}
+\begin{proof}
+(a)$\Rightarrow$(b): the sets $q^{-1}(c)$, $c\in Q$, are nonempty and pairwise disjoint; a selector for this family defines $s$. (b)$\Rightarrow$(a): given a family $F$ of nonempty sets, let $\Om=\{(A,x):A\in F,\ x\in A\}$ and $q(A,x)=A$. A section $s$ gives $A\mapsto$ second component of $s(A)$, a choice function.
+\end{proof}
+
+When $q$ is the quotient map of Proposition~\ref{prop:collapse}, (b) says that every Collapse can be undone by a uniform choice of representative. In ZF without Choice this is not available in general, which is the content of the independence results below.
+
+\begin{cited}[Independence of Choice]\label{cit:indep}
+If ZF is consistent then so are ZFC (G\"odel \cite{Goedel38}) and ZF$+\neg$AC (Cohen \cite{Cohen63}). Hence AC is neither provable nor refutable in ZF.
+\end{cited}
+
+\begin{theorem}[Choice implies excluded middle]\label{thm:diaconescu}
+Let $p$ be any proposition. In an extensional set theory with Separation, Pairing, and the Axiom of Choice for families of nonempty finite sets, $p\vee\neg p$ holds, even if the underlying logic is intuitionistic.
+\end{theorem}
+\begin{proof}
+Let $A=\{x\in\{0,1\}: x=0\vee p\}$ and $B=\{x\in\{0,1\}: x=1\vee p\}$. Then $0\in A$ and $1\in B$, so both are nonempty, and by Choice there is $f$ with $f(A)\in A$ and $f(B)\in B$. Hence $(f(A)=0\vee p)$ and $(f(B)=1\vee p)$. Distribute: either $p$ holds, or $f(A)=0$ and $f(B)=1$. In the second case $f(A)\neq f(B)$. Now suppose $p$. Then $A=B=\{0,1\}$ by Extensionality, so $f(A)=f(B)$. Therefore $p$ implies $f(A)=f(B)$, and so in the second case $\neg p$. In summary, $p\vee\neg p$.
+\end{proof}
+
+Theorem~\ref{thm:diaconescu} is due to Diaconescu \cite{Diaconescu75} and, in a form for sets, Goodman and Myhill \cite{GoodmanMyhill78}. It explains why Choice is never a mere convenience in a constructive setting: it carries the whole of classical logic with it. The same argument reappears in dependent type theory in Section~\ref{sec:axioms}.
+
+\subsection{Models and the limits of the theory}
+
+\begin{cited}[Models of ZFC]\label{cit:models}
+(a) If ZFC has a model it has a countable model (L\"owenheim--Skolem). (b) If $\kappa$ is a (strongly) inaccessible cardinal then $V_\kappa$ is a model of ZFC. (c) Consequently, if ZFC is consistent then ZFC does not prove that an inaccessible cardinal exists. See Jech \cite[Ch.~12 and Ch.~13]{Jech03} and Kunen \cite[Ch.~IV]{Kunen80}.
+\end{cited}
+
+In the formal sense of Definition~\ref{def:zfcformal}, ``ZFC proves $\sigma$'' means $\mathrm{ZFC}\vdash\sigma$ in the system of Definition~\ref{def:nd}, and Cited result~\ref{cit:models}(b) says that for $\kappa$ inaccessible the structure $(V_\kappa,\in)$ is a model of ZFC. Corollary~\ref{cor:model-cons} gives the elementary half of the link between models and consistency used in Section~\ref{sec:A}.
+
+The relevance for the next part is that each additional level of the universe hierarchy in a type theory will correspond to an additional inaccessible in the set-theoretic reading. ``Larger universe'' is an extra admissibility rule, not a consequence of the earlier ones.
+
+\section{Diagonal arguments}\label{sec:diag}
+
+Four results in this text turn on a diagonal construction: Russell's argument (Theorem~\ref{thm:russell}), Cantor's theorem, G\"odel's second theorem (Cited result~\ref{cit:godel2} below), and the inconsistency of a type of all types. They share a form and differ in what they conclude. This section states the shared form precisely and then separates the instances.
+
+\begin{cited}[G\"odel's second incompleteness theorem]\label{cit:godel2}
+If $T$ is a consistent, recursively axiomatized theory that interprets elementary arithmetic, then $T\nvdash\mathrm{Con}(T)$.
+\end{cited}
+
+\subsection{The schema}
+
+\begin{proposition}[Diagonal schema]\label{prop:diagschema}
+Let $A$ and $B$ be sets, $\nu:B\to B$ a function with no fixed point, and $f:A\to(A\to B)$ any function. Define $g:A\to B$ by $g(x):=\nu\big(f(x)(x)\big)$. Then $g\ne f(a)$ for every $a\in A$. In particular $f$ is not surjective onto $A\to B$.
+\end{proposition}
+\begin{proof}
+For $a\in A$, $g(a)=\nu(f(a)(a))\ne f(a)(a)$ because $\nu$ has no fixed point, so $g$ and $f(a)$ differ at $a$.
+\end{proof}
+
+\begin{theorem}[Cantor]\label{thm:cantor}
+For every set $A$ there is no surjection $f:A\to\Pow(A)$. In particular $\Pow(A)$ is not in bijection with $A$.
+\end{theorem}
+\begin{proof}
+Identify subsets with characteristic functions $A\to\{0,1\}$ and take $\nu$ to swap $0$ and $1$. By Proposition~\ref{prop:diagschema}, the set $D:=\{x\in A:x\notin f(x)\}$ is not $f(a)$ for any $a$. (In the language of Section~\ref{sec:ops}, $D=\Refuse_P(A)$ with $P=\{x\in A:x\in f(x)\}$, so $D$ is formed by Separation over the given set $A$.)
+\end{proof}
+
+\subsection{Four instances}
+
+\begin{center}
+\small
+\begin{tabular}{@{}p{0.14\textwidth}p{0.2\textwidth}p{0.27\textwidth}p{0.29\textwidth}@{}}
+\toprule
+Instance & Hypothesis used & What the diagonal produces & Conclusion\\
+\midrule
+Cantor & $A$ any set & a subset of $A$ outside the range of $f$ & a cardinality fact, no contradiction\\
+Russell & $A$ is a set containing all sets & the set $\{x\in A:x\notin x\}$ & the hypothesis fails: there is no universal set (Theorem~\ref{thm:russell})\\
+G\"odel II & $T$ consistent, recursively axiomatized, interprets arithmetic & a sentence equivalent to its own unprovability, built by the fixed-point lemma & $T\nvdash\mathrm{Con}(T)$ (Cited result~\ref{cit:godel2})\\
+Type of types & $\Type:\Type$ & a paradox in the style of Girard and Hurkens & the rule is inconsistent; universe levels are needed\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{cited}[Fixed-point lemma and the type-of-types paradox]\label{cit:diag}
+(a) For a theory $T$ in the language of arithmetic and a formula $\psi(x)$ with one free variable, there is a sentence $\theta$ such that $T\vdash\theta\leftrightarrow\psi(\ulcorner\theta\urcorner)$, where $\ulcorner\theta\urcorner$ is the numeral of the G\"odel number of $\theta$ \cite{BBJ07}. (b) A type theory with a type of all types, $\Type:\Type$, is inconsistent (Girard's paradox; see Hurkens \cite{Hurkens95} for a simplification).
+\end{cited}
+
+\subsection{What the schema does and does not say}
+
+The four results are not four forms of one theorem. Proposition~\ref{prop:diagschema} is the common construction. The instances differ in what is assumed (a set with a surjection in Cantor's case, a universal set in Russell's, an arithmetized provability predicate in G\"odel's, a universe containing itself in the type-theoretic case), and in what is concluded. Cantor's argument refutes nothing: it shows that a size comparison has a definite answer. Russell's argument refutes a hypothesis. G\"odel's argument requires a good deal more machinery: syntax must be represented inside arithmetic and provability must be representable, which is why the fixed-point lemma in Cited result~\ref{cit:diag}(a) is needed and cannot be replaced by Proposition~\ref{prop:diagschema} alone. A categorical formulation of the common pattern is due to Lawvere \cite{Lawvere69}; it is cited here for orientation and not used.
+
+\begin{designrule}[Naming the diagonal]\label{dr:diag}
+When a diagonal argument is invoked, state which hypothesis is being used and which kind of conclusion is drawn: a size fact, the refutation of a hypothesis, or a limit on provability. The schema does not by itself say which.
+\end{designrule}
+
+\subsection{Relation to Refuse}
+
+Two of the instances bear on the central distinction of this text. The Russell argument fails to produce a set only when the domain of the restriction is not itself a set (Design rule~\ref{dr:domainfirst}). Cantor's theorem shows that, over any domain $A$, the supply of Refuse outputs $\Pow(A)$ strictly exceeds the supply of elements, which is why the Power set axiom is a substantive axiom beyond Separation, and why a countable model cannot contain \emph{all} of the refusals available externally (Remark~\ref{rem:skolem}). In type theory the type-of-types paradox plays the role of Russell's: an unrestricted formation rule is inconsistent, and the universe hierarchy of Section~\ref{sec:kernel} is the restriction that blocks it.
+
+\begin{remark}[Skolem's observation in operator terms]\label{rem:skolem}
+By Cited results~\ref{cit:models}(a) and~\ref{cit:godelcomplete}, if ZFC is consistent it has a countable model $\mathcal M$. Inside $\mathcal M$ the Power set axiom holds, so $\mathcal M$ contains an element which $\mathcal M$ regards as the set of all subsets of $\omega$ and, by Cantor's theorem (Theorem~\ref{thm:cantor}), as uncountable. From outside, $D$ is countable, so this set has countably many members. There is no contradiction: Power set asserts closure under the Refuse-outputs \emph{that exist in $\mathcal M$} (Proposition~\ref{prop:pow}), not under all of them. A first-order theory cannot fix the full supply of refusals; this is the content of the contrast between Separation and Power set drawn in Section~\ref{sec:zfc}.
+\end{remark}
+
+% =====================================================================
+\part{Types}
+
+\newcommand{\inl}{\mathsf{inl}}
+\newcommand{\inr}{\mathsf{inr}}
+\newcommand{\abort}{\mathsf{abort}}
+\newcommand{\pr}{\pi}
+
+\section{Simple types and the Curry--Howard correspondence}\label{sec:ch}
+
+The term layer of Section~\ref{sec:terms} has no types. A type discipline restricts which terms may be combined, and the restriction turns out to be exactly the restriction imposed by a proof system. This section makes the correspondence a theorem for the propositional fragment. The dependent type theory of Section~\ref{sec:kernel} then generalizes it.
+
+\subsection{The calculus}
+
+\begin{definition}[Types and terms of $\lambda^{\to\times+0}$]\label{def:stlc}
+Fix a set of base types $\alpha,\beta,\dots$. \emph{Types} are $A,B::=\alpha\mid A\to B\mid A\times B\mid A+B\mid\mathbf 0$. \emph{Terms} are
+\[
+t,u::=x\mid\lambda x{:}A.\,t\mid t\,u\mid\langle t,u\rangle\mid\pr_1t\mid\pr_2t\mid\inl t\mid\inr t\mid\mathsf{case}\ t\ \mathsf{of}\ \inl x\Rightarrow u\mid\inr y\Rightarrow v\mid\abort_C\,t .
+\]
+The typing judgment $\Gamma\vdash t:A$ is generated by
+\[
+\frac{x{:}A\in\Gamma}{\Gamma\vdash x:A}\qquad
+\frac{\Gamma,x{:}A\vdash t:B}{\Gamma\vdash\lambda x{:}A.\,t:A\to B}\qquad
+\frac{\Gamma\vdash f:A\to B\quad\Gamma\vdash a:A}{\Gamma\vdash f\,a:B}
+\]
+\[
+\frac{\Gamma\vdash a:A\quad\Gamma\vdash b:B}{\Gamma\vdash\langle a,b\rangle:A\times B}\qquad
+\frac{\Gamma\vdash p:A\times B}{\Gamma\vdash\pr_1p:A}\qquad
+\frac{\Gamma\vdash p:A\times B}{\Gamma\vdash\pr_2p:B}
+\]
+\[
+\frac{\Gamma\vdash a:A}{\Gamma\vdash\inl a:A+B}\qquad
+\frac{\Gamma\vdash b:B}{\Gamma\vdash\inr b:A+B}\qquad
+\frac{\Gamma\vdash s:A+B\quad\Gamma,x{:}A\vdash u:C\quad\Gamma,y{:}B\vdash v:C}{\Gamma\vdash\mathsf{case}\ s\ \mathsf{of}\ \inl x\Rightarrow u\mid\inr y\Rightarrow v:C}
+\]
+\[
+\frac{\Gamma\vdash e:\mathbf 0}{\Gamma\vdash\abort_C\,e:C}
+\]
+The reduction rules are
+\begin{align*}
+(\lambda x{:}A.\,t)\,a&\to\subst{t}{x}{a}, & \pr_i\langle a_1,a_2\rangle&\to a_i,\\
+\mathsf{case}\ \inl a\ \mathsf{of}\ \inl x\Rightarrow u\mid\inr y\Rightarrow v&\to\subst{u}{x}{a}, &
+\mathsf{case}\ \inr b\ \mathsf{of}\ \inl x\Rightarrow u\mid\inr y\Rightarrow v&\to\subst{v}{y}{b},
+\end{align*}
+closed under term contexts.
+\end{definition}
+
+In the vocabulary of the earlier parts, abstraction is $\Bind$, application together with the $\beta$ rule is $\Coll$, and the type $A\to\mathbf 0$ is the Refuse of $A$: a way of discharging every inhabitant of $A$ into the empty type.
+
+\subsection{Intuitionistic natural deduction}
+
+\begin{definition}[Natural deduction NJ]\label{def:nj}
+Propositional formulas are the types of Definition~\ref{def:stlc}, read with $\to,\wedge,\vee,\bot$ for $\to,\times,+,\mathbf 0$. The sequent calculus NJ has the rules: assumption; $\to$I (discharging an assumption) and $\to$E (modus ponens); $\wedge$I and the two $\wedge$E; the two $\vee$I and $\vee$E (case analysis, discharging an assumption in each branch); and $\bot$E (from $\bot$ infer any formula).
+\end{definition}
+
+\begin{theorem}[Curry--Howard correspondence for $\lambda^{\to\times+0}$ and NJ]\label{thm:ch}
+The statement concerns exactly the calculus of Definition~\ref{def:stlc} and the system NJ of Definition~\ref{def:nj}, and nothing larger.
+(a) If $\Gamma\vdash t:A$ is derivable, then $\underline\Gamma\vdash A$ is derivable in NJ, where $\underline\Gamma$ is the set of types in $\Gamma$.
+(b) If $\Delta\vdash A$ is derivable in NJ, then there are a context $\Gamma$ listing the formulas of $\Delta$ with distinct variables and a term $t$ with $\Gamma\vdash t:A$.
+\end{theorem}
+\begin{proof}
+The typing rules of Definition~\ref{def:stlc} are in bijection with the rules of NJ: variable with assumption; abstraction with $\to$I; application with $\to$E; pairing and projections with $\wedge$I, $\wedge$E; $\inl,\inr$ with $\vee$I; $\mathsf{case}$ with $\vee$E; $\abort$ with $\bot$E. Forgetting the terms in a typing derivation yields an NJ derivation, which proves (a). Conversely, given an NJ derivation, assign a fresh variable to each assumption and build the term by following the derivation rule by rule; this proves (b), by induction on the derivation.
+\end{proof}
+
+\begin{example}[A detour and its removal]\label{ex:detour}
+The term $(\lambda x{:}A.\,\langle x,x\rangle)\,a$ of type $A\times A$ corresponds to a derivation that introduces $A\to A\times A$ by $\to$I and immediately eliminates it by $\to$E. The reduction $(\lambda x{:}A.\,\langle x,x\rangle)\,a\to\langle a,a\rangle$ replaces that detour by the direct derivation that uses the derivation of $A$ twice. In general, a $\beta$-step is the removal of an introduction immediately followed by the matching elimination.
+\end{example}
+
+\subsection{Normalization and consistency}
+
+\begin{cited}[Normalization]\label{cit:sn}
+Reduction in $\lambda^{\to\times+0}$ is strongly normalizing (no infinite reduction sequence) and preserves types (subject reduction) \cite{Tait67,GLT89}.
+\end{cited}
+
+\begin{lemma}[Closed normal terms are introductions]\label{lem:intro}
+A closed term in normal form is an abstraction, a pair, or an $\inl$ or $\inr$ term. In particular no closed normal term has type $\mathbf 0$.
+\end{lemma}
+\begin{proof}
+Induction on the term $t$. It cannot be a variable, since it is closed. If $t$ is an elimination form, namely $f\,a$, $\pr_ip$, $\mathsf{case}\ s\ \mathsf{of}\ \cdots$, or $\abort_C\,e$, then its principal argument ($f$, $p$, $s$, or $e$) is a closed subterm of a normal term, hence closed and normal, hence by the induction hypothesis an abstraction, a pair, or an $\inl/\inr$ term. For $f\,a$, $\pr_ip$, and $\mathsf{case}$ this makes $t$ a redex, contradicting normality. For $\abort_C\,e$ with $e$ of type $\mathbf 0$, an introduction form for $\mathbf 0$ does not exist, since the types of abstractions, pairs, and $\inl/\inr$ terms are $\to$, $\times$, and $+$. So $t$ must be an introduction. No introduction has type $\mathbf 0$.
+\end{proof}
+
+\begin{theorem}[Consistency of the object calculus]\label{thm:consistency-stlc}
+There is no closed term of type $\mathbf 0$. Hence NJ does not derive $\bot$ from no assumptions.
+\end{theorem}
+\begin{proof}
+Suppose $t$ is closed of type $\mathbf 0$. By Cited result~\ref{cit:sn}, $t$ reduces to a normal form $t'$, which is closed and, by subject reduction, of type $\mathbf 0$, contradicting Lemma~\ref{lem:intro}. For the second claim use Theorem~\ref{thm:ch}(b).
+\end{proof}
+
+\begin{remark}[Object calculus and metatheory]\label{rem:objmeta}
+Theorem~\ref{thm:consistency-stlc} is a statement \emph{about} the calculus $\lambda^{\to\times+0}$, proved \emph{in the metatheory} with the help of the normalization theorem of Cited result~\ref{cit:sn}. It does not say that the calculus proves its own consistency: the calculus has no way to express a statement about its own terms, and the normalization argument is carried out outside it. There is no tension with G\"odel's second theorem (Cited result~\ref{cit:godel2}), which concerns consistent theories that interpret elementary arithmetic; $\lambda^{\to\times+0}$ has no natural numbers and does not interpret arithmetic. For the dependent kernel of Section~\ref{sec:kernel}, which does contain $\mathsf{Nat}$, the corresponding statement is relative: its consistency is established from a stronger metatheory (Cited result~\ref{cit:norm}, stated in that section), and, by the same theorem, cannot be established inside it.
+\end{remark}
+
+\begin{corollary}[No excluded middle]\label{cor:no-em}
+For a base type $\alpha$ there is no closed term of type $\alpha+(\alpha\to\mathbf 0)$.
+\end{corollary}
+\begin{proof}
+A closed term of this type would give, by Theorem~\ref{thm:ch}(a), an NJ derivation of $\alpha\vee\neg\alpha$, which by Cited result~\ref{cit:heyting} would be valid in every open-world semantics. Example~\ref{ex:heyting} gives a valuation (take $X=\mathbb{R}$ and $\sem\alpha=\mathbb{R}\setminus\{0\}$) at which it is not valid.
+\end{proof}
+
+Corollary~\ref{cor:no-em} joins two earlier parts of this text: a topological counterexample to excluded middle (Section~\ref{sec:heyting}) forbids the existence of a program of the corresponding type. Classical principles are available only by adding a constant, as in Section~\ref{sec:axioms}.
+
+\subsection{What the dependent kernel adds}
+
+The rule for $A\to B$ is the case of $\Pi x{:}A.\,B$ in which $B$ does not mention $x$; $A\times B$ is the corresponding case of a dependent pair; and the empty type remains the type with no constructors. The new ingredients of Section~\ref{sec:kernel} are (i) types depending on terms, so that quantifiers $\forall x{:}A.\,P(x)$ are $\Pi$-types, (ii) a universe $\Prop$ of propositions with proof irrelevance, and (iii) inductive types in general. The correspondence of Theorem~\ref{thm:ch} then extends to a correspondence between first-order-style intuitionistic logic and the $\Pi$ fragment, which is cited here and not proved \cite{Howard80,Martin-Lof84}.
+
+\section{Refuse inside Bind: the kernel of a dependent type theory}\label{sec:kernel}
+
+\subsection{What changes relative to the term layer}
+
+Section~\ref{sec:terms} ended with a limitation: every term applies to every term. A dependent type theory removes the limitation by giving every binder a \emph{domain}, and by allowing the range of the body to depend on the pop being bound. The restriction of a domain, which in Part~III was a predicate applied to a prior set from outside, becomes a construction inside the calculus. The presentation below follows the kernel of Lean 4 as described by Carneiro \cite{Carneiro19} and de~Moura and Ullrich \cite{LeanCADE21}; it is a summary of known rules, not a new system.
+
+\subsection{Judgments and the rules}
+
+Contexts are lists $\Gamma::=\cdot\mid\Gamma,x{:}A$. There are three judgments: $\Gamma\vdash t:A$, $\Gamma\vdash A\equiv B$ (definitional equality), and well-formedness of contexts, which is left implicit. Universe levels are generated by $0$, successor, $\max$, $\imax$, and level variables, where
+\[
+\imax(\ell,0)=0,\qquad \imax(\ell,m+1)=\max(\ell,m+1).
+\]
+$\Sort\,\ell$ is the universe of level $\ell$; $\Prop:=\Sort\,0$ and $\Type\,\ell:=\Sort(\ell+1)$.
+
+\[
+\frac{}{\Gamma\vdash\Sort\,\ell:\Sort(\ell+1)}\;\text{(Sort)}\qquad
+\frac{x{:}A\in\Gamma}{\Gamma\vdash x:A}\;\text{(Pop)}
+\]
+\[
+\frac{\Gamma\vdash A:\Sort\,i\quad\Gamma,x{:}A\vdash B:\Sort\,j}{\Gamma\vdash\Pi x{:}A.\,B:\Sort\,\imax(i,j)}\;(\Pi)\qquad
+\frac{\Gamma,x{:}A\vdash t:B}{\Gamma\vdash\lambda x{:}A.\,t:\Pi x{:}A.\,B}\;(\textsc{Bind})
+\]
+\[
+\frac{\Gamma\vdash f:\Pi x{:}A.\,B\quad\Gamma\vdash a:A}{\Gamma\vdash f\,a:\subst{B}{x}{a}}\;(\textsc{Collapse})\qquad
+\frac{\Gamma\vdash t:A\quad\Gamma\vdash A\equiv B}{\Gamma\vdash t:B}\;\text{(Conv)}
+\]
+
+Definitional equality is the least congruence containing: $\beta$, $(\lambda x{:}A.\,t)\,a\equiv\subst{t}{x}{a}$; $\eta$, $\lambda x{:}A.\,f\,x\equiv f$ for $x$ not free in $f$; $\delta$ and $\zeta$ (unfolding of definitions and of local definitions); $\iota$ (reduction of a recursor applied to a constructor); and \emph{proof irrelevance}:
+\[
+\frac{\Gamma\vdash P:\Prop\quad\Gamma\vdash p:P\quad\Gamma\vdash q:P}{\Gamma\vdash p\equiv q:P}\;\text{(PI)}
+\]
+
+\begin{analogy}[Operators in the kernel]\label{an:kernel}
+The rule (Pop) introduces a pop already present in the context. The rule (Bind) abstracts one. The rule (Collapse) is application, whose computational content is the $\beta$ rule of Section~\ref{sec:terms}, now applied to terms whose domains are checked. (PI) is a Collapse that identifies all proofs of a proposition. Refuse has no rule of its own; it is built from the others, as the next subsection shows.
+\end{analogy}
+
+\subsection{Refuse as subtype formation}
+
+A \emph{predicate} on $A$ is a term $p:A\to\Prop$. Mathlib-style sets are predicates: $\mathsf{Set}\,A:=A\to\Prop$, with $a\in S$ meaning $S\,a$.
+
+\begin{definition}[Internal Refuse]\label{def:intref}
+For $A:\Sort\,u$ and $P:A\to\Prop$, the \emph{refused domain} is the subtype
+\[
+\Refuse_P(A):=\{x:A\mid\neg P\,x\},\qquad \neg Q:=Q\to\mathsf{False}.
+\]
+The elements of $\{x:A\mid Q\,x\}$ are pairs $\langle a,h\rangle$ with $a:A$ and $h:Q\,a$.
+\end{definition}
+
+\begin{proposition}[Refuse laws survive internally]\label{prop:intref}
+For $A$ a type and $P,Q:A\to\Prop$:
+(a) if $P$ is the constant predicate $\lambda x.\mathsf{True}$ then $\Refuse_P(A)$ has no inhabitants (is empty);
+(b) if $P=\lambda x.\mathsf{False}$ then the projection $\Refuse_P(A)\to A$ has a right inverse, so every element of $A$ yields an element of $\Refuse_P(A)$.
+\end{proposition}
+\begin{proof}
+(a) An inhabitant would be $\langle a,h\rangle$ with $h:\neg\mathsf{True}$, that is $h:\mathsf{True}\to\mathsf{False}$. The function $\lambda\langle a,h\rangle.\,h\,\mathsf{trivial}$ has type $\Refuse_P(A)\to\mathsf{False}$, so an inhabitant of the subtype would yield a term of $\mathsf{False}$; in a consistent theory there is none. (b) Given $a:A$, the pair $\langle a,\lambda h.\,h\rangle$ has second component of type $\neg\mathsf{False}=\mathsf{False}\to\mathsf{False}$, which is inhabited by the identity.
+\end{proof}
+
+Proposition~\ref{prop:intref}(a) is the type-theoretic reading of ``$\Refuse_{\U}(\Om)=\emptyset$'' (Proposition~\ref{prop:refuse-laws}(iii)); it is a statement that the subtype is uninhabited, proved by exhibiting a function into $\mathsf{False}$. (b) is the reading of $\Refuse_\emptyset(\Om)=\Om$.
+
+\begin{remark}
+The passage from external to internal Refuse is the point at which the Domain-first rule (Design rule~\ref{dr:domainfirst}) becomes automatic: the subtype constructor takes the type $A$ as an argument, so there is no way to write a refusal without a domain. This is a syntactic fact about the formation rule, not a theorem about consistency.
+\end{remark}
+
+\subsection{Impredicativity of $\Prop$}
+
+By the $(\Pi)$ rule with $j=0$, $\imax(i,0)=0$, so a product $\Pi x{:}A.\,B$ with $B:\Prop$ lies in $\Prop$ \emph{whatever the universe $i$ of $A$}. Consequently one may quantify over all predicates, $\forall S:\mathsf{Set}\,A,\ \cdots$, and remain in $\Prop$.
+
+\begin{analogy}\label{an:impred}
+This is the type-theoretic counterpart of the Power set axiom's quantification over all refusals (Proposition~\ref{prop:pow}). In both cases a statement is allowed to range over the full supply of refusals, including those that are not definable by any finite expression. In ZFC the supply is a set $\Pow(\Om)$; in type theory the supply is the type $A\to\Prop$ and quantification over it is permitted inside $\Prop$ itself.
+\end{analogy}
+
+\subsection{Inductive types and the empty type}
+
+An inductive type is introduced by its constructors and eliminated by a recursor, with $\iota$-reduction as the computation rule. Examples relevant here are $\mathbb{N}$ (constructors $0$, $\mathsf{succ}$), $\mathsf{Eq}$, and the types with no constructors.
+
+\begin{definition}[Empty types]\label{def:empty}
+$\mathsf{Empty}:\Type$ and $\mathsf{False}:\Prop$ are the inductive types with no constructors. Their recursors are $\mathsf{Empty.rec}:\Pi(e:\mathsf{Empty}).\,C\,e$ and $\mathsf{False.rec}:\Pi(h:\mathsf{False}).\,C\,h$, for any motive $C$.
+\end{definition}
+
+Elimination from $\mathsf{False}$ into an arbitrary sort is allowed. This is an instance of the general restriction that an inductive proposition may eliminate only into $\Prop$ unless it is a \emph{subsingleton} in a sense given in \cite{Carneiro19} (roughly: at most one constructor, whose arguments are either propositions or determined by the output indices); $\mathsf{False}$, with no constructors, satisfies it vacuously. The restriction is what keeps proof irrelevance from being refuted by case analysis on proofs.
+
+\begin{proposition}[Negation and inhabitation]\label{prop:negnon}
+For any type $A$, $(A\to\mathsf{False})\leftrightarrow\neg\,\mathsf{Nonempty}\,A$, where $\mathsf{Nonempty}\,A:\Prop$ is the inductive proposition with the single constructor $\mathsf{intro}:A\to\mathsf{Nonempty}\,A$.
+\end{proposition}
+\begin{proof}
+($\Rightarrow$) Given $f:A\to\mathsf{False}$ and $\mathsf{intro}\,a:\mathsf{Nonempty}\,A$, eliminate into $\mathsf{False}$ (a proposition, so elimination from $\mathsf{Nonempty}$ is permitted) to get $f\,a:\mathsf{False}$. ($\Leftarrow$) Given $h:\neg\mathsf{Nonempty}\,A$ and $a:A$, $h\,(\mathsf{intro}\,a):\mathsf{False}$.
+\end{proof}
+
+The proposition separates \emph{emptiness of a type} (no term of type $A$) from \emph{the proposition $\neg\mathsf{Nonempty}\,A$}. Both are encoded here by the same function into $\mathsf{False}$. In set theory, by contrast, $\emptyset$ is a particular set (Proposition~\ref{prop:empty}); in type theory, ``empty'' is a property of a type or of a predicate. The empty subworld of $A$ is the predicate $\lambda x.\mathsf{False}:\mathsf{Set}\,A$, which is the internal version of $\Refuse_{\U}(\Om)$.
+
+\begin{cited}[Normalization and consistency]\label{cit:norm}
+For the calculus of constructions and its extension with inductive types, closed well-typed terms normalize and $\mathsf{False}$ has no closed inhabitant \cite{CoquandHuet88,CoquandPaulin90,Werner94}. For the Lean kernel, consistency is established relative to ZFC with inaccessible cardinals \cite{Carneiro19}; \emph{decidability of definitional equality and subject reduction are known to be delicate for the full system}, because of the interaction of proof irrelevance, quotients, and accessibility-based recursion, and are discussed in the same source.
+\end{cited}
+
+\subsection{A worked derivation}\label{sec:worked}
+
+The kernel rules are exercised on the smallest nontrivial case: the natural numbers and addition. The derivations are carried out by hand at the level of the rules of Section~\ref{sec:kernel}.
+
+\begin{definition}[Naturals, equality, addition]\label{def:nat}
+$\mathsf{Nat}:\Type$ is the inductive type with constructors $\mathsf{zero}:\mathsf{Nat}$ and $\mathsf{succ}:\mathsf{Nat}\to\mathsf{Nat}$. Its recursor is
+\[
+\mathsf{Nat.rec}:\ \Pi(C:\mathsf{Nat}\to\Sort\,u).\ C\,\mathsf{zero}\to\big(\Pi n{:}\mathsf{Nat}.\ C\,n\to C(\mathsf{succ}\,n)\big)\to\Pi n{:}\mathsf{Nat}.\ C\,n,
+\]
+with $\iota$-reductions
+\[
+\mathsf{Nat.rec}\,C\,z\,s\ \mathsf{zero}\ \equiv\ z,\qquad
+\mathsf{Nat.rec}\,C\,z\,s\,(\mathsf{succ}\,n)\ \equiv\ s\,n\,(\mathsf{Nat.rec}\,C\,z\,s\,n).
+\]
+$\mathsf{Eq}:\Pi\{A:\Sort\,u\},\,A\to A\to\Prop$ is the inductive proposition with one constructor $\mathsf{Eq.refl}\,a:\mathsf{Eq}\,a\,a$; its recursor is the transport principle $\mathsf{Eq.rec}$, with $\mathsf{Eq.rec}\,m\ (\mathsf{Eq.refl}\,a)\equiv m$. Write $\mathsf{congrArg}\,f\,h:=\mathsf{Eq.rec}\,(\mathsf{Eq.refl}\,(f\,a))\,h:\mathsf{Eq}\,(f\,a)\,(f\,b)$ for $f:A\to B$ and $h:\mathsf{Eq}\,a\,b$. Addition is defined by recursion on its second argument:
+\[
+\mathsf{add}:=\lambda m\,n{:}\mathsf{Nat}.\ \mathsf{Nat.rec}\,(\lambda\_.\mathsf{Nat})\ m\ (\lambda\_\,r.\ \mathsf{succ}\,r)\ n .
+\]
+Write $1:=\mathsf{succ}\,\mathsf{zero}$, $2:=\mathsf{succ}\,1$, $4:=\mathsf{succ}\,(\mathsf{succ}\,2)$.
+\end{definition}
+
+\begin{proposition}[Computation proves $2+2=4$]\label{prop:2p2}
+$\vdash\mathsf{Eq.refl}\,4:\mathsf{Eq}\,(\mathsf{add}\,2\,2)\,4$.
+\end{proposition}
+\begin{proof}
+By the rule for $\mathsf{Eq.refl}$, $\mathsf{Eq.refl}\,4:\mathsf{Eq}\,4\,4$. By the conversion rule it suffices to show $\mathsf{add}\,2\,2\equiv4$:
+\begin{align*}
+\mathsf{add}\,2\,2&\equiv\mathsf{Nat.rec}\,(\lambda\_.\mathsf{Nat})\,2\,s\,(\mathsf{succ}\,1) &&(\delta,\beta)\\
+&\equiv s\,1\,\big(\mathsf{Nat.rec}\,(\lambda\_.\mathsf{Nat})\,2\,s\,1\big) &&(\iota)\\
+&\equiv\mathsf{succ}\,\big(\mathsf{Nat.rec}\,(\lambda\_.\mathsf{Nat})\,2\,s\,(\mathsf{succ}\,\mathsf{zero})\big) &&(\beta)\\
+&\equiv\mathsf{succ}\,\big(s\,\mathsf{zero}\,(\mathsf{Nat.rec}\,(\lambda\_.\mathsf{Nat})\,2\,s\,\mathsf{zero})\big) &&(\iota)\\
+&\equiv\mathsf{succ}\,(\mathsf{succ}\,(\mathsf{Nat.rec}\,(\lambda\_.\mathsf{Nat})\,2\,s\,\mathsf{zero})) &&(\beta)\\
+&\equiv\mathsf{succ}\,(\mathsf{succ}\,2)=4 &&(\iota),
+\end{align*}
+where $s:=\lambda\_\,r.\,\mathsf{succ}\,r$.
+\end{proof}
+
+Here the kernel decides the equation by computation, with no proof search. The same mechanism proves more than numerical instances.
+
+\begin{proposition}[$n+0=n$ by computation]\label{prop:nplus0}
+\[\vdash\ \lambda n{:}\mathsf{Nat}.\ \mathsf{Eq.refl}\,n\ :\ \Pi n{:}\mathsf{Nat}.\ \mathsf{Eq}\,(\mathsf{add}\,n\,\mathsf{zero})\,n.\]
+\end{proposition}
+\begin{proof}
+For a variable $n$, $\mathsf{add}\,n\,\mathsf{zero}\equiv\mathsf{Nat.rec}\,(\lambda\_.\mathsf{Nat})\,n\,s\,\mathsf{zero}\equiv n$ by $\iota$, since the recursion is on the \emph{second} argument and that argument is the constructor $\mathsf{zero}$. So $\mathsf{Eq.refl}\,n$ has the required type by conversion.
+\end{proof}
+
+The mirror equation does not follow from computation.
+
+\begin{proposition}[$0+n=n$ needs induction]\label{prop:zeroplus}
+\begin{multline*}
+\vdash\ \lambda n{:}\mathsf{Nat}.\ \mathsf{Nat.rec}\ (\lambda k.\,\mathsf{Eq}\,(\mathsf{add}\,\mathsf{zero}\,k)\,k)\ (\mathsf{Eq.refl}\,\mathsf{zero})\\
+(\lambda k\,h.\ \mathsf{congrArg}\,\mathsf{succ}\,h)\ n\ :\ \Pi n{:}\mathsf{Nat}.\ \mathsf{Eq}\,(\mathsf{add}\,\mathsf{zero}\,n)\,n.
+\end{multline*}
+Moreover, $\mathsf{add}\,\mathsf{zero}\,n\not\equiv n$ for a variable $n$, so $\lambda n.\mathsf{Eq.refl}\,n$ does \emph{not} have this type.
+\end{proposition}
+\begin{proof}
+Take the motive $C\,k:=\mathsf{Eq}\,(\mathsf{add}\,\mathsf{zero}\,k)\,k$. \emph{Base:} $C\,\mathsf{zero}=\mathsf{Eq}\,(\mathsf{add}\,\mathsf{zero}\,\mathsf{zero})\,\mathsf{zero}\equiv\mathsf{Eq}\,\mathsf{zero}\,\mathsf{zero}$ by $\iota$, which is inhabited by $\mathsf{Eq.refl}\,\mathsf{zero}$. \emph{Step:} given $h:C\,k$, that is $h:\mathsf{Eq}\,(\mathsf{add}\,\mathsf{zero}\,k)\,k$, the goal is $C\,(\mathsf{succ}\,k)=\mathsf{Eq}\,(\mathsf{add}\,\mathsf{zero}\,(\mathsf{succ}\,k))\,(\mathsf{succ}\,k)$, and by $\iota$ the left side is $\equiv\mathsf{succ}\,(\mathsf{add}\,\mathsf{zero}\,k)$. Then $\mathsf{congrArg}\,\mathsf{succ}\,h:\mathsf{Eq}\,(\mathsf{succ}\,(\mathsf{add}\,\mathsf{zero}\,k))\,(\mathsf{succ}\,k)$ has the required type. Applying the recursor to $n$ gives the stated term.
+
+For the final claim: $\mathsf{add}\,\mathsf{zero}\,n\equiv\mathsf{Nat.rec}\,(\lambda\_.\mathsf{Nat})\,\mathsf{zero}\,s\,n$ with $n$ a variable. No $\iota$-rule applies because $n$ is not a constructor application, so this term is in normal form with a head that is a recursor stuck on a variable, and it is not the variable $n$. By confluence of reduction for the system (Cited result~\ref{cit:norm}) two terms with distinct normal forms are not definitionally equal.
+\end{proof}
+
+\begin{proposition}[Footprint]\label{prop:nat-footprint}
+The three terms of Propositions~\ref{prop:2p2}, \ref{prop:nplus0}, and~\ref{prop:zeroplus} use only the rules of Section~\ref{sec:kernel} and the inductive types $\mathsf{Nat}$ and $\mathsf{Eq}$, and declare no axioms. (In the terminology introduced in Section~\ref{sec:axioms}, their footprints, Definition~\ref{def:footprint}, are empty.)
+\end{proposition}
+\begin{proof}
+By inspection: no declared axiom occurs in the terms or in the definitions they unfold.
+\end{proof}
+
+The pair of results shows, in the smallest setting, the distinction on which the later parts rely. Whether an equation is available by \emph{computation} depends on how the function is defined, not only on the function: $n+0=n$ holds by computation and $0+n=n$ by induction, although they are equally true of the same function. The kernel is a decision procedure for definitional equality, and everything beyond it must be supplied as a proof term.
+
+\subsection{Quotient types as Collapse}\label{sec:quot}
+
+For a type $A$ and a relation $r:A\to A\to\Prop$ the kernel provides $\Quot\,r$, the constructor $\Quot.\mathsf{mk}:A\to\Quot\,r$, the eliminator $\Quot.\mathsf{lift}$, and the principle $\Quot.\mathsf{sound}$:
+\[
+\Quot.\mathsf{lift}\ f\ h\ (\Quot.\mathsf{mk}\ a)\ \equiv\ f\,a\ \ (\iota),\qquad
+\Quot.\mathsf{sound}:\ r\,a\,b\ \to\ \Quot.\mathsf{mk}\,a=\Quot.\mathsf{mk}\,b,
+\]
+where $f:A\to B$ and $h$ is a proof that $f$ respects $r$.
+
+\begin{cited}[Funext from Quot.sound]\label{cit:funext}
+Function extensionality is derivable from $\Quot.\mathsf{sound}$ (and propositional extensionality is not, and is taken as a separate axiom). See \cite{Carneiro19}.
+\end{cited}
+
+\begin{proposition}[Quot.lift is the universal property of Collapse]\label{prop:quotuniv}
+Let $f:A\to B$ respect $r$. Then $g:=\Quot.\mathsf{lift}\,f\,h$ satisfies $g\circ\Quot.\mathsf{mk}\equiv f$ definitionally, and any $g':\Quot\,r\to B$ with $g'\circ\Quot.\mathsf{mk}=f$ (propositionally, pointwise) satisfies $g'=g$ given function extensionality.
+\end{proposition}
+\begin{proof}
+The first claim is the $\iota$-rule. For the second, $\Quot.\mathsf{ind}$ reduces equality of two functions on $\Quot\,r$ to equality of their composites with $\Quot.\mathsf{mk}$, and function extensionality (Cited result~\ref{cit:funext}) turns pointwise equality into equality of functions.
+\end{proof}
+
+Proposition~\ref{prop:quotuniv} is Proposition~\ref{prop:collapse} read inside the kernel. The domain-layer quotient and the kernel quotient have the same universal property; the kernel version has the extra data of a proof $h$ because ``constant on classes'' is itself a proposition that must be supplied.
+
+\subsection{Sets inside types}
+
+\begin{definition}[Pre-sets]\label{def:preset}
+Following Aczel \cite{Aczel78}, define the inductive type $\mathsf{PSet}$ whose constructor takes an index type $I$ and a family $f:I\to\mathsf{PSet}$. Equip it with a bisimulation-style equivalence $\simeq$ and set $\mathsf{ZFSet}:=\Quot(\simeq)$. Membership is defined through the family.
+\end{definition}
+
+This construction is used in the Mathlib library for the type of ZF sets \cite{Mathlib20}. It places a model of ZF(C)-style set theory \emph{inside} a type theory. The reverse direction, a model of type theory inside set theory, is the subject of the next section.
+
+\section{Axioms added to the kernel}\label{sec:axioms}
+
+\subsection{Three standard additions}
+
+The Lean kernel as summarized in Section~\ref{sec:kernel} is not classical. Three statements are in common use on top of it:
+\begin{enumerate}[label=(\roman*)]
+\item $\Quot.\mathsf{sound}$, which is a primitive of the kernel, as above;
+\item \emph{propositional extensionality}, $\mathsf{propext}:\Pi(p\,q:\Prop).\,(p\leftrightarrow q)\to p=q$;
+\item \emph{global choice}, $\mathsf{Classical.choice}:\Pi(\alpha:\Sort\,u).\,\mathsf{Nonempty}\,\alpha\to\alpha$.
+\end{enumerate}
+Each is a revision of what the system admits (Section~\ref{sec:A}).
+
+\subsection{Choice carries classical logic}
+
+\begin{cited}[Diaconescu, internal form]\label{cit:diac-type}
+From $\mathsf{Classical.choice}$ and $\mathsf{propext}$ one derives $\Pi(p:\Prop).\,p\vee\neg p$.
+\end{cited}
+\emph{Sketch.} Let $U\,x:=(x=\mathsf{true})\vee p$ and $V\,x:=(x=\mathsf{false})\vee p$ on $\mathsf{Bool}$. The subtypes $\{x\mid U\,x\}$ and $\{x\mid V\,x\}$ are nonempty, so choice supplies $a$ and $b$ with $U\,a.1$ and $V\,b.1$. Case-splitting on the disjunctions gives either $p$, or $a.1=\mathsf{true}$ and $b.1=\mathsf{false}$. If $p$ held, $U$ and $V$ would be propositionally equal predicates (each is equivalent to $\mathsf{True}$, so $\mathsf{propext}$ and function extensionality identify them), and choice applied to equal arguments would give equal results, so $a.1=b.1$. Hence $p\to a.1=b.1$, and in the second case $\neg p$. The use of $\mathsf{propext}$ in the middle of the argument is the type-theoretic counterpart of the use of Extensionality in Theorem~\ref{thm:diaconescu}. \qed
+
+\subsection{The axiom footprint}
+
+\begin{definition}[Footprint]\label{def:footprint}
+For a closed declaration $d$, its \emph{footprint} $\mathrm{Ax}(d)$ is the set of declared axioms that occur in $d$ or, recursively, in any declaration that $d$ uses.
+\end{definition}
+
+\begin{proposition}[Footprints are monotone]\label{prop:foot}
+If $d$ uses $d'$ then $\mathrm{Ax}(d')\subseteq\mathrm{Ax}(d)$. If $\mathrm{Ax}(d)=\emptyset$, then $d$ is a theorem of the kernel alone.
+\end{proposition}
+\begin{proof}
+Both statements are immediate from the recursive definition: the footprint of $d$ is the union of the axioms occurring in $d$ with the footprints of the declarations $d$ uses, and a term whose footprint is empty is, after unfolding, a term built from the kernel rules alone.
+\end{proof}
+
+Footprints make precise a distinction that is often blurred. Whether a statement ``needs choice'' is a property of \emph{a particular proof term}, not of the statement. A function that selects the first element of a nonempty list has an empty footprint, because the list supplies the selection by data; a function that selects an element from a type known only to be $\mathsf{Nonempty}$ has $\mathsf{Classical.choice}$ in its footprint, because nothing supplies the selection. Both are ``choose an element of a nonempty collection,'' and only the second is the Axiom of Choice in the sense of Proposition~\ref{prop:choice-section}.
+
+\begin{designrule}[Report footprints]\label{dr:footprint}
+A formal development should state the footprint of each headline theorem, in the manner of a list of axioms, so that a reader can see which of the revisions of Section~\ref{sec:A} the result depends on.
+\end{designrule}
+
+\section{Translating between sets and types}\label{sec:translate}
+
+\subsection{What is known}
+
+\begin{cited}[Relating the two worlds]\label{cit:translate}
+\begin{enumerate}[label=(\alph*)]
+\item Constructive set theory CZF is interpretable in Martin-L\"of type theory with a universe via the $\mathsf{PSet}$ construction of Definition~\ref{def:preset} \cite{Aczel78,Aczel99}.
+\item The calculus of inductive constructions with $n$ universes and classical axioms is equiconsistent with ZFC augmented by $n$ inaccessible cardinals, for finite $n$ \cite{Werner97}.
+\item The type theory of Lean is consistent relative to ZFC with countably many inaccessible cardinals, by an interpretation in which $\Sort\,\ell$ is modelled by $V_{\kappa_\ell}$ for inaccessibles $\kappa_0<\kappa_1<\cdots$ \cite{Carneiro19}.
+\end{enumerate}
+\end{cited}
+
+The interpretation in (b) and (c) matches the earlier remark that each level of the universe hierarchy corresponds to an additional inaccessible (Cited result~\ref{cit:models}): ``another universe'' is an extra admissibility rule, consistently addable, never derivable from the lower levels. A foundation with finitely many universes is weaker than one with infinitely many, and the difference is exactly the strength of the inaccessibles added.
+
+\subsection{The second dictionary}
+
+\begin{center}
+\begin{tabular}{@{}p{0.2\textwidth}p{0.36\textwidth}p{0.36\textwidth}@{}}
+\toprule
+ & ZFC & Dependent type theory\\
+\midrule
+Where is Refuse? & Outside the objects: a formula applied to a set (Separation) & Inside the calculus: a predicate $A\to\Prop$ and a subtype\\
+What is membership? & A primitive relation $\in$ among sets & A typing judgment $t:A$ at the meta level; $a\in S:=S\,a$ for predicates\\
+What is equality? & Extensionality axiom (a statement about sets) & Identity type, with $\beta\eta$-conversion and proof irrelevance built into the kernel\\
+Collapse & Extensionality, equivalence classes, Replacement & $\beta$, $\Quot$, proof irrelevance\\
+Impredicative quantification & Power set & $\Pi$ into $\Prop$\\
+Choice & An axiom & $\mathsf{Classical.choice}$, an axiom outside the kernel\\
+Universe growth & Inaccessible cardinals & Universe levels\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{analogy}\label{an:dict2}
+Read through this table, the three foundations of the title are three answers to a single question: \emph{where is a domain allowed to be restricted, and who checks the restriction?} ZFC answers ``from outside, by a formula, over a set already given.'' Constructive logic answers ``inside, by an admissible region that must be stable under refinement.'' A dependent type theory answers ``inside, by a type former whose arguments carry the domain, checked by the kernel.'' The table does not prove any equivalence between them; the equivalences are those of Cited result~\ref{cit:translate}.
+\end{analogy}
+
+\subsection{Libraries and kernels}
+
+A library built on the kernel can contain several coexisting representations of the same informal notion. A ``set of elements of $A$'' may be a predicate $A\to\Prop$ (internal Refuse) or an element of $\mathsf{ZFSet}$ (an Aczel-style quotient). These are different objects, related by a translation that is itself a theorem of the library, not an identification made by the kernel. A statement about one does not automatically transfer to the other. This matters for any claim about what ``Lean's sets'' are: the answer depends on which of the two representations is meant.
+
+% =====================================================================
+\part{Reflection}
+
+\section{Revising the admissibility rule}\label{sec:A}
+
+\subsection{The operator $\Rev$}
+
+The four operators act within a fixed rule of admissibility. Foundations change when the rule itself changes.
+
+\begin{definition}[Revision]\label{def:A}
+A \emph{rule-set} is a theory $T$ in a fixed language (axioms and inference rules). A \emph{revision} $\Rev$ is a map from rule-sets to rule-sets. The revisions considered here add an axiom: $\Rev_\sigma(T)=T+\sigma$.
+\end{definition}
+
+Examples already encountered are $\sigma=\mathrm{AC}$ over ZF; $\sigma=\mathsf{Classical.choice}$ or $\sigma=\mathsf{propext}$ over the kernel; and $\sigma=$ ``an inaccessible cardinal exists'' over ZFC, with its type-theoretic counterpart, one more universe level.
+
+\begin{proposition}[Revision and independence]\label{prop:revision}
+If $T$ is consistent and $T\nvdash\sigma$ and $T\nvdash\neg\sigma$, then $\Rev_\sigma(T)$ and $\Rev_{\neg\sigma}(T)$ are both consistent and neither is contained in the other.
+\end{proposition}
+\begin{proof}
+If $T+\sigma$ were inconsistent then $T\vdash\neg\sigma$, contrary to hypothesis; symmetrically for $T+\neg\sigma$. If $T+\sigma\supseteq T+\neg\sigma$ in provable consequences then $T+\sigma\vdash\neg\sigma$, so $T+\sigma$ would be inconsistent; and conversely.
+\end{proof}
+
+By Cited result~\ref{cit:indep}, AC over ZF satisfies the hypotheses of Proposition~\ref{prop:revision} whenever ZF is consistent.
+
+Combined with Cited result~\ref{cit:models}, this says that no sufficiently strong foundation can certify from within the soundness of a revision that raises its own consistency strength. Statements of the form ``this system is justified'' are therefore always made from a stronger vantage point, or are not made at all. The honest form of a foundational claim is relative: \emph{this theorem is derivable in $T$, whose footprint is $F$, and $T$ is consistent relative to $T'$.}
+
+\section{Where a statement can fail}\label{sec:layers}
+
+A formal statement passes through several stages before it counts as established, and it can fail at each. The classification below is generic and applies to any proof assistant with a kernel.
+
+\begin{definition}[Failure layers]\label{def:layers}
+\begin{enumerate}[label=(\arabic*)]
+\item \emph{Parsing}: the text is not a well-formed expression of the surface language.
+\item \emph{Elaboration}: the expression is parsed but cannot be completed to a well-typed term; implicit arguments, coercions, universe levels, or the expected sort of a position cannot be resolved.
+\item \emph{Tactic or proof search}: elaboration succeeds but a proof step does not close its goal.
+\item \emph{Kernel}: a fully elaborated term is rejected by the independent checker.
+\item \emph{Derived contradiction}: the term is accepted, and what it proves is inconsistent with the intended reading, for example because an assumption is inconsistent.
+\item \emph{Scope}: everything is accepted and consistent, but the theorem does not state what its informal description says it states.
+\end{enumerate}
+\end{definition}
+
+\begin{example}[Two elaboration failures]\label{ex:elab}
+(i) A position that requires a proposition is given a value: $\forall n:\mathbb{N},\ n\le2\to 0$. The final $0$ has type $\mathbb{N}$, but the arrow expects a type or a proposition there. This fails at layer~(2).
+(ii) A proposition is passed to a function on booleans: with $\mathsf{not}:\mathsf{Bool}\to\mathsf{Bool}$ and $\neg:\Prop\to\Prop$ distinct, the expression $\mathsf{not}\,(n\le2)$ expects a $\mathsf{Bool}$ and receives a $\Prop$. This also fails at layer~(2). The usual repair is to use $\neg$, or to insert a decision procedure that converts the proposition to a boolean.
+\end{example}
+
+\begin{analogy}[Proof checking as a fifth operator]\label{an:verify}
+Layers~(2) through~(4) together play the role of a \emph{Verify} step that follows $\Bind$ and precedes $\Coll$ in the lifecycle used elsewhere in the Spherepop program: a term is built, its admissibility is checked, and only then is it evaluated or identified. This is a resemblance of order only.
+\end{analogy}
+
+The layers are ordered by how much of the argument has been tested: a layer-(1) or (2) failure says nothing about the mathematics, because the statement was never in a form the system could examine; a layer-(5) failure says the theorem is vacuous or false as stated; a layer-(6) failure says the formalization is correct and its meaning is not. Reports of ``verified'' results should name the layer at which the check was passed.
+
+\begin{proposition}[A verified theorem is relative to its axioms]\label{prop:relative}
+If $d$ is accepted by the kernel with footprint $F=\mathrm{Ax}(d)$, then $d$ is a theorem of the kernel extended by $F$. In particular, a statement obtained as a theorem about hypotheses supplied as declared axioms is a theorem of the form ``if the axioms then the conclusion,'' and its footprint contains those axioms.
+\end{proposition}
+\begin{proof}
+By Proposition~\ref{prop:foot}, every axiom used by $d$ lies in $F$, so $d$ is derivable in the kernel with $F$ added. For the second sentence, an axiom $\alpha$ declared by the author and used in the proof of $d$ occurs in $\mathrm{Ax}(d)$ by definition.
+\end{proof}
+
+Proposition~\ref{prop:relative} is elementary and is the formal content of the slogan that a derivation cannot be more informative than its premises. It is worth stating because it separates two readings of a verified result: \emph{the conclusion holds} and \emph{the conclusion follows from the declared axioms}. Only the second is established.
+\section{Conventions as a common language}\label{sec:convention}
+
+\subsection{The role of an arbitrary base}
+
+The axioms of ZFC are not forced. Independence results (Cited result~\ref{cit:indep}) show that Choice can be added or its negation added, with both extensions consistent if ZF is. The same is true of the Continuum Hypothesis over ZFC \cite{Cohen63}. In that precise sense the choice of base is a convention, comparable to the choice of a unit of length: a different unit would do equally well as far as nature is concerned, and no measurement is more correct for being in metres.
+
+What a convention provides is not truth but \emph{comparability}. Two parties who have adopted the same base can exchange statements and derivations, and each can check what the other produced. The value of ZFC, and of a fixed kernel with a fixed set of added axioms, is that it supplies one rule of admissibility, stated in advance, that everyone can apply. The rest of this section makes the point exact.
+
+\subsection{Reproducible results}
+
+\begin{definition}[Reproducible result]\label{def:repro}
+Let $T$ be a theory with a decidable set of axioms. A \emph{reproducible result relative to $T$} is a triple $(T,\varphi,d)$ where $d$ is a finite derivation of the sentence $\varphi$ from the axioms of $T$.
+\end{definition}
+
+\begin{cited}[Checkability]\label{cit:checkable}
+For a first-order theory with a decidable set of axioms, the relation ``$d$ is a derivation of $\varphi$ from $T$'' is decidable. See Enderton \cite[Ch.~2 and~3]{Enderton01}.
+\end{cited}
+
+Cited result~\ref{cit:checkable} is the logical content of the word \emph{reproducible} in this text: given the base, the question whether a purported derivation is correct has a mechanical answer that does not depend on who asks. The kernel of a proof assistant is an implementation of this decision procedure for a particular base. (For the full Lean kernel the situation is subtler, as noted in Cited result~\ref{cit:norm}, and this text claims only what the cited sources claim.)
+
+\begin{proposition}[Results compose over a common base]\label{prop:compose}
+(a) If $(T,\varphi,d)$ and $(T,\varphi\to\psi,e)$ are reproducible results then so is $(T,\psi,d\ast e)$, where $d\ast e$ concatenates the derivations and applies modus ponens.
+(b) If $T\subseteq T'$ and $(T,\varphi,d)$ is reproducible, then $(T',\varphi,d)$ is reproducible.
+\end{proposition}
+\begin{proof}
+(a) The concatenation is a finite sequence each of whose lines is an axiom of $T$ or follows from earlier lines, ending in $\psi$. (b) Every axiom of $T$ is an axiom of $T'$, so $d$ is a derivation from $T'$.
+\end{proof}
+
+Proposition~\ref{prop:compose}(a) is what a common base buys: derivations from the same $T$ can be chained without translation. Part (b) says that results are portable \emph{upward}: a result proved over a weaker base remains valid over any stronger one. The converse fails, which is why a footprint matters (Definition~\ref{def:footprint}).
+
+\begin{example}[Results that cannot be combined]\label{ex:incompat}
+Let $T_1=\mathrm{ZF}+\mathrm{AC}$ and $T_2=\mathrm{ZF}+\neg\mathrm{AC}$. If ZF is consistent, each of $T_1$ and $T_2$ is consistent (Cited result~\ref{cit:indep}), so each supports many reproducible results. But $T_1\cup T_2$ proves both $\mathrm{AC}$ and $\neg\mathrm{AC}$ and so proves every sentence. A reproducible result relative to $T_1$ and one relative to $T_2$ cannot be chained in either theory in the manner of Proposition~\ref{prop:compose}(a), and the pair says nothing jointly. A community in which half the authors assumed $T_1$ and half $T_2$, without saying so, would produce correct and mutually unusable results.
+\end{example}
+
+Example~\ref{ex:incompat} is the formal reason that an \emph{arbitrary} base is better than a different base for each author. The choice among conventions is not forced, but the existence of one agreed convention is what lets results be collected, compared, and reused.
+
+\begin{analogy}[Units, formats, and protocols]\label{an:units}
+A unit of length, a character encoding, and a network protocol share one feature: any particular choice could have been otherwise, and what matters is that a single choice is widely adopted and written down. Foundations of mathematics are a convention of this kind with an unusually long track record. The analogy proves nothing about mathematics; it says what role the convention plays.
+\end{analogy}
+
+\section{Arbitrary bases, determinate consequences}\label{sec:determinate}
+
+\subsection{Arbitrary at the base, forced above it}
+
+That the base is a convention does not make its consequences conventional. Once a base $T$ is fixed, whether $T\vdash\varphi$ is a matter of fact, settled by a derivation or by an independence proof. Two layers must be kept apart:
+\begin{itemize}
+\item the \emph{choice of $T$} is not forced and is not true or false;
+\item \emph{what follows from $T$} is determinate, and statements about it are true or false.
+\end{itemize}
+A claim of the form ``the Axiom of Choice is arbitrary'' is correct about the first layer and says nothing about the second. A claim of the form ``therefore anything derived from it is arbitrary'' confuses the two.
+
+\subsection{How much does the convention matter?}
+
+The choice matters little for some statements and a great deal for others, and both facts are theorems.
+
+\begin{cited}[Conservativity for arithmetic]\label{cit:shoenfield}
+ZF and ZFC prove the same $\Pi^1_2$ sentences; in particular they prove the same arithmetical sentences. This follows from G\"odel's constructible universe together with Shoenfield absoluteness. See Jech \cite[Ch.~13 and Ch.~25]{Jech03}.
+\end{cited}
+
+So adopting Choice never changes which arithmetical statements are provable. It changes what can be proved about large infinite objects.
+
+\begin{cited}[Choice and measurability]\label{cit:vitali}
+In ZFC there is a subset of $\mathbb{R}$ that is not Lebesgue measurable (Vitali). Relative to the consistency of an inaccessible cardinal, ZF with dependent choice is consistent with every set of reals being Lebesgue measurable (Solovay \cite{Solovay70}).
+\end{cited}
+
+Cited result~\ref{cit:vitali} shows that the choice of convention can have visible consequences in analysis. It also shows that the consequence is itself determinate: given the base, the answer follows.
+
+\subsection{What a convention can be assessed on}
+
+\begin{designrule}[Assessing a convention]\label{dr:assess}
+A foundational base is assessed on four things, none of which is truth:
+\begin{enumerate}[label=(\roman*)]
+\item \emph{Consistency relative to other bases} (Section~\ref{sec:translate});
+\item \emph{Strength}: whether the mathematics to be done can be carried out in it;
+\item \emph{Conservativity}: which statements it leaves unchanged relative to a weaker base, as in Cited result~\ref{cit:shoenfield};
+\item \emph{Adoption}: how many parties use it, since that is what gives comparability.
+\end{enumerate}
+\end{designrule}
+
+\begin{remark}
+This does not make the choice of base unconstrained. A base that is inconsistent has no use as a common language, since it proves every sentence. A base too weak to express the statements parties wish to exchange is not a common language for them. Adoption alone decides between bases that satisfy the other three equally well.
+\end{remark}
+
+\section{One object, many representations: the radix example}\label{sec:radix}
+
+\subsection{Representation systems and canonical forms}
+
+The earlier sections distinguish a convention from what follows from it. A numeral system is the simplest place to see the distinction proved rather than asserted, because the object represented (a natural number) is fixed in advance and the representation is a free choice.
+
+\begin{definition}[Representation system]\label{def:repsys}
+A \emph{representation system} is a triple $(R,\sem{\cdot},\to)$ of a set $R$ of inscriptions, a \emph{denotation} map $\sem{\cdot}:R\to X$ into a set $X$ of represented objects, and a rewriting relation $\to$ on $R$. It is \emph{sound} if $r\to r'$ implies $\sem r=\sem{r'}$, \emph{terminating} if there is no infinite chain $r_0\to r_1\to\cdots$, and \emph{confluent} if $r\twoheadrightarrow s$ and $r\twoheadrightarrow t$ imply a common $u$ with $s\twoheadrightarrow u$ and $t\twoheadrightarrow u$. A \emph{normal form} is an inscription with no outgoing rewrite.
+\end{definition}
+
+\begin{theorem}[Canonical forms]\label{thm:canon}
+Let $(R,\sem{\cdot},\to)$ be sound and terminating.
+\begin{enumerate}[label=(\alph*)]
+\item Every $r\in R$ rewrites to some normal form $\mathrm{nf}(r)$ with $\sem{\mathrm{nf}(r)}=\sem r$.
+\item If moreover $\sem{\cdot}$ is injective on normal forms, then $\to$ is confluent, every $r$ has a \emph{unique} normal form, and for all $r,r'\in R$,
+\[
+\sem r=\sem{r'}\iff\mathrm{nf}(r)=\mathrm{nf}(r').
+\]
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+(a) By termination, any maximal chain from $r$ is finite and ends in a normal form; by soundness the denotation is constant along the chain. (b) Two normal forms reachable from $r$ both have denotation $\sem r$ by (a), so they are equal by injectivity; hence the normal form is unique. If $r\twoheadrightarrow s$ and $r\twoheadrightarrow t$, then $\mathrm{nf}(s)=\mathrm{nf}(r)=\mathrm{nf}(t)$ (the normal form of $s$ is reachable from $r$), so $s$ and $t$ join. For the equivalence, ($\Leftarrow$) is soundness along both chains, and ($\Rightarrow$) holds because $\mathrm{nf}(r)$ and $\mathrm{nf}(r')$ are normal forms with the same denotation.
+\end{proof}
+
+Theorem~\ref{thm:canon}(b) shows that confluence need not be proved as a separate lemma when termination, soundness, and injectivity on normal forms are available. The three properties together say that the representation is a presentation of the object and not a different object, and that a canonical representative can be reached by any strategy.
+
+\subsection{Integer radices}
+
+\begin{proposition}[Integer radix]\label{prop:intradix}
+Let $b\ge2$ be an integer. Every natural number $N$ has exactly one expansion $N=\sum_{k=0}^m d_kb^k$ with $d_k\in\{0,\dots,b-1\}$ and either $m=0$ or $d_m\neq0$.
+\end{proposition}
+\begin{proof}
+Existence by induction on $N$: for $N<b$ take $m=0$; otherwise write $N=bq+r$ with $0\le r<b$ and $q<N$, expand $q$, and append $r$. Uniqueness: $d_0\equiv N\pmod b$ is forced, so $d_0=r$, and the remaining digits expand $(N-r)/b$, which has a unique expansion by induction.
+\end{proof}
+
+\begin{proposition}[Radix invariance]\label{prop:radixinv}
+Let $\nu_1:S_1\to\mathbb{N}$ and $\nu_2:S_2\to\mathbb{N}$ be bijections from sets of numerals, and define operations on numerals by transport, $x\oplus_i y:=\nu_i^{-1}(\nu_i x+\nu_i y)$ and $x\otimes_i y:=\nu_i^{-1}(\nu_i x\cdot\nu_i y)$. Then $\nu_2^{-1}\nu_1:S_1\to S_2$ is an isomorphism of $(S_1,\oplus_1,\otimes_1,\le_1)$ onto $(S_2,\oplus_2,\otimes_2,\le_2)$. Every sentence of first-order arithmetic is true in one if and only if it is true in the other.
+\end{proposition}
+\begin{proof}
+Both structures are isomorphic to $(\mathbb{N},+,\times,\le)$ by $\nu_1$ and $\nu_2$ respectively, and isomorphic structures satisfy the same first-order sentences.
+\end{proof}
+
+Proposition~\ref{prop:radixinv} is a formal version of the statement that a number is not its decimal numeral: the choice of radix is a choice of $\nu$, and every arithmetic fact is invariant under that choice.
+
+\subsection{A non-integer radix}
+
+The same schema applies to the radix $3/2$, which is a legitimate and non-degenerate choice of place-value system. The following rewriting presentation is the exploding-dot rule: $N$ dots are placed in box $0$, and three dots in box $k$ may be replaced by two dots in box $k+1$.
+
+\begin{definition}[Unidimary system]\label{def:unid}
+Let $R$ be the set of finitely supported sequences $c=(c_k)_{k\ge0}$ of natural numbers (dots per box), with $\sem c:=\sum_kc_k(3/2)^k\in\mathbb{Q}$. The rewrite $c\to c'$ holds when, for some $k$, $c_k\ge3$, $c'_k=c_k-3$, $c'_{k+1}=c_{k+1}+2$, and $c'_j=c_j$ otherwise. The normal forms are the sequences with every $c_k\in\{0,1,2\}$, that is, the finite digit strings over $\{0,1,2\}$. The \emph{unidimary numeral} of $N\in\mathbb{N}$ is the normal form reached from the configuration with $N$ dots in box $0$.
+\end{definition}
+
+\begin{lemma}[Soundness and termination]\label{lem:unid-st}
+The system of Definition~\ref{def:unid} is sound and terminating. Starting from $N$ dots in box $0$, a normal form is reached after exactly $N-\sum_kd_k$ rewrites, where $(d_k)$ is the final digit string.
+\end{lemma}
+\begin{proof}
+Soundness: $3\,(3/2)^k=2\,(3/2)^{k+1}$, so a rewrite does not change $\sem{\cdot}$. Termination: each rewrite removes $3$ dots and adds $2$, so the total number of dots $\sum_kc_k$ decreases by exactly $1$; it is a natural number, so only finitely many rewrites are possible. From $N$ initial dots, reaching total $\sum_kd_k$ takes exactly $N-\sum_kd_k$ rewrites.
+\end{proof}
+
+\begin{lemma}[Injectivity on normal forms]\label{lem:unid-inj}
+Two distinct finite digit strings over $\{0,1,2\}$, with leading zeros ignored, have distinct values $\sum_kd_k(3/2)^k$.
+\end{lemma}
+\begin{proof}
+Pad both strings to a common length $m+1$ and suppose they have equal value. Let $e_k=d_k-d'_k\in\{-2,\dots,2\}$ and suppose some $e_k\ne0$; let $j$ be the least such index. Multiplying $\sum_ke_k(3/2)^k=0$ by $2^m$ gives $\sum_ke_k\,3^k\,2^{m-k}=0$. Every term with $k>j$ is divisible by $3^{j+1}$, and the terms with $k<j$ vanish. Dividing by $3^j$ yields $e_j\,2^{m-j}+3t=0$ for an integer $t$. Hence $3\mid e_j2^{m-j}$, and since $\gcd(3,2)=1$, $3\mid e_j$. But $0<|e_j|\le2$, a contradiction.
+\end{proof}
+
+\begin{theorem}[Unidimary numerals]\label{thm:unid}
+Every natural number $N$ has exactly one finite digit string over $\{0,1,2\}$ (without leading zeros) of value $N$. The exploding-dot rule reaches it from $N$ dots in box $0$ by every sequence of rewrites, in any order.
+\end{theorem}
+\begin{proof}
+By Lemma~\ref{lem:unid-st} a normal form is reached with value $N$, so a digit string of value $N$ exists. Lemma~\ref{lem:unid-inj} makes it unique. Any order of rewrites ends in a normal form of value $N$ (Theorem~\ref{thm:canon}(a)), which must be that string by uniqueness; this is Theorem~\ref{thm:canon}(b).
+\end{proof}
+
+\begin{example}\label{ex:unid10}
+For $N=10$: ten dots in box $0$; three rewrites move six dots to box $1$, leaving one in box $0$; two rewrites in box $1$ send four dots to box $2$; one rewrite in box $2$ sends two to box $3$, leaving one. The final digits, from box~$3$ down, are $2,1,0,1$, and $2\cdot\tfrac{27}{8}+1\cdot\tfrac94+0+1=10$. By Lemma~\ref{lem:unid-st} the number of rewrites is $10-(2+1+0+1)=6$, as counted.
+\end{example}
+
+\begin{proposition}[Relation to rational-base numeration]\label{prop:afs}
+For a rational base $p/q$ with $p>q\ge1$ coprime, Akiyama, Frougny and Sakarovitch \cite{AFS08} represent each natural number $M$ uniquely as $M=\sum_ia_iq^{-1}(p/q)^i$ with $a_i\in\{0,\dots,p-1\}$. For $p/q=3/2$, the digit string $(a_i)$ of $M$ in their system is the unidimary numeral of $2M$.
+\end{proposition}
+\begin{proof}
+Multiplying the defining equation by $q=2$ gives $\sum_ia_i(3/2)^i=2M$ with $a_i\in\{0,1,2\}$. By Theorem~\ref{thm:unid}, the only such digit string is the unidimary numeral of $2M$.
+\end{proof}
+
+Proposition~\ref{prop:afs} fixes the attribution. The numeral systems of \cite{AFS08} are the literature on rational-base numeration. The unidimary presentation used here differs from it by the factor $q^{-1}$ in the place values: it represents every natural number, including odd ones, and its numerals for even numbers $2M$ coincide with the numerals of $M$ in \cite{AFS08}. The uniqueness argument in Lemma~\ref{lem:unid-inj} is elementary and is given here for completeness; the existence and uniqueness of the numerals in \cite{AFS08} is not used.
+
+\subsection{Why integer radices are used}
+
+Since Proposition~\ref{prop:radixinv} shows that every arithmetic fact is invariant, the reasons for preferring one radix are reasons of cost, and they can be measured.
+
+\begin{proposition}[Length lower bound]\label{prop:len}
+A digit string of length $m$ over $\{0,1,2\}$ has value at most $4\big((3/2)^m-1\big)$. Hence the unidimary numeral of $N$ has at least $\log_{3/2}(N/4+1)$ digits. For large $N$ it is longer than the base-$b$ numeral of $N$ by a factor at least $\ln b/\ln(3/2)$ asymptotically; this is about $1.71$ for $b=2$ and $5.68$ for $b=10$.
+\end{proposition}
+\begin{proof}
+The value is at most $2\sum_{k=0}^{m-1}(3/2)^k=2\cdot\frac{(3/2)^m-1}{1/2}=4\big((3/2)^m-1\big)$. Solving for $m$ gives the lower bound. The base-$b$ numeral has $\lfloor\log_bN\rfloor+1$ digits, and $\log_{3/2}N/\log_bN=\ln b/\ln(3/2)$.
+\end{proof}
+
+\begin{computation}[Lengths]\label{comp:len}
+Digits needed for $N$ in base 10, base 2, and the unidimary system, with the bound of Proposition~\ref{prop:len} rounded up.
+\begin{center}
+\small
+\begin{tabular}{@{}rcccc@{}}
+\toprule
+$N$ & base 10 & base 2 & unidimary & bound \\
+\midrule
+$10$ & 2 & 4 & 4 & 4\\
+$100$ & 3 & 7 & 9 & 9\\
+$1000$ & 4 & 10 & 15 & 14\\
+$10^6$ & 7 & 20 & 32 & 31\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{computation}
+
+A second cost is redundancy of the digit alphabet. Over a base-$b$ alphabet, every digit string is a numeral. Over $\{0,1,2\}$ in base $3/2$, most strings do not denote integers.
+
+\begin{computation}[Strings that are integers]\label{comp:int}
+Among the $3^l$ digit strings of length $l$ (leading zeros allowed), the number whose value is an integer is:
+\begin{center}
+\small
+\begin{tabular}{@{}lcccccccccc@{}}
+\toprule
+$l$ & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10\\
+integer-valued & 3 & 6 & 9 & 15 & 24 & 36 & 54 & 81 & 123 & 186\\
+$3^l$ & 3 & 9 & 27 & 81 & 243 & 729 & 2187 & 6561 & 19683 & 59049\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{computation}
+
+The counts grow by a factor close to $3/2$ per digit, in line with the growth of the place values, so each additional digit adds well under one bit of capacity; a binary digit adds one. This is an observation about the table, not a theorem.
+
+\begin{analogy}[Arbitrary, but not equally good]\label{an:radixcost}
+The radices $2$, $3$, $10$, and $3/2$ all give working numeral systems with identical arithmetic (Proposition~\ref{prop:radixinv}). They differ in length, in the share of strings that are valid, and in how arithmetic algorithms behave. A convention of this kind is chosen on cost, and a shared choice is worth more than a locally optimal one. The same pattern holds one level down for foundations: the base is a convention, the consequences are determinate, and the reasons for adopting a particular base are reasons of cost and adoption.
+\end{analogy}
+
+\begin{remark}[Four things that are not the same]\label{rem:four}
+The radix example separates four notions that are often run together. \emph{Truth preservation}: every arithmetic sentence has the same truth value in every radix (Proposition~\ref{prop:radixinv}). \emph{Representational identity}: the numerals differ, so the inscriptions are not the same. \emph{Resource cost}: the lengths differ, with a proved lower bound (Proposition~\ref{prop:len}). \emph{Practical interchangeability}: the systems are not interchangeable for use, because of cost and because most digit strings in the non-integer radix are not numerals (Computation~\ref{comp:int}). The same distinctions recur for foundations: ZFC and type theory may be related by interpretations (Cited result~\ref{cit:translate}) without being identical, equally costly, or interchangeable in practice.
+\end{remark}
+
+\subsection{The representation schema}
+
+The radix example exhibits a four-step pattern.
+
+\begin{designrule}[Representation schema]\label{dr:schema}
+A representation is described by (1) a denotation $\sem{\cdot}$ from inscriptions to the objects represented; (2) a set of admissible transformations of inscriptions; (3) an \emph{invariant}, namely a preservation theorem that the denotation is unchanged by admissible transformations; and (4) a \emph{canonical form}, a normal form reached by the transformations and identifying the denotation (Theorem~\ref{thm:canon}).
+\end{designrule}
+
+\begin{analogy}[The operators in the schema]\label{an:schema-ops}
+Read through the schema, $\Pop$ generates candidate inscriptions, $\Refuse$ removes inadmissible ones (in Definition~\ref{def:unid}, the configurations not of the stated form are not inscriptions of the system, and, as Computation~\ref{comp:int} shows, most digit strings do not denote integers), $\Bind$ ties inscriptions to their denotation, and $\Coll$ selects or reaches the canonical representative. This is a reading of the schema, not a consequence of it.
+\end{analogy}
+
+The schema earns its generality only where the preservation theorem is proved. The table records where that is the case in this text.
+
+\begin{center}
+\small
+\begin{tabular}{@{}p{0.26\textwidth}p{0.3\textwidth}p{0.34\textwidth}@{}}
+\toprule
+Representation & Preservation result & Status\\
+\midrule
+Unidimary numerals & Theorem~\ref{thm:unid} & proved in this text\\
+Boolean semantics & Soundness, Theorem~\ref{thm:sound} & proved in this text\\
+Terms as lambda terms & Proposition~\ref{prop:sp-lambda}, Church--Rosser & proved by bijection of grammars, confluence cited\\
+Typed terms to normal forms & Cited result~\ref{cit:norm} & cited; fails for the untyped calculus, which does not terminate\\
+Quotients & Proposition~\ref{prop:quotuniv} & proved from the stated kernel rules\\
+Sets as pre-sets & Cited result~\ref{cit:translate} & cited\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{remark}[A criterion for failure]\label{rem:fail}
+If, for a proposed use of the four operators, no denotation, no preservation theorem, and no canonical form can be exhibited, then the use is a renaming and the schema adds nothing to it. The untyped lambda calculus is the instructive boundary case in this document: its reduction is confluent but not terminating, so Theorem~\ref{thm:canon} does not apply to it, and canonical forms exist only for the terms that happen to normalize.
+\end{remark}
+
+\section{A reproducibility protocol}\label{sec:protocol}
+
+\subsection{What a report must contain}
+
+The preceding sections suggest a minimal standard for reporting a formal result.
+
+\begin{designrule}[Reporting a formal result]\label{dr:report}
+A claim that a statement has been formally established should state:
+\begin{enumerate}[label=(\arabic*)]
+\item the \emph{base}: the theory or kernel and its version;
+\item the \emph{footprint} of the headline theorem (Definition~\ref{def:footprint});
+\item the \emph{layer} reached (Definition~\ref{def:layers}), and in particular that the kernel accepted the whole development;
+\item which hypotheses are \emph{declared as axioms by the author} rather than derived (Proposition~\ref{prop:relative});
+\item the \emph{scope}: a plain-language statement of what the theorem asserts, including what it does not;
+\item the \emph{environment}: pinned versions of the tools and libraries, so that the check can be repeated.
+\end{enumerate}
+\end{designrule}
+
+Items (1) to (3) are what turn ``verified'' into a claim that can be checked. Item (4) is the one most often omitted. A development in which the substantive assumptions enter as declared axioms is still a correct derivation, and by Proposition~\ref{prop:relative} what it establishes is the implication from those axioms. Reporting them separately lets a reader judge whether the axioms are the content of the claim.
+
+\subsection{Controls}
+
+\begin{definition}[Controls]\label{def:controls}
+A \emph{negative control} is a statement that is known to be false or ill-formed and that the pipeline must reject. A \emph{positive control} is a statement known to be provable that the pipeline must accept.
+\end{definition}
+
+\begin{proposition}[A negative control detects trivial acceptance]\label{prop:control}
+Suppose a checking pipeline accepts every derivation of $\bot$ from its base. Then it accepts every sentence $\varphi$ with a one-line extension of that derivation. Hence a pipeline that rejects a single known-false sentence has not accepted a derivation of $\bot$.
+\end{proposition}
+\begin{proof}
+From a derivation $d$ of $\bot$, adding the step $\bot\to\varphi$ (ex falso) and modus ponens gives a derivation of $\varphi$ for any $\varphi$. Contrapositively, if some known-false sentence is rejected, then no derivation of $\bot$ was accepted, assuming the pipeline accepts all correct derivations from its base.
+\end{proof}
+
+Controls test the pipeline, not the theorem. They are cheap and they exclude a class of silent failures, in particular a pipeline that accepts everything.
+
+\begin{center}
+\small
+\begin{tabular}{@{}p{0.2\textwidth}p{0.36\textwidth}p{0.34\textwidth}@{}}
+\toprule
+Layer & Failure to guard against & Control\\
+\midrule
+Elaboration & Statement does not mean what it appears to mean & Include an ill-formed variant that must be rejected\\
+Kernel & Checker accepts a bad term & Include a known-false statement that must be rejected\\
+Footprint & Result silently depends on an extra axiom & Report the footprint of each headline theorem\\
+Scope & Theorem proves less than its description claims & State the theorem in words beside the formal statement\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{What reproducibility does not give}
+
+\begin{enumerate}[label=(\roman*)]
+\item It does not give \emph{truth} about the subject matter. A result relative to $T$ is a fact about derivability from $T$.
+\item It does not give \emph{consistency}. By G\"odel's second theorem (Cited result~\ref{cit:godel2}), a base strong enough for arithmetic cannot certify its own consistency; consistency is relative, as in Cited result~\ref{cit:translate}.
+\item It does not give \emph{interpretation}. A formalization can be accepted by the kernel and still fail to state what its authors say it states (layer~(6) of Definition~\ref{def:layers}).
+\end{enumerate}
+
+\begin{analogy}[Common language]\label{an:commonlang}
+The three limits are the limits of any shared standard. A common unit does not tell one what to measure; a common character encoding does not tell one what to write; a common base does not tell one what is true. What each does is make it possible for a second party to repeat the first party's step and see the same outcome.
+\end{analogy}
+
+\section{A reading of the RSVP plenum}\label{sec:rsvp}
+
+\subsection{Purpose and status}
+
+The author's RSVP framework describes a \emph{plenum} $\Psi=(\Phi,\mathbf v,S)$ consisting of a scalar field $\Phi$, a vector (transport) field $\mathbf v$, and an entropy field $S$, from which gravity-like effects are proposed to emerge as an entropic descent, with a compact form $\mathbf G=-\nabla S+\xi\nabla\Phi$. This section asks only whether the four operators supply a useful vocabulary for the plenum. \emph{Nothing in this section derives the field equations of the plenum from the operators.} What is proved is one general fact about identification and information (Proposition~\ref{prop:lost}); the remaining statements are labeled Analogy or Conjecture and carry no more warrant than that.
+
+\subsection{The operator reading}
+
+\begin{analogy}[Plenum in four operators]\label{an:plenum}
+\begin{center}
+\begin{tabular}{@{}lp{0.68\textwidth}@{}}
+\toprule
+Operator & Reading in the plenum\\
+\midrule
+$\Pop$ & a local distinction: a cell of the plenum, with a value of $(\Phi,\mathbf v,S)$\\
+$\Refuse$ & the constraints that restrict which configurations count as admissible (boundary conditions, conservation constraints, admissible local sections)\\
+$\Bind$ & coupling of neighbouring cells, in particular by the transport field $\mathbf v$\\
+$\Coll$ & coarse-graining: identifying microscopically different configurations that agree at a given scale\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{analogy}
+
+\subsection{What is lost by identification}
+
+Collapse identifies items. Identification forgets which of the identified items was present. A quantitative form of this statement holds in any finite setting and is the only theorem needed.
+
+\begin{proposition}[Information lost by Collapse]\label{prop:lost}
+Let $\Om$ be a finite world with a probability measure $\mu$, let $X$ be the random item with law $\mu$, let $\sim$ be an equivalence relation on $\Om$ and $q:\Om\to\Om/{\sim}$ the quotient map, and write $H$ for Shannon entropy. Define the \emph{lost entropy} $L(\sim):=H(X)-H(q(X))$. Then
+\[
+L(\sim)=H\big(X\mid q(X)\big)\ \ge\ 0,
+\]
+with equality if and only if every $\sim$-class contains at most one item of positive probability. Moreover, if $\sim_1$ refines $\sim_2$ then $L(\sim_1)\le L(\sim_2)$, and
+\[
+L(\sim_2)=L(\sim_1)+H\big(q_1(X)\mid q_2(X)\big).
+\]
+\end{proposition}
+\begin{proof}
+Since $q(X)$ is a function of $X$, $H(X,q(X))=H(X)$. The chain rule gives $H(X,q(X))=H(q(X))+H(X\mid q(X))$, hence $L(\sim)=H(X\mid q(X))$, which is nonnegative as a conditional entropy. It vanishes iff, given the class, $X$ is determined almost surely, that is iff each class has at most one point of positive probability. For the refinement statement, $q_2=r\circ q_1$ for a function $r$, so $H(X\mid q_2(X))=H(X,q_1(X)\mid q_2(X))=H(q_1(X)\mid q_2(X))+H(X\mid q_1(X),q_2(X))$, and $H(X\mid q_1(X),q_2(X))=H(X\mid q_1(X))$ because $q_2(X)$ is determined by $q_1(X)$. Nonnegativity of $H(q_1(X)\mid q_2(X))$ gives monotonicity.
+\end{proof}
+
+Proposition~\ref{prop:lost} is an instance of the data-processing principle. Its role here is to give a precise, nonnegative, additive quantity attached to a Collapse: how much of the item's identity is not recoverable from its class. Coarser Collapse loses at least as much, and the loss composes additively along a chain of refinements.
+
+\subsection{An analogy and a conjecture}
+
+\begin{analogy}[Entropy as the cost of Collapse]\label{an:S}
+In the plenum, the entropy field $S$ and the ``entropic descent'' of the framework have the same shape as Proposition~\ref{prop:lost}: a coarse description discards information, the discarded amount is a nonnegative quantity that grows with coarseness, and systems under a coarsening flow move in the direction in which it grows. This resemblance suggests reading $S$ as the lost entropy of a Collapse determined by the scale at which the plenum is described.
+\end{analogy}
+
+\begin{conjecture}[Plenum entropy as lost entropy]\label{conj:S}
+There is a family of equivalence relations $\{\sim_\lambda\}_\lambda$ on the configuration space of the plenum, indexed by a scale $\lambda$ and refining as $\lambda$ decreases, such that the pointwise lost entropy $S_\lambda(x):=L(\sim_\lambda)$ restricted to the cell at $x$ agrees, in the continuum limit and up to normalization, with the entropy field $S$ of the framework, and such that $-\nabla S_\lambda$ reproduces the entropic drift term of $\mathbf G$.
+\end{conjecture}
+
+\emph{Evidence.} Only the structural resemblance of Analogy~\ref{an:S}. The conjecture is heuristic. It is also easy to falsify in principle, because it requires an explicit choice of $\{\sim_\lambda\}$ and a comparison with the field equations of the framework.
+
+\subsection{Implications if the conjecture held}
+
+The implications listed are conditional, and each depends on Conjecture~\ref{conj:S}.
+\begin{enumerate}[label=(\roman*)]
+\item \emph{No extra primitive.} The entropic term would be a property of the Collapse family and would not require a separate entropy primitive in the ontology.
+\item \emph{Additivity across scales.} Proposition~\ref{prop:lost} gives $S$ an additive decomposition along refinements, so contributions from successive coarse-grainings would add, which is a checkable constraint on any proposed form of $S$.
+\item \emph{Foundations as Collapse families.} The revisions of Section~\ref{sec:A} would be changes of which identifications are admitted. Strengthening the foundation by adding extensionality-type principles identifies more items; weakening it identifies fewer.
+\end{enumerate}
+
+\subsection{What would settle it}
+
+\begin{enumerate}[label=(\alph*)]
+\item State a concrete family $\{\sim_\lambda\}$ on a lattice version of the plenum.
+\item Compute $S_\lambda$ for it and compare with the entropy equation of the framework in the continuum limit.
+\item Show that the weak-field limit of $-\nabla S_\lambda$ yields the Poisson-type equation proposed in the framework, or identify precisely where it fails.
+\end{enumerate}
+Each step is an open problem. A negative result at (b) or (c) would refute Conjecture~\ref{conj:S} as stated while leaving the operator vocabulary of Analogy~\ref{an:plenum} intact.
+
+% =====================================================================
+\section{Summary and open problems}\label{sec:summary}
+
+\subsection{What was built}
+
+\begin{enumerate}
+\item A four-operator domain algebra (Section~\ref{sec:ops}) with the laws of Refuse and the universal property of Collapse.
+\item The untyped lambda calculus recovered by renaming, with $\Bind$ as abstraction and $\Coll$ as evaluation (Section~\ref{sec:terms}).
+\item Classical and intuitionistic propositional logic as two disciplines of Refuse, with a proof of soundness and an explicit counterexample to excluded middle in the open-world discipline (Sections~\ref{sec:bool} and~\ref{sec:heyting}).
+\item The axioms of ZFC as closure conditions, with proofs that the empty set is derived, that there is no universal set, that Foundation excludes membership loops, and that Choice implies excluded middle (Section~\ref{sec:zfc}).
+\item The kernel of a Lean-style dependent type theory, with Refuse as subtype formation, Collapse as application and quotient, and the three axioms commonly added (Sections~\ref{sec:kernel} and~\ref{sec:axioms}).
+\item A comparison of sets and types in which the difference is located at the place where domain restriction is permitted (Section~\ref{sec:translate}).
+\item A taxonomy of the layers at which a formal statement may fail, and the relativity of any verified theorem to its axiom footprint (Section~\ref{sec:layers}).
+\item A reproducibility account in which the axioms of ZFC and a kernel's added axioms are conventions that supply a common language: reproducible results, composition over a common base, determinate consequences of an arbitrary base, and a reporting protocol with controls (Sections~\ref{sec:convention} to~\ref{sec:protocol}).
+\item First-order logic with structures, satisfaction, the substitution and coincidence lemmas, soundness, and ZFC stated as a first-order theory (Section~\ref{sec:fol}).
+\item Simply typed lambda calculus with sums and the empty type, an explicit Curry--Howard theorem for a named calculus and a named proof system, and consistency of the object calculus by normalization (Section~\ref{sec:ch}).
+\item A worked derivation in the kernel, separating what is decided by computation ($2+2=4$, $n+0=n$) from what requires induction ($0+n=n$) (Section~\ref{sec:worked}).
+\item A diagonal schema and its four instances kept distinct (Section~\ref{sec:diag}).
+\item A radix case study that supplies a complete example of a representation with denotation, preservation, canonical form, and cost (Section~\ref{sec:radix}).
+\end{enumerate}
+
+\subsection{Open problems}
+
+\begin{conjecture}[Refuse-complete presentation]\label{conj:complete}
+There is a presentation of a Lean-style kernel in which the only binding construct is $\Bind$, the only elimination is $\Coll$, and $\Prop$ and subtypes are obtained from a single restriction rule corresponding to $\Refuse$, with the same provability strength as the presentation of Section~\ref{sec:kernel}.
+\end{conjecture}
+
+\emph{Status.} Heuristic. The subtype construction of Definition~\ref{def:intref} shows the restriction can be defined from the standard rules; the open question is the converse, whether the standard rules can be derived from a single restriction rule.
+
+Further open problems:
+\begin{enumerate}
+\item Characterize the $\Rev$-steps (Section~\ref{sec:A}) that are conservative over a given fragment, in the sense that they add no new theorems of a given form.
+\item Give a mechanized development of Sections~\ref{sec:bool} to~\ref{sec:quot} in a proof assistant, so that every theorem labeled as proved here is machine-checked and carries a stated footprint.
+\item Decide whether Conjecture~\ref{conj:S} can be sharpened into a statement about a specific lattice model.
+\end{enumerate}
+
+\subsection{Exercises}
+
+\begin{exercise}
+Show that $\Refuse_P\Refuse_Q=\Refuse_Q\Refuse_P$ for the domain-layer operator, and compute $\Refuse_P\Refuse_Q(\Om)$ when $P\subseteq Q$.
+\end{exercise}
+\begin{exercise}
+In the open-world semantics on $X=\mathbb{R}$, compute $\neg U$ and $\neg\neg U$ for $U=(0,\infty)$ and for $U=\mathbb{R}\setminus\{0\}$. Which of $\neg\neg U\subseteq U$ and $U\cup\neg U=X$ hold in each case?
+\end{exercise}
+\begin{exercise}
+Reduce $\mathsf{and}\ \mathsf{T}\ \mathsf{T}$ and $\mathsf{plus}\ \overline1\ \overline2$ to normal form using only $\Coll$-$\beta$.
+\end{exercise}
+\begin{exercise}
+Prove from Foundation that there is no infinite descending $\in$-chain $x_0\ni x_1\ni x_2\ni\cdots$ \emph{when the chain is given as a set}. (Hint: apply Foundation to $\{x_n:n\in\mathbb{N}\}$.)
+\end{exercise}
+\begin{exercise}
+Write the term of type $\Refuse_P(A)\to\mathsf{False}$ when $P=\lambda x.\mathsf{True}$ and check that it has the stated type under the rules of Section~\ref{sec:kernel}.
+\end{exercise}
+\begin{exercise}
+Give a finite example $(\Om,\mu,\sim)$ with $L(\sim)>0$ and one with $L(\sim)=0$ but $\sim$ not the identity relation. (Hint: use a class containing a point of probability zero.)
+\end{exercise}
+
+% =====================================================================
+\appendix
+\section{Inventory of cited results}\label{app:cited}
+
+The table lists every result used without proof, with its source. All other numbered statements labeled Theorem, Proposition, or Lemma are proved in the text.
+
+\begin{center}
+\small
+\begin{tabular}{@{}p{0.11\textwidth}p{0.55\textwidth}p{0.26\textwidth}@{}}
+\toprule
+Item & Result & Source\\
+\midrule
+\ref{cit:complete} & Completeness of classical propositional logic by truth tables & \cite{TvD88}\\
+\ref{cit:heyting} & Soundness and completeness of intuitionistic propositional logic for open-world semantics & \cite{TvD88}\\
+\ref{cit:rank} & Foundation is equivalent to every set having a rank & \cite{Jech03}\\
+\ref{cit:indep} & Independence of Choice from ZF & \cite{Goedel38,Cohen63}\\
+\ref{cit:models} & L\"owenheim--Skolem; $V_\kappa$ models ZFC for inaccessible $\kappa$ & \cite{Jech03,Kunen80}\\
+\ref{cit:norm} & Normalization and consistency for the calculus of constructions with inductive types; relative consistency of the Lean kernel & \cite{CoquandHuet88,CoquandPaulin90,Werner94,Carneiro19}\\
+\ref{cit:funext} & Function extensionality from $\Quot.\mathsf{sound}$ & \cite{Carneiro19}\\
+\ref{cit:diac-type} & Diaconescu's theorem in type-theoretic form & \cite{Diaconescu75}, library formalization\\
+\ref{cit:translate} & Sets in types and types in sets & \cite{Aczel78,Aczel99,Werner97,Carneiro19}\\
+\ref{cit:godel2} & G\"odel's second incompleteness theorem & standard\\
+\ref{cit:godelcomplete} & Completeness and compactness of first-order logic & \cite{Goedel30,Enderton01}\\
+\ref{cit:sn} & Strong normalization and subject reduction for $\lambda^{\to\times+0}$ & \cite{Tait67,GLT89}\\
+\ref{cit:diag} & Fixed-point lemma; paradox for $\Type:\Type$ & \cite{BBJ07,Hurkens95}\\
+\ref{prop:afs} & Rational-base numeration of the natural numbers & \cite{AFS08}\\
+\ref{cit:checkable} & Decidability of derivation checking for decidably axiomatized first-order theories & \cite{Enderton01}\\
+\ref{cit:shoenfield} & ZF and ZFC prove the same $\Pi^1_2$ sentences & \cite{Jech03}\\
+\ref{cit:vitali} & Vitali set under AC; Solovay's model & \cite{Solovay70}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Summary of status labels by part}\label{app:status}
+
+\begin{center}
+\small
+\begin{tabular}{@{}lp{0.62\textwidth}@{}}
+\toprule
+Part & Content and warrant\\
+\midrule
+Ground & Definitions; proved laws of Refuse and Collapse; renaming of the lambda calculus (proved by bijection of grammars)\\
+Logic & Soundness proved; completeness cited; a proved counterexample to excluded middle in the open-world semantics\\
+Sets & ZFC statements are standard; Propositions on $\emptyset$, universal set, Foundation, and Choice and quotients proved; independence and models cited\\
+Types & Rules summarized from the literature; internal Refuse, negation and inhabitation, footprints proved; consistency and translations cited\\
+Reflection & Revision, layers, and the reproducibility protocol are definitions with short proofs; conservativity and measurability are cited; the RSVP reading has one proved proposition and otherwise Analogy and Conjecture\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+
+\section{Script for the radix computations}\label{app:script}
+
+The following script produces the unidimary numerals and the checks reported in Section~\ref{sec:radix}. It was run, and its assertions held, for the ranges stated in the comments.
+
+\begin{small}
+\begin{verbatim}
+from fractions import Fraction as F
+import itertools, math, random
+
+def uni(n):                      # exploding-dot normal form, digits low to high
+    b = [n]; i = 0
+    while i < len(b):
+        while b[i] >= 3:
+            q = b[i] // 3
+            b[i] -= 3 * q
+            if i + 1 == len(b): b.append(0)
+            b[i + 1] += 2 * q
+        i += 1
+    while len(b) > 1 and b[-1] == 0: b.pop()
+    return ''.join(map(str, reversed(b)))
+
+def val(s):
+    return sum(int(c) * F(3, 2) ** k for k, c in enumerate(reversed(s)))
+
+assert all(val(uni(n)) == n for n in range(3000))            # value conserved
+for l in range(1, 10):                                        # injectivity
+    seen = {}
+    for t in itertools.product('012', repeat=l):
+        if t[0] == '0' and l > 1: continue
+        v = val(''.join(t)); assert v not in seen; seen[v] = t
+print([uni(n) for n in range(21)])                            # table
+\end{verbatim}
+\end{small}
+
+The numerals for $0$ to $20$ are
+\begin{center}
+\small
+\begin{tabular}{@{}rl@{\qquad}rl@{\qquad}rl@{\qquad}rl@{}}
+\toprule
+0 & 0 & 6 & 210 & 12 & 2120 & 18 & 21200\\
+1 & 1 & 7 & 211 & 13 & 2121 & 19 & 21201\\
+2 & 2 & 8 & 212 & 14 & 2122 & 20 & 21202\\
+3 & 20 & 9 & 2100 & 15 & 21010 & &\\
+4 & 21 & 10 & 2101 & 16 & 21011 & &\\
+5 & 22 & 11 & 2102 & 17 & 21012 & &\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+% =====================================================================
+\begin{thebibliography}{99}
+\bibitem{AFS08} S.~Akiyama, C.~Frougny, and J.~Sakarovitch. Powers of rationals modulo 1 and rational base number systems. \emph{Israel J.\ Math.} 168 (2008), 53--91.
+\bibitem{Aczel78} P.~Aczel. The type theoretic interpretation of constructive set theory. In \emph{Logic Colloquium '77}, North-Holland, 1978, 55--66.
+\bibitem{Aczel99} P.~Aczel. On relating type theories and set theories. In \emph{Types for Proofs and Programs (TYPES '98)}, LNCS 1657, Springer, 1999, 1--18.
+\bibitem{Barendregt84} H.~P.~Barendregt. \emph{The Lambda Calculus: Its Syntax and Semantics}. North-Holland, 1984.
+\bibitem{Carneiro19} M.~Carneiro. The type theory of Lean. Master's thesis, Carnegie Mellon University, 2019.
+\bibitem{Cohen63} P.~J.~Cohen. The independence of the continuum hypothesis. \emph{Proc.\ Natl.\ Acad.\ Sci.\ USA} 50 (1963), 1143--1148.
+\bibitem{CoquandHuet88} T.~Coquand and G.~Huet. The calculus of constructions. \emph{Information and Computation} 76 (1988), 95--120.
+\bibitem{CoquandPaulin90} T.~Coquand and C.~Paulin. Inductively defined types. In \emph{COLOG-88}, LNCS 417, Springer, 1990, 50--66.
+\bibitem{Diaconescu75} R.~Diaconescu. Axiom of choice and complementation. \emph{Proc.\ Amer.\ Math.\ Soc.} 51 (1975), 176--178.
+\bibitem{Enderton01} H.~B.~Enderton. \emph{A Mathematical Introduction to Logic}, 2nd ed. Harcourt/Academic Press, 2001.
+\bibitem{Goedel38} K.~G\"odel. The consistency of the axiom of choice and of the generalized continuum hypothesis. \emph{Proc.\ Natl.\ Acad.\ Sci.\ USA} 24 (1938), 556--557.
+\bibitem{GoodmanMyhill78} N.~D.~Goodman and J.~Myhill. Choice implies excluded middle. \emph{Z.\ Math.\ Logik Grundlag.\ Math.} 24 (1978), 461.
+\bibitem{Jech03} T.~Jech. \emph{Set Theory}, The Third Millennium Edition. Springer, 2003.
+\bibitem{Kunen80} K.~Kunen. \emph{Set Theory: An Introduction to Independence Proofs}. North-Holland, 1980.
+\bibitem{LeanCADE21} L.~de~Moura and S.~Ullrich. The Lean 4 theorem prover and programming language. In \emph{CADE-28}, LNCS 12699, Springer, 2021, 625--635.
+\bibitem{Mathlib20} The mathlib Community. The Lean mathematical library. In \emph{CPP 2020}, ACM, 2020, 367--381.
+\bibitem{Solovay70} R.~M.~Solovay. A model of set-theory in which every set of reals is Lebesgue measurable. \emph{Ann.\ of Math.} 92 (1970), 1--56.
+\bibitem{TvD88} A.~S.~Troelstra and D.~van Dalen. \emph{Constructivism in Mathematics}, Vol.~I. North-Holland, 1988.
+\bibitem{Werner94} B.~Werner. Une th\'eorie des constructions inductives. PhD thesis, Universit\'e Paris~7, 1994.
+\bibitem{Werner97} B.~Werner. Sets in types, types in sets. In \emph{Theoretical Aspects of Computer Software (TACS '97)}, LNCS 1281, Springer, 1997.
+\bibitem{BBJ07} G.~S.~Boolos, J.~P.~Burgess, and R.~C.~Jeffrey. \emph{Computability and Logic}, 5th ed. Cambridge University Press, 2007.
+\bibitem{GLT89} J.-Y.~Girard, Y.~Lafont, and P.~Taylor. \emph{Proofs and Types}. Cambridge University Press, 1989.
+\bibitem{Goedel30} K.~G\"odel. Die Vollst\"andigkeit der Axiome des logischen Funktionenkalk\"uls. \emph{Monatsh.\ Math.\ Phys.} 37 (1930), 349--360.
+\bibitem{Howard80} W.~A.~Howard. The formulae-as-types notion of construction. In \emph{To H.~B.~Curry: Essays on Combinatory Logic, Lambda Calculus and Formalism}, Academic Press, 1980, 479--490.
+\bibitem{Hurkens95} A.~J.~C.~Hurkens. A simplification of Girard's paradox. In \emph{TLCA '95}, LNCS 902, Springer, 1995, 266--278.
+\bibitem{Lawvere69} F.~W.~Lawvere. Diagonal arguments and cartesian closed categories. In \emph{Category Theory, Homology Theory and their Applications II}, LNM 92, Springer, 1969, 134--145.
+\bibitem{Martin-Lof84} P.~Martin-L\"of. \emph{Intuitionistic Type Theory}. Bibliopolis, 1984.
+\bibitem{Tait67} W.~W.~Tait. Intensional interpretations of functionals of finite type I. \emph{J.\ Symbolic Logic} 32 (1967), 198--212.
+\end{thebibliography}
+
+\end{document}
+

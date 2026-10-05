@@ -1,0 +1,868 @@
+1
+00:00:00,000 --> 00:00:11,340
+Imagínense que de pronto un grupo de físicos teóricos convoca una conferencia gigantesca para declarar que todas las matemáticas modernas están absoluta y definitivamente muertas.
+
+2
+00:00:11,900 --> 00:00:13,620
+O sea, suena a una locura total.
+
+3
+00:00:13,980 --> 00:00:27,760
+Totalmente. ¿Y su evidencia principal? Afirman que un complejo software de demostración matemática está ontológicamente corrupto. Así, con esas palabras. Solo porque se atreve a usar una simple carpeta vacía en su estructura.
+
+4
+00:00:27,760 --> 00:00:32,020
+Sí, parece un guión de ciencia ficción mala o una broma de internet.
+
+5
+00:00:32,460 --> 00:00:46,860
+Exacto, pero es una controversia muy real y fascinante que vamos a explorar a fondo hoy. Para quienes nos escuchan y aman estos temas densos pero sin querer ahogarse en fórmulas, hoy vamos a desgranar la arquitectura oculta de la verdad lógica.
+
+6
+00:00:47,360 --> 00:00:51,880
+Y por eso nos vamos a basar en dos ensayos buenísimos de octubre de 2026.
+
+7
+00:00:51,880 --> 00:01:01,520
+Ajá, escritos por el investigador independiente Flyxion. Sus títulos son Formal Failure and Ontological Overreach y Rebuilding the Foundations of Logic.
+
+8
+00:01:01,860 --> 00:01:11,200
+Ok, vamos a desempacar esto. Nuestra misión aquí es desmitificar cómo los matemáticos y pues las computadoras realmente se ponen de acuerdo sobre lo que es verdad.
+
+9
+00:01:11,580 --> 00:01:13,140
+Que es un problema gigantesco, la verdad.
+
+10
+00:01:13,140 --> 00:01:21,960
+Total. Y ver qué pasa cuando alguien confunde una herramienta matemática con el universo mismo, porque eso lleva a teorías desastrosas.
+
+11
+00:01:22,380 --> 00:01:26,620
+Entonces, para empezar, cuéntanos un poco sobre este marco físico rival llamado Tone.
+
+12
+00:01:26,620 --> 00:01:36,260
+Bueno, el caso de Tone es el escenario perfecto para ver esta trampa intelectual. A ver, Tone acusa a un sistema de software muy respetado en la comunidad que se llama Lean.
+
+13
+00:01:36,560 --> 00:01:37,180
+Lean, ajá.
+
+14
+00:01:37,360 --> 00:01:46,620
+Y dicen que tiene fallas fundamentales. Lean es básicamente un probador de teoremas. Es una herramienta que usan los matemáticos para verificar que sus cadenas de razonamiento sean absolutamente herméticas.
+
+15
+00:01:47,800 --> 00:01:51,040
+Como un corrector ortográfico, pero para lógica pura.
+
+16
+00:01:51,040 --> 00:02:00,780
+Exactamente. Entonces, la gente de Tone intentó usar Lean para formalizar sus propias teorías físicas revolucionarias. Y el sistema pues arrojó un montón de errores y colapso.
+
+17
+00:02:01,340 --> 00:02:03,180
+Me imagino que no se lo tomaron muy bien.
+
+18
+00:02:03,480 --> 00:02:14,680
+Para nada. En lugar de revisar sus ecuaciones o pensar que tal vez tenían un error, los autores de Tone publicaron manifiestos afirmando que Lean y toda la matemática tradicional están construidos sobre una mentira.
+
+19
+00:02:14,680 --> 00:02:27,660
+O sea, es culpa de la herramienta. Pero a ver, para entender semejante acusación, tenemos que mirar de qué se quejan exactamente. En la comunidad matemática, los cimientos más famosos se conocen como ZFC.
+
+20
+00:02:28,020 --> 00:02:31,900
+Que es la teoría de conjuntos de Sermelo Frankel con el axioma de elección.
+
+21
+00:02:31,900 --> 00:02:45,840
+Exacto. Y los defensores de Tone argumentan que Lean falló porque supuestamente Lean es simplemente ZFC disfrazado. Y dicen que ZFC es falso porque acepta el concepto del conjunto vacío.
+
+22
+00:02:46,080 --> 00:02:48,980
+Allí es donde la cosa se pone un poco esotérica.
+
+23
+00:02:48,980 --> 00:03:06,080
+Demasiado. Según la filosofía de Tone, aceptar un conjunto vacío significa que las matemáticas están afirmando que la nada absoluta existe. Como si fuera una sustancia física real en nuestro universo. Y que al ponerle nombre a esa nada, corrompimos la realidad.
+
+24
+00:03:06,140 --> 00:03:18,020
+Lo fascinante aquí es que el primer gran problema con este ataque es un desconocimiento técnico masivo por parte de Tone. Los textos de Fluction lo señalan muy bien. Lean ni siquiera funciona sobre el motor de ZFC.
+
+25
+00:03:18,020 --> 00:03:18,660
+¿Ah, no?
+
+26
+00:03:18,800 --> 00:03:28,900
+No, para nada. La lógica que hace la tira Lean es una arquitectura totalmente distinta. Se llama teoría de tipos dependientes. En Lean, ZFC es solo una biblioteca de código opcional.
+
+27
+00:03:29,240 --> 00:03:32,200
+O sea, un módulo extra que le puedes instalar si quieres.
+
+28
+00:03:32,960 --> 00:03:37,900
+Exacto. Es algo que puedes simular dentro del software, pero no es la estructura base del programa.
+
+29
+00:03:38,600 --> 00:03:44,300
+Pero bueno, independientemente del motor que usen, quejarse del conjunto vacío rosa lo absurdo.
+
+30
+00:03:44,300 --> 00:03:50,120
+A ver, yo lo veo así. Es como si en tu computadora creas una carpeta nueva en el escritorio.
+
+31
+00:03:50,360 --> 00:03:50,700
+Ajá.
+
+32
+00:03:50,820 --> 00:03:57,160
+Y no le pones ningún archivo adentro. Esa carpeta está vacía. Es solo un contenedor con una etiqueta.
+
+33
+00:03:57,900 --> 00:04:05,400
+Nadie en su sano juicio empezaría a gritar que el sistema operativo está afirmando que existe un agujero negro consumidor de materia en el disco duro.
+
+34
+00:04:05,840 --> 00:04:07,320
+Esa analogía es buenísima.
+
+35
+00:04:07,320 --> 00:04:13,660
+Es que un conjunto vacío o un tipo sin habitantes en Lean es eso. Un clasificador. Una caja vacía.
+
+36
+00:04:14,360 --> 00:04:18,440
+No es una declaración cósmica de que la nada existe físicamente flotando por ahí.
+
+37
+00:04:18,940 --> 00:04:25,400
+Claro. Y si seguimos con tu idea de la carpeta. El costo de borrar esa posibilidad del sistema sería enorme. Devastador.
+
+38
+00:04:25,760 --> 00:04:30,000
+Porque rechazar el conjunto vacío no es un simple capricho de los matemáticos.
+
+39
+00:04:30,780 --> 00:04:33,560
+¿A qué te refieres con devastador? ¿Qué pasa si lo quitamos?
+
+40
+00:04:33,560 --> 00:04:39,300
+Pues en sistemas constructivos como Lean, el concepto de vacío es el mecanismo central para codificar la negación.
+
+41
+00:04:39,900 --> 00:04:45,900
+O sea, si quitas el tipo vacío, literalmente pierdes la capacidad de decir que algo no tiene instancias. O de decir que no.
+
+42
+00:04:46,360 --> 00:04:49,580
+A ver, a ver, espera. Eso requiere un poco más de detalle.
+
+43
+00:04:50,020 --> 00:04:56,060
+¿Cómo conectamos una caja vacía con la capacidad de decir que algo es falso en matemáticas?
+
+44
+00:04:56,740 --> 00:04:59,060
+La mecánica es brillante por lo simple que es.
+
+45
+00:04:59,060 --> 00:05:06,060
+Digamos, en la lógica clásica que vemos en la escuela, asumes que una afirmación es verdadera o falsa. Ya está.
+
+46
+00:05:06,340 --> 00:05:07,060
+¿Blanco o negro?
+
+47
+00:05:07,220 --> 00:05:17,540
+Exacto. Pero en sistemas más estrictos como Lean, para decir la proposición P es falsa, tienes que demostrar que si asumes que P es cierta, te lleva a una imposibilidad.
+
+48
+00:05:18,080 --> 00:05:19,220
+Ok. ¿Te sigo?
+
+49
+00:05:19,220 --> 00:05:32,920
+Entonces, el lenguaje define un tipo lógico llamado falso, que por definición no tiene forma de ser construido. Es un tipo intencionalmente vacío. Entonces, la negación se define como la función P implica falso.
+
+50
+00:05:33,520 --> 00:05:42,660
+Ah. Si alguien logra tomar esa proposición P y producir un habitante de la caja vacía, significa que el punto de partida era imposible.
+
+51
+00:05:42,660 --> 00:05:52,620
+Exactamente. Así que, si eliminamos el tipo vacío, como exige Tone, perdemos la capacidad de demostrar que dos ecuaciones se contradicen, o que un problema no tiene solución.
+
+52
+00:05:53,260 --> 00:06:06,540
+Claro. Nos quedaríamos sin forma de refutar absolutamente nada. Sería como programar el sistema de seguridad de un banco, pero sin poner un código de error para contraseñas incorrectas. Si metes la clave mal, el sistema simplemente no sabe qué decirte.
+
+53
+00:06:06,540 --> 00:06:18,680
+Totalmente. Y si Lean es una herramienta de verificación tan robusta, surge la pregunta real. ¿Por qué la física de Tone provocó tantos errores al intentar formalizarse?
+
+54
+00:06:19,040 --> 00:06:25,300
+Pues la respuesta lógica es que sus postulados tenían contradicciones internas gigantes y el software se dio cuenta.
+
+55
+00:06:25,300 --> 00:06:38,760
+Exacto. El análisis de Flicción apunta directamente a eso. Explica cómo la gente de Tone cayó en una trampa brutal. La trampa de la infalsabilidad. Construyeron una narrativa donde ellos nunca pueden perder.
+
+56
+00:06:39,300 --> 00:06:41,160
+Es una posición súper cómoda.
+
+57
+00:06:41,700 --> 00:06:49,680
+Imagínate. Si hubieran logrado que el código compilara en Lean, habrían salido a celebrar diciendo que el estándar de oro de las matemáticas validaba su nueva física.
+
+58
+00:06:50,060 --> 00:06:52,120
+Claro. Portadas en todas las revistas de ciencia.
+
+59
+00:06:52,120 --> 00:07:02,120
+Pero, como el sistema les arrojó cientos de errores, demostrando que sus axiomas se chocaban entre sí, pues declararon que los errores eran la prueba definitiva de que Lean está corrupto.
+
+60
+00:07:02,740 --> 00:07:10,380
+Cara, la física de Tone es revolucionaria. Cruz, las matemáticas del resto del mundo están rotas. Es una profecía autocumplida de manual.
+
+61
+00:07:10,740 --> 00:07:14,760
+Es un sesgo de confirmación del libro. Todo cuenta como confirmación para ellos.
+
+62
+00:07:14,760 --> 00:07:22,460
+Y ese error de culpar a la herramienta en lugar de revisar los propios cálculos nos lleva a la segunda gran acusación de este grupo.
+
+63
+00:07:23,000 --> 00:07:26,620
+Y fíjate que es todavía más extraña que la del conjunto vacío.
+
+64
+00:07:26,860 --> 00:07:28,060
+Sí, la de las derivadas.
+
+65
+00:07:28,260 --> 00:07:34,400
+Ajá. Su intento de dictar reglas absolutas de cómo funciona el universo basándose en derivadas del tiempo.
+
+66
+00:07:35,040 --> 00:07:36,660
+Cuéntanos del famoso tirón.
+
+67
+00:07:37,120 --> 00:07:39,340
+Bueno, recordemos la física de la preparatoria.
+
+68
+00:07:39,340 --> 00:07:41,520
+Bueno, comenzamos con la posición de un objeto.
+
+69
+00:07:42,140 --> 00:07:46,080
+La primera derivada matemática de esa posición respecto al tiempo, pues es la velocidad.
+
+70
+00:07:46,380 --> 00:07:47,840
+Sí, qué tan rápido te mueves.
+
+71
+00:07:48,040 --> 00:07:49,660
+La segunda derivada es la aceleración.
+
+72
+00:07:50,020 --> 00:07:51,620
+Qué tan rápido cambia tu velocidad.
+
+73
+00:07:51,880 --> 00:07:52,740
+Hasta ahí vamos bien.
+
+74
+00:07:52,880 --> 00:07:59,220
+Y la tercera derivada, que es la tasa de cambio de esa aceleración, se conoce en física como el tirón o jerk en inglés.
+
+75
+00:07:59,380 --> 00:08:00,260
+El jerk, claro.
+
+76
+00:08:00,260 --> 00:08:04,400
+Pues lo que hace Tone es tomar este concepto del tirón y lo declaran sagrado.
+
+77
+00:08:04,980 --> 00:08:09,540
+Afirman que el jerk es la forma más alta de cambio admisible en todo el tejido del universo.
+
+78
+00:08:09,760 --> 00:08:10,820
+El límite absoluto.
+
+79
+00:08:10,960 --> 00:08:11,640
+Según ellos, sí.
+
+80
+00:08:11,900 --> 00:08:18,180
+Y argumentan que cualquier derivada por encima del nivel 3 causa un regreso infinito que destruiría la coherencia de la realidad.
+
+81
+00:08:18,920 --> 00:08:24,020
+Entonces, acusan a herramientas como Lean de tener un sesgo por no limitar sus cálculos a esta tercera derivada.
+
+82
+00:08:24,020 --> 00:08:33,020
+A ver, es fascinante lo poco científico que suenan los términos tirón y chasquido cuando los traducimos al español, pero son conceptos súper rigurosos.
+
+83
+00:08:33,960 --> 00:08:37,900
+Porque después del tirón viene el chasquido, el snap, que es la cuarta derivada.
+
+84
+00:08:38,200 --> 00:08:39,020
+Exacto, la cuarta derivada.
+
+85
+00:08:39,700 --> 00:08:45,600
+Y esta afirmación de Tone de que superar la tercera derivada destruiría el universo es facilísima de refutar.
+
+86
+00:08:46,160 --> 00:08:47,940
+Yo estaba leyendo y pensaba en los drones.
+
+87
+00:08:47,940 --> 00:08:56,520
+Cualquier persona que trabaje en ingeniería robótica hoy en día o en el diseño de cuadricópteros sabe que el control de vuelo usa rutinariamente esa cuarta derivada.
+
+88
+00:08:56,780 --> 00:08:57,300
+El chasquido.
+
+89
+00:08:57,640 --> 00:09:01,980
+Sí, usan el snap algebraicamente para generar curvas de trayectoria suaves.
+
+90
+00:09:02,660 --> 00:09:08,260
+Si el universo colapsara por usar la cuarta derivada, pues los drones de entrega se caerían del cielo todos los días.
+
+91
+00:09:09,100 --> 00:09:12,500
+¿Por qué el número 3 sería el límite mágico del universo?
+
+92
+00:09:12,820 --> 00:09:13,560
+Es que no lo es.
+
+93
+00:09:13,780 --> 00:09:17,740
+El autor de las fuentes expone esto como un error de categoría brutal.
+
+94
+00:09:18,260 --> 00:09:21,480
+Primero, culpan a Lean por guardar silencio sobre las reglas del tirón.
+
+95
+00:09:21,940 --> 00:09:24,780
+Pero, a ver, Lean es un lenguaje para verificar pruebas.
+
+96
+00:09:25,320 --> 00:09:27,060
+No tiene un motor de física incorporado.
+
+97
+00:09:27,180 --> 00:09:28,420
+No es un simulador del universo.
+
+98
+00:09:28,720 --> 00:09:29,160
+Claro que no.
+
+99
+00:09:29,540 --> 00:09:33,740
+Que no opine sobre derivadas es un rasgo de neutralidad, no es un defecto ontológico.
+
+100
+00:09:34,240 --> 00:09:38,920
+Y segundo, este miedo a las derivadas superiores sí tiene una base histórica en la física real.
+
+101
+00:09:39,120 --> 00:09:41,620
+Es algo llamado la inestabilidad de Ostogratsky.
+
+102
+00:09:41,620 --> 00:09:44,800
+A ver, a ver, vamos a desempacar esa mecánica porque suena complejo.
+
+103
+00:09:44,800 --> 00:09:48,900
+¿Por qué una derivada alta causaría un problema real en la física teórica?
+
+104
+00:09:49,340 --> 00:09:53,780
+Bueno, tiene que ver con cómo formulamos las ecuaciones de energía en la mecánica analítica.
+
+105
+00:09:54,380 --> 00:09:58,900
+Para predecir el futuro de un sistema, necesitamos conocer todas las variables iniciales, ¿no?
+
+106
+00:09:59,060 --> 00:10:00,380
+Las condiciones de inicio, sí.
+
+107
+00:10:00,380 --> 00:10:08,020
+Exacto. Si nuestro sistema depende de derivadas superiores, matemáticamente vamos a necesitar más coordenadas iniciales para poder describirlo.
+
+108
+00:10:08,440 --> 00:10:13,380
+Entonces, el teorema de Ostogratsky demuestra que, al construir la ecuación de energía total del sistema...
+
+109
+00:10:14,080 --> 00:10:15,740
+El hamiltoniano, ¿verdad?
+
+110
+00:10:15,980 --> 00:10:17,200
+Exacto, el hamiltoniano.
+
+111
+00:10:17,760 --> 00:10:23,320
+Al construirlo con estas derivadas superiores, el espacio matemático se deforma y mete variables lineales.
+
+112
+00:10:23,860 --> 00:10:24,860
+¿Y cuál es el resultado?
+
+113
+00:10:24,860 --> 00:10:27,600
+Que la energía del sistema pierde su límite inferior.
+
+114
+00:10:28,180 --> 00:10:28,720
+Pierde el piso.
+
+115
+00:10:29,360 --> 00:10:31,640
+¡Guau! ¿Y qué pasa si pierde el piso?
+
+116
+00:10:32,040 --> 00:10:35,660
+Pues que el sistema puede empezar a caer hacia estados de energía negativa infinita.
+
+117
+00:10:36,160 --> 00:10:40,440
+Y eso le permite, al mismo tiempo, alimentar una energía cinética positiva infinita.
+
+118
+00:10:40,920 --> 00:10:43,080
+O sea, las partículas acelerarían sin control.
+
+119
+00:10:43,680 --> 00:10:48,160
+Básicamente, acelerarían hacia la velocidad de la luz sin violar la ley de conservación de la energía.
+
+120
+00:10:48,800 --> 00:10:51,460
+El universo se volvería completamente inestable e impredecible.
+
+121
+00:10:51,460 --> 00:10:54,280
+Eso suena aterrador, matemáticamente hablando.
+
+122
+00:10:55,000 --> 00:11:01,220
+Pero, a ver, si eso es cierto, ¿no le da la razón a Tone sobre limitar todo a la tercera derivada para evitar el caos?
+
+123
+00:11:01,620 --> 00:11:02,300
+No, para nada.
+
+124
+00:11:02,680 --> 00:11:10,640
+Porque el teorema de Ostrogrogratsky aplica a cualquier sistema con derivadas superiores a la primera que no se pueda reducir.
+
+125
+00:11:11,260 --> 00:11:18,260
+O sea, si el argumento de Tone fuera cierto, la inestabilidad destruiría el universo desde la segunda derivada.
+
+126
+00:11:18,260 --> 00:11:22,400
+Oh, o sea que el problema empieza antes del número 3.
+
+127
+00:11:22,740 --> 00:11:29,640
+Exacto. La naturaleza, a nivel cuántico y relativista, tiene formas increíblemente complejas de manejar estos infinitos.
+
+128
+00:11:30,220 --> 00:11:38,100
+Así que, dictaminar de forma caprichosa que el límite mágico de la realidad es el número 3 no tiene ninguna justificación real.
+
+129
+00:11:38,820 --> 00:11:41,240
+Aquí es donde se pone realmente interesante.
+
+130
+00:11:41,960 --> 00:11:46,400
+Estamos viendo un caso clásico de confundir el mapa con el territorio.
+
+131
+00:11:46,400 --> 00:11:54,920
+Tone está reificando una herramienta humana, que es la operación de derivar, y la están tratando como si fuera un elemento físico palpable.
+
+132
+00:11:55,960 --> 00:12:00,860
+Exactamente. Tratan a una herramienta matemática como si fuera la realidad misma.
+
+133
+00:12:01,300 --> 00:12:09,220
+Asumen que, porque podemos dibujar el cambio en un papel con tres rayitas, el universo debe estar hecho de tres capas místicas de movimiento.
+
+134
+00:12:09,220 --> 00:12:17,480
+Y cuando asumes que tus herramientas son revelaciones divinas sobre el cosmos, cualquier falla en la herramienta la sientes como una crisis existencial.
+
+135
+00:12:17,800 --> 00:12:19,080
+Sí, te quedas sin piso.
+
+136
+00:12:19,480 --> 00:12:22,000
+Y esa revelación nos deja con una duda enorme.
+
+137
+00:12:22,480 --> 00:12:32,860
+Si el conjunto vacío y la teoría de conjuntos no son verdades intocables del cosmos, sino herramientas diseñadas por humanos, ¿cómo se construyen exactamente esas herramientas?
+
+138
+00:12:32,860 --> 00:12:34,280
+Esa es la gran pregunta.
+
+139
+00:12:34,620 --> 00:12:42,760
+Porque si levantamos el capó del sistema ZFC clásico o del software Lean, encontramos algo sorprendente en el segundo ensayo de Flyzone.
+
+140
+00:12:43,240 --> 00:12:47,980
+Propone que ambos sistemas operan usando un mismo ADN lógico hiperreducido.
+
+141
+00:12:48,440 --> 00:12:51,900
+Sí. El autor hace un ejercicio de ingeniería inversa que es espectacular.
+
+142
+00:12:52,420 --> 00:12:58,840
+Él destila todo y sostiene que cualquier lógica dominante de hoy se puede reconstruir desde una base de solo cuatro operadores.
+
+143
+00:12:59,260 --> 00:13:02,580
+Cuatro operadores para construir toda la matemática.
+
+144
+00:13:02,580 --> 00:13:12,480
+Sí. En inglés los llama pop, refuse, bind y collapse, que en español los podríamos traducir como introducir, restringir, vincular y colapsar.
+
+145
+00:13:12,960 --> 00:13:16,880
+Dominar estos cuatro movimientos es tener las llaves de cualquier sistema moderno.
+
+146
+00:13:17,220 --> 00:13:24,280
+A ver, para que quienes nos escuchan puedan visualizar esto sin abrumarse con fórmulas extrañas, yo armé una analogía culinaria.
+
+147
+00:13:24,740 --> 00:13:26,900
+Pensemos en alguien preparando un pastel en una cocina.
+
+148
+00:13:27,060 --> 00:13:27,720
+Me encanta. A ver.
+
+149
+00:13:27,720 --> 00:13:33,780
+El primer operador, pop, la introducción, es sacar los ingredientes de la despensa y ponerlos en la mesa.
+
+150
+00:13:34,200 --> 00:13:37,140
+Es declarar, aquí hay harina, aquí hay azúcar.
+
+151
+00:13:37,560 --> 00:13:42,020
+Claro. En matemáticas eso sería instanciar un elemento, declarar una variable en tu espacio.
+
+152
+00:13:42,320 --> 00:13:47,460
+Exacto. Luego viene el segundo operador, refuse, el filtro restrictivo.
+
+153
+00:13:47,460 --> 00:13:59,480
+Digamos que el pastel debe ser seguro para celíacos. El operador refuse aplica una condición estricta. De lo que hay en la mesa, quitamos todo lo que tenga gluten. Defines tu límite.
+
+154
+00:13:59,860 --> 00:14:01,040
+Ya restringes el dominio.
+
+155
+00:14:01,520 --> 00:14:12,500
+Luego, el tercer paso, bind, vincular. Tomas la harina sin gluten y la mezclas con agua. Creas relaciones entre elementos que eran independientes y ahora son una masa estructurada.
+
+156
+00:14:12,500 --> 00:14:16,300
+Que en la teoría de tipo sería crear funciones o pares ordenados.
+
+157
+00:14:16,840 --> 00:14:27,600
+Y finalmente, collapse. La evaluación o el colapso. Es meter la mezcla al horno. Las formas previas se funden y se evalúan en un solo objeto final unificado, el pastel.
+
+158
+00:14:28,380 --> 00:14:35,180
+En lógica, entiendo que esto es cuando afirmamos que 2 más 2 y 4 colapsan en el mismo concepto.
+
+159
+00:14:35,180 --> 00:14:42,280
+Es una analogía perfecta. Y si conectamos esto de la cocina con el panorama general, encontramos el gran secreto.
+
+160
+00:14:42,780 --> 00:14:51,380
+Porque precisamente en el operador refuse, en ese filtro restrictivo del gluten, es donde está la diferencia crucial entre ZFC y la teoría de tipos de lean.
+
+161
+00:14:51,900 --> 00:14:56,360
+¿En serio? Si ambos usan el mismo filtro, ¿por qué son tan diferentes en la práctica?
+
+162
+00:14:56,820 --> 00:15:00,780
+Todo se reduce a dónde y cómo permiten usar esa regla refuse.
+
+163
+00:15:00,780 --> 00:15:06,020
+En la teoría de conjuntos clásica de ZFC, el filtro de restricción se aplica desde afuera.
+
+164
+00:15:06,500 --> 00:15:07,220
+¿Cómo desde afuera?
+
+165
+00:15:07,640 --> 00:15:11,500
+O sea, tú empiezas asumiendo que ya existe un universo infinito de conjuntos.
+
+166
+00:15:11,860 --> 00:15:16,580
+Y para crear algo nuevo, tomas ese universo y le aplicas el axioma de separación por encima.
+
+167
+00:15:16,940 --> 00:15:21,200
+Como un colador gigante que pones desde afuera para retener solo lo que cumple tu propiedad.
+
+168
+00:15:21,740 --> 00:15:24,420
+Ok, asumes que todo existe y luego filtras. ¿Y en lean?
+
+169
+00:15:24,620 --> 00:15:28,380
+En lean y su teoría de tipos, la restricción se hace de forma puramente interna.
+
+170
+00:15:28,380 --> 00:15:33,420
+No asumes el universo gigante por adelantado. El filtro es parte de la formación misma del tipo.
+
+171
+00:15:34,000 --> 00:15:40,160
+El núcleo de lean, su kernel, verifica paso a paso que los elementos cumplan la condición antes de permitir que la cosa exista.
+
+172
+00:15:40,800 --> 00:15:48,720
+Ah. O sea que en lean es imposible siquiera referirse a un elemento sin haber demostrado primero de dónde viene y qué regla lo gobierna.
+
+173
+00:15:49,120 --> 00:15:51,700
+Exactamente. Es mucho más estricto desde la raíz.
+
+174
+00:15:51,700 --> 00:16:05,500
+Pero a ver, entonces, ¿qué significa todo esto? Si aceptar un universo gigante o usar un motor interno es solo cuestión de dónde ponemos el colador en la cocina, ¿no significa eso que las matemáticas son completamente arbitrarias?
+
+175
+00:16:06,080 --> 00:16:07,580
+Es una buena duda.
+
+176
+00:16:07,580 --> 00:16:21,220
+Porque si decidir si usamos ZFC o lean es solo una convención humana por conveniencia, casi parece que la gente de Tone tiene algo de razón. O sea, ¿no es todo este andamiaje una ficción inventada por nosotros?
+
+177
+00:16:21,560 --> 00:16:23,240
+Es un escepticismo natural.
+
+178
+00:16:23,760 --> 00:16:31,340
+Pero el texto de Flyxion responde a eso usando un ejemplo bellísimo de la teoría de números, el paradigma de la base tres medios.
+
+179
+00:16:31,820 --> 00:16:33,160
+Base tres medios.
+
+180
+00:16:33,160 --> 00:16:36,240
+Yo estoy acostumbrada a la base diez por los dedos.
+
+181
+00:16:36,600 --> 00:16:48,820
+Claro, diez dedos base diez. Y las computadoras usan base dos, ceros y unos. Pero matemáticamente puedes usar bases fraccionarias, como este sistema unidimario o de puntos explosivos en base tres medios.
+
+182
+00:16:49,300 --> 00:16:53,300
+Eso suena a que rompe las reglas de cómo contamos en primaria. ¿Cómo funciona?
+
+183
+00:16:53,720 --> 00:16:55,620
+Suena rarísimo, pero es impecable.
+
+184
+00:16:55,620 --> 00:17:08,800
+Imagina cajas puestas en fila, de derecha a izquierda. La regla es que cada vez que acumulas tres puntos en una caja, esos tres puntos explotan, desaparecen y se convierten en dos puntos en la caja de la izquierda.
+
+185
+00:17:09,200 --> 00:17:12,880
+A ver si te sigo. El uno es un punto en la primera caja.
+
+186
+00:17:13,260 --> 00:17:16,120
+Ajá. El dos son dos puntos en esa primera caja.
+
+187
+00:17:16,380 --> 00:17:17,620
+Pero al sumar un tercer punto...
+
+188
+00:17:17,620 --> 00:17:28,100
+Explotan. Desaparecen de la primera caja y aparecen dos puntos en la segunda caja. Así que el número tres decimal se escribe como veinte en base tres medios.
+
+189
+00:17:28,580 --> 00:17:34,720
+¡Guau! Entonces el cuatro sería veintiuno. El cinco sería veintidós.
+
+190
+00:17:34,720 --> 00:17:42,140
+Y al sumar uno más para el seis, la primera caja vuelve a tener tres, vuelve a explotar y causa una reacción en cadena.
+
+191
+00:17:42,140 --> 00:17:53,600
+O sea, seguimos contando las mismas manzanas del mundo real. Dos manzanas más dos manzanas son cuatro. Ya sea que dibuje un cuatro normal o un veintiuno en este sistema de puntos explosivos.
+
+192
+00:17:54,100 --> 00:17:59,860
+Exacto. La verdad matemática es subyacente. El resultado se preserva sin importar el sistema que uses.
+
+193
+00:18:00,520 --> 00:18:10,300
+Y ahí está la respuesta a lo arbitrario. Las verdades matemáticas no cambian, pero elegimos los cimientos basados en lo que el texto llama el costo de la convención.
+
+194
+00:18:10,300 --> 00:18:20,260
+Totalmente. Flyxion explica que aunque la base tres medios es 100% válida para cualquier número entero, en la práctica es una pesadilla, súper ineficiente.
+
+195
+00:18:20,740 --> 00:18:24,960
+Me imagino. Para escribir números pequeños necesitas muchísimos más dígitos.
+
+196
+00:18:25,320 --> 00:18:35,740
+Sí. Y además la mayoría de las combinaciones aleatorias de ceros, unos y doces en ese sistema ni siquiera representan números enteros válidos. Es muchísima basura sintáctica.
+
+197
+00:18:35,740 --> 00:18:42,360
+Imagínate hacer la contabilidad de una empresa con números que parecen códigos de barras interminables. La empresa quiebra.
+
+198
+00:18:42,880 --> 00:18:51,540
+Entonces elegimos ZFC o Lean no porque sean la única verdad absoluta dictada por el universo, sino por un tema de costos y adopción.
+
+199
+00:18:51,540 --> 00:19:06,220
+Exacto. Nos brindan un lenguaje común. Maximizan nuestra capacidad de comprobar cosas. Necesitamos que alguien en Tokio y alguien en Bogotá puedan procesar un teorema y llegar a la misma conclusión de manera verificable por una máquina.
+
+200
+00:19:06,820 --> 00:19:16,020
+Creo que esa es la síntesis perfecta para quienes nos escuchan hoy. Confundir el mapa con el territorio es un error súper peligroso, que fue lo que le pasó a Tom.
+
+201
+00:19:16,020 --> 00:19:26,960
+Totalmente. Los sistemas formales no nos mienten. Lean no dice que una carpeta vacía es una entidad material flotando por ahí. ZFC no afirma que los números viven literalmente en las nubes.
+
+202
+00:19:27,400 --> 00:19:34,000
+Y la tercera derivada no es una deidad física que rige el cosmos. Son simplemente herramientas estructuradas.
+
+203
+00:19:34,380 --> 00:19:36,660
+Son convenciones hiperoptimizadas, claro.
+
+204
+00:19:37,240 --> 00:19:44,280
+Optimizadas durante décadas para asegurar que podamos verificar el razonamiento lógico de manera consistente sin que el sistema colapse.
+
+205
+00:19:44,280 --> 00:19:50,320
+Y fíjate, entender que estas herramientas no son dogmas intocables nos deja con un pensamiento final muy loco.
+
+206
+00:19:50,380 --> 00:19:50,700
+A ver.
+
+207
+00:19:51,040 --> 00:19:59,760
+Hemos adaptado nuestras matemáticas a sistemas que nuestras mentes y nuestras computadoras pueden procesar hoy, como la base 10 o la lógica clásica.
+
+208
+00:20:00,280 --> 00:20:04,760
+Pero, ¿qué otros lenguajes de lógica completamente alienígenas podrían existir por ahí?
+
+209
+00:20:04,960 --> 00:20:05,320
+Wow.
+
+210
+00:20:05,320 --> 00:20:10,560
+Imagínate un lenguaje matemático con reglas tan exóticas para nosotros como la base 3 medios.
+
+211
+00:20:11,180 --> 00:20:18,740
+Pero que al usarlo, de repente acá que los misterios más insolubles de la física cuántica parezcan tan simples de resolver como una suma de primaria.
+
+212
+00:20:19,100 --> 00:20:22,000
+Ese pensamiento te deja mirando el techo toda la noche.
+
+213
+00:20:22,360 --> 00:20:28,300
+O sea, tal vez estamos mirando los misterios correctos, pero con los lentes ajustados a un solo tipo de geometría.
+
+214
+00:20:28,300 --> 00:20:34,560
+Ojalá esta exploración anime a la audiencia a seguir cuestionando esas reglas invisibles que construyen nuestra realidad.
+
+215
+00:20:34,900 --> 00:20:39,880
+A veces, la revolución no es descubrir algo nuevo, sino cambiar cómo dibujamos el mapa.
+
+216
+00:20:40,300 --> 00:20:44,460
+Gracias por acompañarnos en esta arquitectura lógica y hasta el próximo análisis a fondo.
+
+217
+00:20:44,460 --> 00:21:14,440
+Gracias por ver el video.
+
