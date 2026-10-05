@@ -35,6 +35,8 @@ The build prints the output of each `#print axioms` line. Those messages are the
 
 - **ConstantJerk** (needs Mathlib). The function `t ↦ t³/6` has third derivative identically 1, so a smooth trajectory with constant jerk exists. The equation `j = 1/j` is consistent with it, and the equation alone does not exclude anything smooth beyond fixing the value of the third derivative.
 
+- **OrdersExclusive** (needs Mathlib). If the self-inversion axiom, with its nonzero clause, holds for the m-th derivative of a function and that derivative is continuous on the real line, it fails for every higher order. The axiom therefore cannot hold at two orders (for example 3 and 6), and it does not select an order.
+
 The Mathlib files build under Lean 4.34.1 with Mathlib v4.34.1. Their axiom dependencies, printed by the build, include Mathlib's classical axioms.
 
 ## Status vocabulary

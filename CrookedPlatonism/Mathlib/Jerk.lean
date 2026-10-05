@@ -23,9 +23,9 @@ theorem self_inverse_cases (j : ℝ) (h0 : j ≠ 0) (h : j = 1 / j) :
 This is why the reciprocal convention has to be stated. -/
 theorem zero_satisfies_totalized : (0 : ℝ) = 1 / 0 := by simp
 
--- The constant-jerk conclusion needs both the nonzero clause and continuity.
--- A smooth function with third derivative identically 1 is `fun t => t ^ 3 / 6`.
--- TODO(jerk): prove `iteratedDeriv 3 (fun t : ℝ => t ^ 3 / 6) = fun _ => 1`.
+-- A smooth function with third derivative identically 1 is `fun t => t ^ 3 / 6`;
+-- see CrookedPlatonism/Mathlib/ConstantJerk.lean. That the axiom holds at at most
+-- one order is proved in CrookedPlatonism/Mathlib/OrdersExclusive.lean.
 
 end CrookedPlatonism.Jerk
 #print axioms CrookedPlatonism.Jerk.self_inverse_cases

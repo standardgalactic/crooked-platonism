@@ -1,6 +1,6 @@
 # Counterfactuals
 
-Status: design rule and conjecture. The designs below are proposals. None has been run.
+Status: design rule and conjecture. Section 3 has been carried out in part (see the Mathlib files). The other designs have not been run.
 
 Scope: a framework for testing the claims that a foundation without the empty set, without choice, or with jerk as a ceiling would support a clean formalization of TONE. The question is empirical: build the alternative and see.
 
@@ -41,9 +41,9 @@ def HasJerkOrder (x : ℝ → ℝ) : Prop :=
   ContDiff ℝ 3 x ∧ ∀ t, ¬ DifferentiableAt ℝ (iteratedDeriv 3 x) t
 ```
 
-Then examine what follows. Does a physically meaningful class of trajectories satisfy it? What is the relation to the self-inversion axiom `j = 1/j` and its role (see `CrookedPlatonism/Mathlib/Jerk.lean`)? The corresponding experiments are `Jerk.lean` and `TifuOrders.lean`.
+Then examine what follows. Does a physically meaningful class of trajectories satisfy it? What is the relation to the self-inversion axiom `j = 1/j` and its role (see `CrookedPlatonism/Mathlib/Jerk.lean`)? The corresponding checked results are in `Jerk.lean`, `ConstantJerk.lean`, `TifuOrders.lean` and `OrdersExclusive.lean`.
 
-**A numerical companion.** `simulations/jerk_regress.py` is planned to check that the regress argument is symmetric: the same argument that selects order 3 selects any other order equally well.
+**A numerical companion.** `simulations/jerk_regress.py` tabulates, for the monomials `t^n/n!` and with exact arithmetic, which orders satisfy the axiom. Only the diagonal does. This is consistent with the checked exclusivity result: the same argument that selects order 3 selects any other order equally well, and no two orders can both hold.
 
 ## 4. Whole-system test
 
