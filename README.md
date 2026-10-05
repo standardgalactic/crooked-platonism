@@ -33,6 +33,8 @@ The build prints the output of each `#print axioms` line. Those messages are the
 - **Jerk** (needs Mathlib). The conditional algebra `j = 1/j` with `j ≠ 0` gives `j = ±1`, and under Mathlib's total convention `1/0 = 0` the value `j = 0` also satisfies the equation, so the reciprocal convention matters.
 - **TifuOrders** (needs Mathlib). The self-inversion axiom, with its nonzero clause, fails for the derivative of any constant function. This is the step behind the claim that axioms for two different orders cannot both hold.
 
+- **ConstantJerk** (needs Mathlib). The function `t ↦ t³/6` has third derivative identically 1, so a smooth trajectory with constant jerk exists. The equation `j = 1/j` is consistent with it, and the equation alone does not exclude anything smooth beyond fixing the value of the third derivative.
+
 The Mathlib files build under Lean 4.34.1 with Mathlib v4.34.1. Their axiom dependencies, printed by the build, include Mathlib's classical axioms.
 
 ## Status vocabulary

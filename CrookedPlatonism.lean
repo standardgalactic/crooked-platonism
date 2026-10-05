@@ -5,3 +5,4 @@ import CrookedPlatonism.Embedding
 import CrookedPlatonism.Tifu
 import CrookedPlatonism.Mathlib.TifuOrders
 import CrookedPlatonism.Mathlib.Jerk
+import CrookedPlatonism.Mathlib.ConstantJerk
