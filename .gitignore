@@ -13,3 +13,4 @@ lake-manifest.json.bak
 *.synctex.gz
 *.bbl
 *.blg
+all_docs*.md
