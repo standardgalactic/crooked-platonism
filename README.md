@@ -1,69 +1,50 @@
-# LEAN FAILS BECAUSE IT IS ZFC! And this is crooked Platonism.
+# Crooked Platonism
 
-This repository does not document a failed coding project.  
-It documents the inevitable collapse of a system that was built on false ontological foundations.
+Notes and checked experiments on Lean's foundations, on set theory, and on the TONE proposal.
 
-**Lean fails because it is ZFC.**
+This repository is a fork of `frintroper/LeanIsCorrupted`. The phrase "crooked Platonism" comes from the original README, where it names the view that Lean distorts a true ontology. Here it names a question: which ontological commitments does a formal foundation carry, and what can a formalization show about them? The original documents are kept under `upstream/` for comparison.
 
-Not because the tactics were bad.  
-Not because the author lacks experience.  
-Lean fails because it is the current technological expression of ZFC — and ZFC is ontologically rotten at its core.
+## What is here
 
-## The Real Problem
+| Folder | Contents |
+|---|---|
+| `CrookedPlatonism/` | Lean 4 experiments, built with Lake. Each file states its status and scope in a header. |
+| `docs/` | Rewritten notes: what Lean assumes, how set theory and type theory relate, and where formalizations break. |
+| `simulations/` | Counterfactual designs for testing the TONE claims, and numerical experiments as they are added. |
+| `essay/` | A longer essay on the argument forms involved (LaTeX source and PDF). |
+| `upstream/` | The original documents and Lean attempts, unchanged. |
 
-ZFC rests on two fatal ontological lies:
+## Running the experiments
 
-1. The empty set exists.
-2. The Axiom of Choice is a legitimate principle.
+```
+lake build
+```
 
-These are not harmless technical assumptions. They are ontological declarations. They decide what counts as real and what counts as legitimate reasoning. And both are false.
+The build prints the output of each `#print axioms` line. Those messages are the evidence for the claims about choice: a theorem that lists no `Classical.choice` does not depend on it.
 
-Lean does not transcend these lies. It inherits them. Therefore it cannot cleanly express a coherent alternative ontology without structural breakdown. The collapses documented in this repository are not bugs. They are symptoms.
+## What the checked experiments show
 
-## What TONE Actually Does
+- **EmptySet.** In Lean, emptiness is a property of a type or of a predicate. The empty type is itself a term of `Type`. This file only shows how Lean encodes emptiness.
+- **Choice.** Dependence on choice is theorem-specific and inspectable. Some theorems depend on no axioms, and `Classical.choice` appears only where it is used.
+- **FailureLayers.** A formalization can fail at the elaboration layer, the tactic layer, the kernel layer, or through a derived contradiction. A tactic that fails does not show that its statement is unprovable by another route.
+- **Embedding.** A claim can be derivable in one represented theory and not in another. A shortfall inside a represented theory is a fact about its rules.
+- **Tifu.** A satirical theorem whose proof returns its hypothesis, included to mark the difference between assuming a claim and supporting it.
 
-TONE does not try to patch ZFC.  
-TONE does not try to save classical foundations with small adjustments.
+The Mathlib files under `CrookedPlatonism/Mathlib/` are staged and not yet built. They will be listed here once they compile.
 
-TONE rejects the entire framework.
+## Status vocabulary
 
-It rejects the empty set as ontologically legitimate.  
-It rejects arbitrary choice as ontologically acceptable.  
-It restores **jerk** as the highest ontologically admissible form of change.
+Every document and Lean file marks its claims with one of these labels:
 
-This is not a technical disagreement. This is an ontological war.
+| Label | Meaning |
+|---|---|
+| Definition | A stipulation. |
+| Theorem | Proved from stated premises, and machine checked where it is a Lean file. |
+| Empirical | Depends on evidence beyond the formal statement. |
+| Design rule | A recommended practice. |
+| Analogy | A comparison that does not itself establish a result. |
+| Conjecture | A proposal with heuristic or partial support, short of proof. |
 
-## Philosophical Context
+## What this repository does not claim
 
-This position is not without precedent.
-
-**Quine** already showed that ontological commitment is tied to what we quantify over. If we stop quantifying over nothing, the entire edifice built on the empty set begins to tremble.
-
-**Vaihinger** understood that large parts of mathematics function as useful fictions. ZFC took these fictions and declared them real. TONE returns them to their proper status.
-
-**Whitehead** saw that reality is process, not substance. Static, low-order descriptions of change (position, velocity, acceleration) are abstractions that become misleading when treated as fundamental. Jerk is closer to the actual texture of becoming.
-
-TONE stands in this lineage — but goes further. It does not merely criticize. It offers a positive ontological alternative.
-
-## What This Repository Shows
-
-- A serious attempt to express TONE inside Lean (`src/TONE_Physics_Core.lean`)
-- The precise points at which Lean collapses (`docs/Why_Lean_Fails.md`)
-- The ontological assumptions that make this collapse necessary (`docs/Ontological_Assumptions_of_Lean.md`)
-- Proof that the problem is not Lean-specific, but ZFC-specific (`docs/The_Death_of_ZFC.md`)
-
-## Final Statement
-
-Lean is not a neutral instrument.  
-It is ZFC in modern clothing.
-
-And ZFC is dying — not because someone found a formal contradiction, but because its most basic ontological commitments are false.
-
-TONE does not ask for a seat at the table of classical foundations.  
-TONE burns the table.
-
-If you still believe that the problems documented here are merely technical, you have not understood the depth of the corruption.
-
-Lean fails because it is ZFC.
-
-And ZFC is finished.
+It does not claim that TONE is false, and it does not claim that any foundation is neutral. Foundations carry commitments, and the notes below name some real ones. The claim under test is narrower: that a particular formalization attempt breaking shows the underlying foundation to be ontologically corrupt. The experiments are designed so that this claim can be examined directly.
